@@ -1,19 +1,19 @@
 <template>
     <div id="app">
-        <Home msg="Hello world!" />
+        <Home msg="Hello world!"/>
     </div>
 </template>
 
 <script lang="ts">
-    import { Component, Vue } from 'vue-property-decorator';
     import Home from './components/Home.vue';
 
-    @Component({
+    const App = {
         components: {
             Home
         }
-    })
-    export default class App extends Vue { }
+    }
+
+    export default App;
 </script>
 
 <style>
