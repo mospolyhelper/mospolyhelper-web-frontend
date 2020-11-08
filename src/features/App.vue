@@ -1,20 +1,25 @@
 <template>
     <div id="app">
-        <Home msg="Hello world!"/>
+        <Header />
+        <router-view />
     </div>
 </template>
 
 <script lang="ts">
-    import Home from './components/Home.vue';
+import { defineComponent } from "vue";
+import Header from "./components/Header.vue";
 
-    const App = {
-        components: {
-            Home
-        }
+const App = defineComponent({
+    components: {
+        Header
     }
+});
 
-    export default App;
+export default App;
 </script>
 
 <style>
+.font-weighted-bold {
+    font-weight: bold;
+}
 </style>

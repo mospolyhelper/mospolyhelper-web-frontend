@@ -1,19 +1,20 @@
-import { createRouter, createWebHistory } from "vue-router";
-import Home from '../components/Home.vue';
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import Home from "../components/Home.vue";
 
-const history = createWebHistory();
+const routes: Array<RouteRecordRaw> = [
+    {
+        path: "/",
+        component: Home
+    },
+    {
+        path: "/:pathMatch(.*)*",
+        component: () => import("@/features/views/NotFound.vue")
+    }
+];
+
 const router = createRouter({
-    history,
-    routes: [
-        {
-            path: '/',
-            component: Home
-        },
-        {
-            path: '*',
-            component: () => import(/* webpackChuckName: notFound */ '@/features/views/NotFound.vue')
-        }
-    ]
-})
+    history: createWebHistory(),
+    routes
+});
 
 export default router;
