@@ -10,9 +10,7 @@ import { defineComponent } from "vue";
 import Header from "./components/Header.vue";
 
 const App = defineComponent({
-    components: {
-        Header
-    }
+    components: { Header }
 });
 
 export default App;

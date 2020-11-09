@@ -10,9 +10,7 @@ import { defineComponent } from "vue";
 import HeaderLink from "./HeaderLink.vue";
 
 const Header = defineComponent({
-    components: {
-        HeaderLink
-    }
+    components: { HeaderLink }
 });
 
 export default Header;

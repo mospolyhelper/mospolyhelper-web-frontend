@@ -7,6 +7,10 @@ const routes: Array<RouteRecordRaw> = [
         component: Home
     },
     {
+        path: "/map",
+        component: () => /* webpackChunkName: map */ import('@/features/views/MapPage.vue')
+    },
+    {
         path: "/:pathMatch(.*)*",
         component: () => import("@/features/views/NotFound.vue")
     }
