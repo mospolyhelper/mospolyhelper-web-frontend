@@ -41,7 +41,6 @@
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="dist\" />
     <Folder Include="public\" />
     <Folder Include="src\" />
     <Folder Include="src\data\schedule\" />
@@ -62,7 +61,6 @@
   <ItemGroup>
     <None Include="src\features\main.ts" />
     <None Include="src\features\shims-vue.d.ts" />
-    <None Include="src\features\shims-tsx.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="babel.config.js" />
