@@ -12,6 +12,8 @@
     "name": ""
   },
   "dependencies": {
+    "inversify": "^5.0.1",
+    "typed-rest-client": "^1.7.3",
     "vue": "2.6.12",
     "vue-class-component": "7.2.6",
     "vue-property-decorator": "9.0.2"
