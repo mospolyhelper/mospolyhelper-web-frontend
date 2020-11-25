@@ -77,10 +77,19 @@
     <TypeScriptCompile Include="src\data\schedule\repository\scheduleRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\schedule\model\auditorium.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\schedule\model\group.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\schedule\model\lesson.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\schedule\model\schedule.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\schedule\model\teacher.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\schedule\repository\scheduleRepository.ts">

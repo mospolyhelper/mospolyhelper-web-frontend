@@ -12,6 +12,8 @@
     "clean": "vue-cli-service build"
   },
   "dependencies": {
+    "inversify": "^5.0.1",
+    "typed-rest-client": "^1.7.3",
     "axios": "^0.21.0",
     "vue": "^3.0.0-beta.1",
     "vue-router": "^4.0.0-rc.2"
