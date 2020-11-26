@@ -1,6 +1,7 @@
 <template>
     <div class="nav-header">
         <HeaderLink to="/" exact>Home</HeaderLink>
+        <HeaderLink to="/schedule">Schedule</HeaderLink>
         <HeaderLink to="/map">Map</HeaderLink>
     </div>
 </template>

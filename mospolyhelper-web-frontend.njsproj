@@ -35,7 +35,16 @@
     <Content Include="public\favicon.ico" />
     <Content Include="public\index.html" />
     <Content Include="src\features\App.vue" />
-    <Content Include="src\features\components\Home.vue" />
+    <Content Include="src\features\common\components\Header.vue" />
+    <Content Include="src\features\common\components\HeaderLink.vue" />
+    <Content Include="src\features\home\views\Home.vue" />
+    <Content Include="src\features\common\views\NotFound.vue" />
+    <Content Include="src\features\schedule\components\Lesson.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\schedule\views\Schedule.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -51,12 +60,20 @@
     <Folder Include="src\domain\schedule\model\" />
     <Folder Include="src\domain\schedule\repository\" />
     <Folder Include="src\domain\schedule\usecase\" />
-    <Folder Include="src\features\assets\" />
-    <Folder Include="src\features\components\" />
+    <Folder Include="src\features\common\assets\" />
+    <Folder Include="src\features\common\components\" />
     <Folder Include="src\features\" />
     <Folder Include="src\data\" />
     <Folder Include="src\domain\" />
     <Folder Include="src\di\" />
+    <Folder Include="src\features\common\" />
+    <Folder Include="src\features\home\" />
+    <Folder Include="src\features\home\views\" />
+    <Folder Include="src\features\schedule\" />
+    <Folder Include="src\features\common\router\" />
+    <Folder Include="src\features\schedule\components\" />
+    <Folder Include="src\features\schedule\views\" />
+    <Folder Include="src\features\common\views\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\features\main.ts" />
@@ -96,6 +113,7 @@
     <TypeScriptCompile Include="src\domain\schedule\usecase\scheduleUseCase.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\features\common\router\router.ts" />
     <TypeScriptCompile Include="src\main.ts" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
