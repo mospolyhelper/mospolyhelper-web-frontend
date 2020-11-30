@@ -45,7 +45,13 @@
     </Content>
     <Content Include="src\features\home\views\Home.vue" />
     <Content Include="src\features\common\views\NotFound.vue" />
+    <Content Include="src\features\schedule\components\DailySchedule.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\features\schedule\components\Lesson.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\schedule\components\WeeklySchedule.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\features\schedule\views\Schedule.vue">
