@@ -108,6 +108,12 @@
     <TypeScriptCompile Include="src\domain\deadlines\model\deadline.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\deadlines\repository\deadlinesRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\deadlines\usecase\deadlinesUseCase.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\schedule\model\auditorium.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

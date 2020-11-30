@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <div class="deadline">
         <div>{{name}}</div>
         <div>{{description}}</div>
