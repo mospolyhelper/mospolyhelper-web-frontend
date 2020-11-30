@@ -37,6 +37,12 @@
     <Content Include="src\features\App.vue" />
     <Content Include="src\features\common\components\Header.vue" />
     <Content Include="src\features\common\components\HeaderLink.vue" />
+    <Content Include="src\features\deadlines\components\Deadline.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\deadlines\views\Deadlines.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\features\home\views\Home.vue" />
     <Content Include="src\features\common\views\NotFound.vue" />
     <Content Include="src\features\schedule\components\Lesson.vue">
@@ -56,6 +62,10 @@
     <Folder Include="src\data\schedule\api\" />
     <Folder Include="src\data\schedule\remote\" />
     <Folder Include="src\data\schedule\repository\" />
+    <Folder Include="src\domain\deadlines\" />
+    <Folder Include="src\domain\deadlines\model\" />
+    <Folder Include="src\domain\deadlines\usecase\" />
+    <Folder Include="src\domain\deadlines\repository\" />
     <Folder Include="src\domain\schedule\" />
     <Folder Include="src\domain\schedule\model\" />
     <Folder Include="src\domain\schedule\repository\" />
@@ -67,8 +77,11 @@
     <Folder Include="src\domain\" />
     <Folder Include="src\di\" />
     <Folder Include="src\features\common\" />
+    <Folder Include="src\features\deadlines\components\" />
+    <Folder Include="src\features\deadlines\views\" />
     <Folder Include="src\features\home\" />
     <Folder Include="src\features\home\views\" />
+    <Folder Include="src\features\deadlines\" />
     <Folder Include="src\features\schedule\" />
     <Folder Include="src\features\common\router\" />
     <Folder Include="src\features\schedule\components\" />
@@ -90,6 +103,15 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\data\schedule\repository\scheduleRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\deadlines\model\deadline.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\deadlines\repository\deadlinesRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\deadlines\usecase\deadlinesUseCase.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\schedule\model\auditorium.ts">
