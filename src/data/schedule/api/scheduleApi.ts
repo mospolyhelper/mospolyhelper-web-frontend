@@ -2,7 +2,7 @@ import * as rm from 'typed-rest-client/RestClient';
 import Schedule from '../../../domain/schedule/model/schedule';
 
 export default class ScheduleApi {
-    private URL_BASE = 'https://localhost:44394'
+    private URL_BASE = 'https://mospolyhelper.herokuapp.com'
     private URL_MODULE = '/schedule'
     private URL_SCHEDULE = '/schedule'
 
