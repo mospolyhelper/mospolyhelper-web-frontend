@@ -12,8 +12,20 @@ export default class DeadlinesUseCase {
         this.repository.addDeadline(d);
     }
 
-    deleteDeadline(d: Deadline) {
-        this.repository.deleteDeadline(d);
+    deleteDeadline(id: number) {
+        this.repository.deleteDeadline(id);
+    }
+
+    setCompleted(id: number) {
+        let d = this.repository.getDeadline(id);
+        d?.completed != d?.completed;
+        this.repository.editDeadline(d);
+    }
+
+    setPinned(id: number) {
+        let d = this.repository.getDeadline(id);
+        d?.pinned != d?.pinned;
+        this.repository.editDeadline(d);
     }
 
     show() {

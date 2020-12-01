@@ -32,6 +32,14 @@ export default class Repository {
         return this.deadlines;
     }
 
+    getDeadline(id: number): Deadline | undefined {
+        for (let deadline of this.deadlines) {
+            if (deadline.id == id) {
+                return deadline;
+            }
+        }
+    }
+
     loadDeadlines() {
         let self = this;
         this.showjson();
@@ -44,11 +52,28 @@ export default class Repository {
         });
     }
 
-    deleteDeadline(d: Deadline) {
+    deleteDeadline(id: number) {
         this.deadlines.filter(function (element, index, array) {
-            return (element.id != d.id);
+            return (element.id != id);
         });
+        console.log("removed id", id)
         this.saveToJson();
+        this.showjson();
+    }
+
+    editDeadline(d: Deadline | undefined) {
+        let id: number | undefined = 0;
+        for (let deadline of this.deadlines) {
+            if (deadline.id == d?.id) {
+                id = d?.id;
+                break;
+            } 
+        }
+        if (id != null && d != null) {
+            this.deadlines[id] = d;
+            this.saveToJson();
+        }
+ 
     }
 
     showjson() {

@@ -24,8 +24,16 @@
         '123',
         true,
         new Date(1478708162000));
-    useCase.addDeadline(d)
-    useCase.addDeadline(d)
+    useCase.addDeadline(new Deadline(
+        "Технология кроссплатформенного программирования",
+        '123',
+        true,
+        new Date(1478708162000)))
+    useCase.addDeadline(new Deadline(
+        "Технология кроссплатформенного программирования",
+        '123',
+        true,
+        new Date(1478708162000)))
 
     useCase.show();
     const deadlines = defineComponent({

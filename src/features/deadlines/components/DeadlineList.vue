@@ -1,12 +1,12 @@
 ﻿<template>
     <div class="deadlineList">
         <deadline v-for="deadline in deadlinesList"
-                  id="deadline.id"
                   :name="deadline.name"
                   :description="deadline.description"
                   :date="deadline.date.toLocaleString()"
                   :importance="deadline.importance"
-                  :completed="isCompleted(deadline.completed)" />
+                  :completed="isCompleted(deadline.completed)"
+                  :idd="deadline.id"/>
 
     </div>
 </template>
