@@ -1,31 +1,31 @@
 ﻿<template>
-    <div class="deadlines">
-    </div>
-    <deadline :name="deadline.name"
-            :description="deadline.description"
-            :date="deadline.date"
-            :time="deadline.time"
-            :importance="1"
-            :completed="123"></deadline>
+    <p>
+        Дедлайны
+        <a href="https://vuejs.org" target="_blank">Vue.js</a> and
+        <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>.
+    </p>
+    <deadlineList :deadlinesList="deadline">
+
+    </deadlineList>
+    <!--<form class="addDeadline">
+    </form>-->
 
 </template>
 
 <script lang="ts">
     import { defineComponent } from "vue";
     import Deadline from "@/domain/deadlines/model/deadline";
-    import deadline from "@/features/deadlines/components/Deadline.vue";
+    import deadlineList from "@/features/deadlines/components/DeadlineList.vue";
     import DeadlinesUseCase from "@/domain/deadlines/usecase/deadlinesUseCase";
-    //import DeadlinesRepository from "@/domain/deadlines/repository/deadlinesRepository"
 
     let useCase = new DeadlinesUseCase();
-
-    useCase.addDeadline(new Deadline(
+    let d = new Deadline(
         "Технология кроссплатформенного программирования",
         '123',
         true,
-        "дата",
-        "время"
-    ))
+        new Date(1478708162000));
+    useCase.addDeadline(d)
+    useCase.addDeadline(d)
 
     useCase.show();
     const deadlines = defineComponent({
@@ -33,17 +33,11 @@
         },
         data() {
             return {
-                deadline: new Deadline(
-                    "Технология кроссплатформенного программирования",
-                    '123',
-                    true,
-                    "дата",
-                    "время"
-                )
+                deadline: useCase.getDeadlines()
             }
         },
         components: {
-            deadline
+            deadlineList
         }
     });
 

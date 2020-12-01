@@ -20,11 +20,12 @@ export default class Repository {
 
     addDeadline(d: Deadline) {
         if (this.deadlines.length > 0)
-            d.id = this.deadlines[this.deadlines.length].id + 1;
+            d.id = this.deadlines[this.deadlines.length-1].id + 1;
         else
             d.id = 1;
         this.deadlines.push(d);
         this.saveToJson();
+        this.showjson();
     }
 
     getDeadlines(): Deadline[] {
@@ -32,15 +33,15 @@ export default class Repository {
     }
 
     loadDeadlines() {
-        let deadline: Deadline[] = [];
+        let self = this;
+        this.showjson();
         this.fs.readFile('deadlines.json', 'utf8', function readFileCallback(err: any, data: string) {
             if (err) {
                 console.log(err);
             } else {
-                deadline = JSON.parse(data);
+                self.deadlines = JSON.parse(data);
             }
         });
-        this.deadlines = deadline;
     }
 
     deleteDeadline(d: Deadline) {
