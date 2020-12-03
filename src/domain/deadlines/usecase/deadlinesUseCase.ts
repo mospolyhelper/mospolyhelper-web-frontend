@@ -17,15 +17,11 @@ export default class DeadlinesUseCase {
     }
 
     setCompleted(id: number) {
-        let d = this.repository.getDeadline(id);
-        d?.completed != d?.completed;
-        this.repository.editDeadline(d);
+        this.repository.setCompleted(id);
     }
 
     setPinned(id: number) {
-        let d = this.repository.getDeadline(id);
-        d?.pinned != d?.pinned;
-        this.repository.editDeadline(d);
+        this.repository.setPinned(id);
     }
 
     show() {

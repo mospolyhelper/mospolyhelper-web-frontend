@@ -7,8 +7,8 @@
         <div>{{completed}}</div>
         <button @click="removeFormElement(id)">Удалить</button>
         <button @click="">Редактировать</button>
-        <button @click="pin()">Закрепить</button>
-        <button @click="complete()">Выполнить</button>
+        <button @click="pin(id)">Закрепить</button>
+        <button @click="complete(id)">Выполнить</button>
     </div>
 </template>
 
@@ -20,7 +20,7 @@
 
     const deadline = defineComponent({
         props: {
-            idd: Number,
+            id: Number,
             name: String,
             description: String,
             date: String,
@@ -28,18 +28,17 @@
             completed: String
         },
         methods: {
-            pin() {
-                useCase.setPinned(this.$props.idd ? this.$props.idd : 0);
-                //this.$props.
+            pin(id: number) {
+                useCase.setPinned(id);
+                console.log('pinned element', id);
             },
-            complete() {
-                useCase.setCompleted(this.$props.idd ? this.$props.idd : 0);
-                //this.completed = "Выполнено"
+            complete(id: number) {
+                useCase.setCompleted(id);
             },
             removeFormElement(id: number) {
                 console.log('sending message up to remove id', id)
                 this.$emit('remove', id)
-                useCase.deleteDeadline(this.$props.idd ? this.$props.idd : 0);
+                useCase.deleteDeadline(id);
             }
         }
     });

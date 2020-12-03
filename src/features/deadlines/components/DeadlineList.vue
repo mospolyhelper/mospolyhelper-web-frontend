@@ -6,14 +6,17 @@
                   :date="deadline.date.toLocaleString()"
                   :importance="deadline.importance"
                   :completed="isCompleted(deadline.completed)"
-                  :idd="deadline.id"/>
-
+                  :id="deadline.id"/>
+        <button @click="showJson()">showjson</button>
     </div>
 </template>
 
 <script lang="ts">
     import { defineComponent } from "vue";
     import deadline from "@/features/deadlines/components/Deadline.vue"
+    import DeadlinesUseCase from "@/domain/deadlines/usecase/deadlinesUseCase";
+
+    let useCase = new DeadlinesUseCase();
     const deadlineList = defineComponent({
         props: {
             deadlinesList: Array
@@ -24,6 +27,9 @@
         methods: {
             isCompleted(b: boolean) {
                 return deadline.completed ? "Выполнено" : "Не выполнено";
+            },
+            showJson() {
+                useCase.show();
             }
         }
     });

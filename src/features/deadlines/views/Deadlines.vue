@@ -19,23 +19,36 @@
     import DeadlinesUseCase from "@/domain/deadlines/usecase/deadlinesUseCase";
 
     let useCase = new DeadlinesUseCase();
-    let d = new Deadline(
-        "Технология кроссплатформенного программирования",
-        '123',
-        true,
-        new Date(1478708162000));
     useCase.addDeadline(new Deadline(
-        "Технология кроссплатформенного программирования",
+        "Технология кроссплатформенного программирования1",
         '123',
-        true,
+        false,
         new Date(1478708162000)))
     useCase.addDeadline(new Deadline(
-        "Технология кроссплатформенного программирования",
+        "Технология кроссплатформенного программирования2",
         '123',
-        true,
+        false,
         new Date(1478708162000)))
 
-    useCase.show();
+    useCase.addDeadline(new Deadline(
+        "Технология кроссплатформенного программирования3",
+        '123',
+        false,
+        new Date(1478708162000)))
+
+    useCase.addDeadline(new Deadline(
+        "Технология кроссплатформенного программирования4",
+        '123',
+        false,
+        new Date(1478708162000)))
+
+    useCase.addDeadline(new Deadline(
+        "Технология кроссплатформенного программирования5",
+        '123',
+        false,
+        new Date(1478708162000)))
+
+    //useCase.show();
     const deadlines = defineComponent({
         props: {
         },
