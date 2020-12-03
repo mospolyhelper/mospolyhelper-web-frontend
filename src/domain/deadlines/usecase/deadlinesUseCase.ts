@@ -8,6 +8,10 @@ export default class DeadlinesUseCase {
         return this.repository.getDeadlines();
     }
 
+    getDeadline(id: number): Deadline {
+        return this.repository.getDeadline(id);
+    }
+
     addDeadline(d: Deadline) {
         this.repository.addDeadline(d);
     }

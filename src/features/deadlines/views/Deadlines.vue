@@ -4,11 +4,11 @@
         <a href="https://vuejs.org" target="_blank">Vue.js</a> and
         <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>.
     </p>
-    <deadlineList :deadlinesList="deadline">
+    <deadlineList :deadlinesList="deadline" 
+                  v-on:removeFromArray="deleteElement"
+                  v-on:setCompleted="setCompleted"
+                  v-on:setPinned="setPinned"/>
 
-    </deadlineList>
-    <!--<form class="addDeadline">
-    </form>-->
 
 </template>
 
@@ -47,7 +47,7 @@
         '123',
         false,
         new Date(1478708162000)))
-
+    
     //useCase.show();
     const deadlines = defineComponent({
         props: {
@@ -59,6 +59,32 @@
         },
         components: {
             deadlineList
+        },
+        methods: {
+            update(id: number, index: number) {
+                this.$data.deadline = useCase.getDeadlines();
+                //console.log(this.$data.deadline.);
+                this.$data.deadline[index] = useCase.getDeadlines()[index];
+
+            },
+            deleteElement(id: number, i: number) {
+                useCase.deleteDeadline(id)
+                
+                const index = this.$data.deadline.indexOf(this.$data.deadline[i], 0);
+                if (index > -1) {
+                    this.$data.deadline.splice(index, 1);
+                }
+
+            },
+            setCompleted(id: number, index: number) {
+                useCase.setCompleted(id);
+                this.update(id, index);
+                this.$data.deadline[index].completed = !this.$data.deadline[index].completed
+            },
+            setPinned(id: number, index: number) {
+                useCase.setPinned(id);
+                this.$data.deadline[index].pinned = !this.$data.deadline[index].pinned
+            }
         }
     });
 

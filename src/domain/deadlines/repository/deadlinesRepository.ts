@@ -57,15 +57,13 @@ export default class Repository {
     }
 
     deleteDeadline(id: number) {
-        //this.deadlines.filter(deadline => deadline == this.getDeadline(id));
         for (let i = 0; i <= this.deadlines.length; i++) {
             if (this.deadlines[i].id == id) {
-                //delete this.deadlines[i];
                 const index = this.deadlines.indexOf(this.deadlines[i], 0);
                 if (index > -1) {
                     this.deadlines.splice(index, 1);
                 }
-                console.log('deleted element', i);
+                console.log('deleted element index ', i, "with id ", id);
                 break;
             }
         }

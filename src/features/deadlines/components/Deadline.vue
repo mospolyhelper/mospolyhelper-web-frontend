@@ -1,14 +1,14 @@
 ﻿<template>
-    <div class="deadline" @remove="removeFormElement">
+    <div class="deadline" vhide>
         <div>{{name}}</div>
         <div>{{description}}</div>
         <div>{{date}}</div>
         <div>{{importance}}</div>
         <div>{{completed}}</div>
-        <button @click="removeFormElement(id)">Удалить</button>
+        <button @click="removeFormElement">Удалить</button>
         <button @click="">Редактировать</button>
-        <button @click="pin(id)">Закрепить</button>
-        <button @click="complete(id)">Выполнить</button>
+        <button @click="pin">Закрепить</button>
+        <button @click="complete">Выполнить</button>
     </div>
 </template>
 
@@ -20,7 +20,6 @@
 
     const deadline = defineComponent({
         props: {
-            id: Number,
             name: String,
             description: String,
             date: String,
@@ -28,17 +27,14 @@
             completed: String
         },
         methods: {
-            pin(id: number) {
-                useCase.setPinned(id);
-                console.log('pinned element', id);
+            pin() {
+                this.$emit('setPinned');
             },
-            complete(id: number) {
-                useCase.setCompleted(id);
+            complete() {
+                this.$emit('setCompleted');
             },
-            removeFormElement(id: number) {
-                console.log('sending message up to remove id', id)
-                this.$emit('remove', id)
-                useCase.deleteDeadline(id);
+            removeFormElement() {
+                this.$emit('remove');
             }
         }
     });
