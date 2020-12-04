@@ -5,6 +5,7 @@
         <div>{{date}}</div>
         <div>{{importance}}</div>
         <div>{{completed}}</div>
+        <div>{{pinned}}</div>
         <button @click="removeFormElement">Удалить</button>
         <button @click="">Редактировать</button>
         <button @click="pin">Закрепить</button>
@@ -13,10 +14,8 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent, vShow } from "vue";
-    import DeadlinesUseCase from "@/domain/deadlines/usecase/deadlinesUseCase";
+    import { defineComponent } from "vue";
 
-    let useCase = new DeadlinesUseCase();
 
     const deadline = defineComponent({
         props: {
@@ -24,7 +23,8 @@
             description: String,
             date: String,
             importance: String,
-            completed: String
+            completed: String,
+            pinned: String
         },
         methods: {
             pin() {

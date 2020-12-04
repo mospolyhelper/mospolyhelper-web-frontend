@@ -31,4 +31,8 @@ export default class DeadlinesUseCase {
     show() {
         this.repository.showjson();
     }
+
+    editDeadline(d: Deadline) {
+        this.repository.editDeadline(d);
+    }
 }

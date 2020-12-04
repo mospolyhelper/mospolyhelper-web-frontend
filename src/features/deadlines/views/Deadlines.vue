@@ -8,7 +8,10 @@
                   v-on:removeFromArray="deleteElement"
                   v-on:setCompleted="setCompleted"
                   v-on:setPinned="setPinned"/>
-
+    <formDeadline :isUpdate="isUpdate"
+                  v-on:update="updateDeadline"
+                  v-on:add="addDeadline">
+    </formDeadline>
 
 </template>
 
@@ -16,6 +19,7 @@
     import { defineComponent } from "vue";
     import Deadline from "@/domain/deadlines/model/deadline";
     import deadlineList from "@/features/deadlines/components/DeadlineList.vue";
+    import formDeadline from "@/features/deadlines/components/FormDeadline.vue"
     import DeadlinesUseCase from "@/domain/deadlines/usecase/deadlinesUseCase";
 
     let useCase = new DeadlinesUseCase();
@@ -23,7 +27,7 @@
         "Технология кроссплатформенного программирования1",
         '123',
         false,
-        new Date(1478708162000)))
+        (new Date(1478708162000))))
     useCase.addDeadline(new Deadline(
         "Технология кроссплатформенного программирования2",
         '123',
@@ -54,17 +58,22 @@
         },
         data() {
             return {
-                deadline: useCase.getDeadlines()
+                deadline: useCase.getDeadlines(),
+                isUpdate: false
             }
         },
         components: {
-            deadlineList
+            deadlineList,
+            formDeadline
         },
         methods: {
             update(id: number, index: number) {
                 this.$data.deadline = useCase.getDeadlines();
                 //console.log(this.$data.deadline.);
-                this.$data.deadline[index] = useCase.getDeadlines()[index];
+                this.$data.deadline[index] = new Deadline(
+                    "Технология кроссплатформенного программирования1",
+                    '123',
+                    false);
 
             },
             deleteElement(id: number, i: number) {
@@ -79,11 +88,18 @@
             setCompleted(id: number, index: number) {
                 useCase.setCompleted(id);
                 this.update(id, index);
-                this.$data.deadline[index].completed = !this.$data.deadline[index].completed
+                this.deadline[index].completed = !this.$data.deadline[index].completed
             },
             setPinned(id: number, index: number) {
                 useCase.setPinned(id);
-                this.$data.deadline[index].pinned = !this.$data.deadline[index].pinned
+                this.deadline[index].pinned = !this.$data.deadline[index].pinned
+            },
+            addDeadline(d: Deadline) {
+                useCase.addDeadline(d);
+            },
+            updateDeadline(d: Deadline) {
+                useCase.editDeadline(d);
+
             }
         }
     });
