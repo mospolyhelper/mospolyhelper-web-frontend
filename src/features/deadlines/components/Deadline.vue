@@ -3,9 +3,9 @@
         <div>{{name}}</div>
         <div>{{description}}</div>
         <div>{{date}}</div>
-        <div>{{importance}}</div>
-        <div>{{completed}}</div>
-        <div>{{pinned}}</div>
+        <div>{{isImportant}}</div>
+        <div>{{isCompleted}}</div>
+        <div>{{isPinned}}</div>
         <button @click="removeFormElement">Удалить</button>
         <button @click="">Редактировать</button>
         <button @click="pin">Закрепить</button>
@@ -22,9 +22,9 @@
             name: String,
             description: String,
             date: String,
-            importance: String,
-            completed: String,
-            pinned: String
+            importance: Number,
+            completed: Boolean,
+            pinned: Boolean
         },
         methods: {
             pin() {
@@ -35,7 +35,27 @@
             },
             removeFormElement() {
                 this.$emit('remove');
+            },
+        },
+        computed: {
+            isCompleted: function(): String {
+                return this.completed ? "Выполнено" : "Не выполнено";
+            },
+            isPinned: function (): String {
+                return this.pinned ? "Закреплено" : "Не закреплено";
+            },
+            isImportant: function (): String {
+                switch (this.importance) {
+                    case 0: return "Не важно";
+                    case 1: return "Важно";
+                    case 2: return "Очень важно";
+                    default: return "";
+                }
             }
+            //,
+            //showDate: function (): String {
+            //    return this.date != undefined ? this.date.toLocaleString() : ""
+            //}
         }
     });
 

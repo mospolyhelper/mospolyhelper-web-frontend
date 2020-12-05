@@ -35,4 +35,9 @@ export default class DeadlinesUseCase {
     editDeadline(d: Deadline) {
         this.repository.editDeadline(d);
     }
+
+    search(s: string) {
+        let list = this.repository.getDeadlines();
+        return list.filter((val) => val.name.includes(s))
+    }
 }

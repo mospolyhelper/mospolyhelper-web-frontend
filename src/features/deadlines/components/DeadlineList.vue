@@ -7,10 +7,10 @@
                   v-on:setPinned="setPinned(deadline.id, index)"
                   :name="deadline.name"
                   :description="deadline.description"
-                  :date="deadline.date.toLocaleString()"
-                  :importance="importance(deadline.importance)"
-                  :completed="isCompleted(deadline.completed)"
-                  :pinned="isPinned(deadline.pinned)" />
+                  :date="deadline.date"
+                  :importance="deadline.importance"
+                  :completed="deadline.completed"
+                  :pinned="deadline.pinned" />
     </div>
     
 </template>
@@ -27,20 +27,6 @@
             deadline
         },
         methods: {
-            isCompleted(b: boolean) {
-                return deadline.completed ? "Выполнено" : "Не выполнено";
-            },
-            isPinned(b: boolean) {
-                return deadline.pinned ? "Закреплено" : "Не закреплено";
-            },
-            importance(imp: number) {
-                switch (imp) {
-                    case 0: return "Не важно";
-                    case 1: return "Важно";
-                    case 2: return "Очень важно";
-                    default: return "";
-                }
-            },
             removeFromList(id: number, index: number) {
                 this.$emit('removeFromArray', id, index);
             },

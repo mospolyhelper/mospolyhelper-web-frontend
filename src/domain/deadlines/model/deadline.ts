@@ -5,7 +5,7 @@
         public name: string,
         public description: string,
         public pinned: boolean = false,
-        public date: Date = new Date(),
+        public date: string = new Date().toLocaleString(),
         public importance: number = 0,
         public id: number = 0
     ) { }
