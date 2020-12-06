@@ -1,14 +1,9 @@
 <template>
-    <h1>ййй</h1>
-    <p>
-        Расписание занятий
-        <a href="https://vuejs.org" target="_blank">Vue.js</a> and
-        <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>.
-    </p>
     <div class="schedule">
+        <input v-model="group" />
         <button @click="update">Update</button>
 
-        <weeklySchedule :dailySchedules="lesson"></weeklySchedule>
+        <weeklySchedule :dailySchedules="dailySchedules"></weeklySchedule>
     </div>
 
 </template>
@@ -19,20 +14,11 @@
     import Teacher from '@/domain/schedule/model/teacher';
     import Auditorium from '@/domain/schedule/model/auditorium';
     import Group from '../../../domain/schedule/model/group';
-    import weeklySchedule from "@/features/schedule/components/WeeklySchedule.vue"
-    import ScheduleApi from "@/data/schedule/api/scheduleApi"
+    import weeklySchedule from "@/features/schedule/components/WeeklySchedule.vue";
+    import ScheduleApi from "@/data/schedule/api/scheduleApi";
+    import Schedule from "@/domain/schedule/model/schedule";
+    import { getLessons } from "@/domain/schedule/utils/scheduleUtils"
 
-    var q = new Lesson(
-        1,
-        'Технология кроссплатформенного программирования',
-        'Лаб. работа',
-        [new Teacher(['Морозов', 'Юрий', 'Владимирович'])],
-        [new Auditorium('Пр2610', '#ffaaaa')],
-        [new Group('181-721', false)],
-        new Date(2020, 9, 14),
-        new Date(2020, 12, 3)
-    );
-    var d = [q, q, q, q, q, q];
     var api = new ScheduleApi();
     
 
@@ -41,7 +27,8 @@
         },
         data() {
             return {
-                lesson: [d, d, d, d, d, d, d]
+                dailySchedules: [new Array<Lesson>(), [], [], [], [], [], []],
+                group: ""
             }
         },
         components: {
@@ -49,16 +36,21 @@
         },
         methods: {
             update() {
-                api.getSchedule().then(value => {
-                    console.log("123");
-                    console.log(value);
-                    this.upd(value?.dailySchedules)
+                api.getSchedule(this.group).then(value => {
+                    let today = new Date();
+                    let dayOfWeek = today.getDay();
+                    if (dayOfWeek == 0) {
+                        dayOfWeek = 7;
+                    }
+                    const monday = 1;
+                    today.setDate(today.getDate() - (dayOfWeek - monday));
+                    let dailySchedules = new Array<Array<Lesson>>();
+                    for (let i = 0; i < 7; i++) {
+                        dailySchedules[i] = value ? getLessons(value, today) : [];
+                        today.setDate(today.getDate() + 1)
+                    }
+                    this.dailySchedules = dailySchedules;
                 });
-            },
-            upd(sch: Array<Array<Lesson>> | undefined) {
-                if (sch) {
-                    this.lesson = sch;
-                }
             }
         }
     });

@@ -2,15 +2,13 @@ import Teacher from './teacher';
 import Auditorium from './auditorium';
 import Group from './group';
 
-export default class Lesson {
-    constructor(
-        public readonly order: number,
-        public readonly title: string,
-        public readonly type: string,
-        public readonly teachers: Array<Teacher>,
-        public readonly auditoriums: Array<Auditorium>,
-        public readonly groups: Array<Group>,
-        public readonly dateFrom: Date,
-        public readonly dateTo: Date
-    ) { }
+export default interface Lesson {
+    readonly order: number;
+    readonly title: string;
+    readonly type: string;
+    readonly teachers: Array<Teacher>;
+    readonly auditoriums: Array<Auditorium>;
+    readonly groups: Array<Group>;
+    readonly dateFrom: Date;
+    readonly dateTo: Date;
 }

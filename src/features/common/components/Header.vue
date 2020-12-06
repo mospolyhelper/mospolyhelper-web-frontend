@@ -3,6 +3,7 @@
         <HeaderLink to="/" exact>Home</HeaderLink>
         <HeaderLink to="/schedule">Schedule</HeaderLink>
         <HeaderLink to="/map">Map</HeaderLink>
+        <HeaderLink to="/deadlines">Deadlines</HeaderLink>
     </div>
 </template>
 

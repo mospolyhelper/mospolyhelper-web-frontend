@@ -6,8 +6,8 @@
                 :type="lesson.type"
                 :teacher="getTeachers(lesson)"
                 :auditorium="getAuditoriums(lesson)"
-                dateFrom="14 сентября"
-                dateTo="23 декабря"></lesson>
+                :dateFrom="lesson.dateFrom"
+                :dateTo="lesson.dateTo"></lesson>
     </div>
 </template>
 
@@ -38,8 +38,6 @@ import Lesson from '../../../domain/schedule/model/lesson';
 
 <style scoped>
     .dailySchedule {
-        margin-right: 10px;
-        margin-left: 10px;
         flex-grow: 1;
         flex-shrink: 1;
         flex-basis: 0%;
