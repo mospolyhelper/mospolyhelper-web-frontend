@@ -7,9 +7,9 @@
         <div>{{isCompleted}}</div>
         <div>{{isPinned}}</div>
         <button @click="removeFormElement">Удалить</button>
-        <button @click="">Редактировать</button>
-        <button @click="pin">Закрепить</button>
-        <button @click="complete">Выполнить</button>
+        <button v-if="false" @click="update">Редактировать</button>
+        <button @click="pin">{{isPinnedBtn}}</button>
+        <button @click="complete">{{isCompletedBtn}}</button>
     </div>
 </template>
 
@@ -36,9 +36,12 @@
             removeFormElement() {
                 this.$emit('remove');
             },
+            update() {
+                this.$emit('update');
+            },
         },
         computed: {
-            isCompleted: function(): String {
+            isCompleted: function (): String {
                 return this.completed ? "Выполнено" : "Не выполнено";
             },
             isPinned: function (): String {
@@ -51,11 +54,13 @@
                     case 2: return "Очень важно";
                     default: return "";
                 }
+            },
+            isPinnedBtn: function (): String {
+                return !this.pinned ? "Закрепить" : "Открепить";
+            },
+            isCompletedBtn: function (): String {
+                return !this.completed ? "Выполнено" : "Не выполнено";
             }
-            //,
-            //showDate: function (): String {
-            //    return this.date != undefined ? this.date.toLocaleString() : ""
-            //}
         }
     });
 

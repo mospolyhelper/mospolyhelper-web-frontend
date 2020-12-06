@@ -2,9 +2,10 @@
     <div class="deadlineList">
         <deadline v-for="(deadline, index) in deadlinesList"
                   v-bind:key="deadline.id"
-                  v-on:remove="removeFromList(deadline.id, index)"
-                  v-on:setCompleted="setCompleted(deadline.id, index)"
-                  v-on:setPinned="setPinned(deadline.id, index)"
+                  v-on:remove="removeFromList(deadline.id)"
+                  v-on:update="update(deadline.id)"
+                  v-on:setCompleted="setCompleted(deadline.id)"
+                  v-on:setPinned="setPinned(deadline.id)"
                   :name="deadline.name"
                   :description="deadline.description"
                   :date="deadline.date"
@@ -12,7 +13,7 @@
                   :completed="deadline.completed"
                   :pinned="deadline.pinned" />
     </div>
-    
+
 </template>
 
 <script lang="ts">
@@ -27,15 +28,19 @@
             deadline
         },
         methods: {
-            removeFromList(id: number, index: number) {
-                this.$emit('removeFromArray', id, index);
+            removeFromList(id: number) {
+                this.$emit('removeFromArray', id);
             },
-            setCompleted(id: number, index: number) {
-                this.$emit('setCompleted', id, index);
+            update(id: number) {
+                this.$emit('update', id);
             },
-            setPinned(id: number, index: number) {
-                this.$emit('setPinned', id, index);
+            setCompleted(id: number) {
+                this.$emit('setCompleted', id);
+            },
+            setPinned(id: number) {
+                this.$emit('setPinned', id);
             }
+
         }
     });
 
