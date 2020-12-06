@@ -1,4 +1,5 @@
 <template>
+    <div v-if="!previousEqual">{{times[0]}} - {{times[1]}}</div>
     <div class="lesson">
         <div class="type">{{type}}</div>
         <div class="title">{{title}}</div>
@@ -10,11 +11,11 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
-    import * as moment from 'moment';
-    import 'moment/locale/ru';
+    import LessonTimes from '@/domain/schedule/utils/lessonTimes'
 
     const lesson = defineComponent({
         props: {
+            previousEqual: Boolean,
             order: Number,
             title: String,
             type: String,
@@ -23,12 +24,15 @@
             dateFrom: Date,
             dateTo: Date
         },
+        data() {
+            return {
+                times: LessonTimes.getTime(this.order!, false)
+            }
+        },
         methods: {
             getFormattedDate(date: Date) {
-                console.log(date);
-                moment.locale('ru');
-                const moment1 = require('moment');
-                return moment1(date).format('D MMMM');
+                const moment = require('moment');
+                return moment(date).format('D MMMM');
             }
         }
     });

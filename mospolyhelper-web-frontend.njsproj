@@ -54,6 +54,9 @@
     </Content>
     <Content Include="src\features\home\views\Home.vue" />
     <Content Include="src\features\common\views\NotFound.vue" />
+    <Content Include="src\features\schedule\components\ArraySelector.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\features\schedule\components\DailySchedule.vue">
       <SubType>Code</SubType>
     </Content>
@@ -152,6 +155,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\schedule\utils\groupUtils.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\schedule\utils\lessonTimes.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\schedule\utils\scheduleUtils.ts">

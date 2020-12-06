@@ -1,6 +1,7 @@
 <template>
     <div class="weeklySchedule" >
-        <dailySchedule v-for="dailySchedule in dailySchedules"
+        <dailySchedule v-for="(dailySchedule, i) in dailySchedules"
+                       :date="dates[i]"
                        :dailySchedule="dailySchedule" />
     </div>
 </template>
@@ -12,7 +13,8 @@
 
     const weeklySchedule = defineComponent({
         props: {
-            dailySchedules: Array
+            dailySchedules: Array,
+            dates: Array
         },
         components: {
             dailySchedule
