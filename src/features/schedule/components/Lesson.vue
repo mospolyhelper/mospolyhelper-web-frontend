@@ -1,5 +1,5 @@
 <template>
-    <div v-if="!previousEqual">{{times[0]}} - {{times[1]}}</div>
+    <div v-if="!previousEqual">{{getTime()}}</div>
     <div class="lesson">
         <div class="type">{{type}}</div>
         <div class="title">{{title}}</div>
@@ -24,12 +24,11 @@
             dateFrom: Date,
             dateTo: Date
         },
-        data() {
-            return {
-                times: LessonTimes.getTime(this.order!, false)
-            }
-        },
         methods: {
+            getTime() {
+                const times = LessonTimes.getTime(this.order!, false);
+                return times[0] + ' - ' + times[1];
+            },
             getFormattedDate(date: Date) {
                 const moment = require('moment');
                 return moment(date).format('D MMMM');

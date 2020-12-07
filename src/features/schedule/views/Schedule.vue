@@ -2,9 +2,16 @@
     <div class="schedule">
         <input v-model="group" />
         <button @click="download">Загрузить</button>
+        Фильтр по дате: showEnded
         <input type="checkbox" v-model="showEnded" />
+        showCurrent
         <input type="checkbox" v-model="showCurrent" />
+        showNotStarted
         <input type="checkbox" v-model="showNotStarted" />
+        <br />
+        <button @click="setPreviousWeek">Предыдущая неделя</button>
+        <div>Неделя {{getFormattedDate(dates[0])}} - {{getFormattedDate(dates[6])}}</div>
+        <button @click="setNextWeek">Следующая неделя</button>
 
         <weeklySchedule :dailySchedules="dailySchedules"
                         :dates="dates"></weeklySchedule>
@@ -80,6 +87,10 @@
             arraySelector
         },
         methods: {
+            getFormattedDate(date: Date) {
+                const moment = require('moment');
+                return moment(date).format('D MMMM');
+            },
             download() {
                 useCase.getScheduleByGroup(this.group).then(value => {
                     this.schedule = value;
@@ -112,6 +123,20 @@
                 });
             },
             update() {
+                let dailySchedules = new Array<Array<Lesson>>();
+                for (let i = 0; i < 7; i++) {
+                    dailySchedules[i] = this.schedule ?
+                        getLessons(
+                            this.schedule,
+                            this.dates[i],
+                            this.showEnded,
+                            this.showCurrent,
+                            this.showNotStarted
+                        ) : [];
+                }
+                this.dailySchedules = dailySchedules;
+            },
+            setCurrentWeek() {
                 let today = new Date();
                 let dayOfWeek = today.getDay();
                 if (dayOfWeek == 0) {
@@ -119,24 +144,25 @@
                 }
                 const monday = 1;
                 today.setDate(today.getDate() - (dayOfWeek - monday));
-                let dailySchedules = new Array<Array<Lesson>>();
                 let dates = new Array<Date>();
                 for (let i = 0; i < 7; i++) {
                     dates[i] = new Date(today);
-                    dailySchedules[i] = this.schedule ?
-                        getLessons(
-                            this.schedule,
-                            today,
-                            this.showEnded,
-                            this.showCurrent,
-                            this.showNotStarted
-                        ) : [];
                     today.setDate(today.getDate() + 1)
                 }
-                this.dailySchedules = dailySchedules;
                 this.dates = dates;
             },
-
+            setNextWeek() {
+                for (const date of this.dates) {
+                    date.setDate(date.getDate() + 7);
+                }
+                this.update();
+            },
+            setPreviousWeek() {
+                for (const date of this.dates) {
+                    date.setDate(date.getDate() - 7);
+                }
+                this.update();
+            },
             groupListChanged(value: Array<String>) {
                 this.checkedGroupList = value;
             },
@@ -152,6 +178,9 @@
             typeListChanged(value: Array<String>) {
                 this.checkedTypeList = value;
             }
+        },
+        created() {
+            this.setCurrentWeek();
         }
     });
 

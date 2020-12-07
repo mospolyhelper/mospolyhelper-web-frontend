@@ -24,20 +24,23 @@ export const filterByDate = (
     showNotStarted: Boolean
 ): Array<Lesson> => 
     dailySchedule.filter(it => {
+        let dateFixed = new Date(date.getTime());
+        dateFixed.setHours(0, 0, 0, 0);
+
         if (showEnded && showCurrent && showNotStarted) return true;
         if (!showEnded && !showCurrent && !showNotStarted) return true;
 
-        if (showEnded && !showCurrent && !showNotStarted) return date > it.dateTo;
-        if (showEnded && showCurrent && !showNotStarted) return date >= it.dateFrom;
+        if (showEnded && !showCurrent && !showNotStarted) return dateFixed > it.dateTo;
+        if (showEnded && showCurrent && !showNotStarted) return dateFixed >= it.dateFrom;
 
-        if (!showEnded && !showCurrent && showNotStarted) return date < it.dateFrom;
-        if (!showEnded && showCurrent && showNotStarted) return date <= it.dateTo;
+        if (!showEnded && !showCurrent && showNotStarted) return dateFixed < it.dateFrom;
+        if (!showEnded && showCurrent && showNotStarted) return dateFixed <= it.dateTo;
 
         if (!showEnded && showCurrent && !showNotStarted)
-            return date >= it.dateFrom && date <= it.dateTo;
+            return dateFixed >= it.dateFrom && dateFixed <= it.dateTo;
 
         if (showEnded && !showCurrent && showNotStarted)
-            return date < it.dateFrom || date > it.dateTo;
+            return dateFixed < it.dateFrom || dateFixed > it.dateTo;
 
         return true;
     });
