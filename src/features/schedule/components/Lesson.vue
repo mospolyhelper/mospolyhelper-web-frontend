@@ -1,25 +1,38 @@
 <template>
+    <div v-if="!previousEqual">{{getTime()}}</div>
     <div class="lesson">
-        <div>{{type}}</div>
-        <div>{{title}}</div>
+        <div class="type">{{type}}</div>
+        <div class="title">{{title}}</div>
         <div>{{teacher}}</div>
         <div v-html="auditorium"></div>
-        <div>{{dateFrom}} - {{dateTo}}</div>
+        <div>{{getFormattedDate(dateFrom)}} - {{getFormattedDate(dateTo)}}</div>
     </div>
 </template>
 
 <script lang="ts">
     import { defineComponent } from "vue";
+    import LessonTimes from '@/domain/schedule/utils/lessonTimes'
 
     const lesson = defineComponent({
         props: {
+            previousEqual: Boolean,
             order: Number,
             title: String,
             type: String,
             teacher: String,
             auditorium: String,
-            dateFrom: String,
-            dateTo: String
+            dateFrom: Date,
+            dateTo: Date
+        },
+        methods: {
+            getTime() {
+                const times = LessonTimes.getTime(this.order!, false);
+                return times[0] + ' - ' + times[1];
+            },
+            getFormattedDate(date: Date) {
+                const moment = require('moment');
+                return moment(date).format('D MMMM');
+            }
         }
     });
 
@@ -29,14 +42,30 @@
 <style scoped>
 
     .lesson {
-        background: #fff; /* Цвет фона */
-        box-shadow: 0 0 6px rgba(0,0,0,0.5); /* Параметры тени */
+        background: #fff;
+        box-shadow: 0 0 6px rgba(0,0,0,0.5);
         margin-top: 10px;
         margin-bottom: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
         padding: 10px;
         border-radius: 25px;
-        min-width: 100%;
-        width: 100%;
+        min-width: 200px;
+    }
+
+    .type {
+        background: #d1eafd;
+        color: #4985a3;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        margin-right: 2px;
+        padding: 6px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+
+    .title {
+        font-weight: bold;
     }
   
 </style>

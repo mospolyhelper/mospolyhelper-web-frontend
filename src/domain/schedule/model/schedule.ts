@@ -1,9 +1,7 @@
 import Lesson from './lesson';
 
-export default class Schedule {
-    constructor(
-        public readonly dailySchedules: Array<Array<Lesson>>,
-        public readonly dateFrom: Date,
-        public readonly dateTo: Date
-    ) { }
+export default interface Schedule {
+    readonly dailySchedules: Array<Array<Lesson>>;
+    readonly dateFrom: Date;
+    readonly dateTo: Date;
 }

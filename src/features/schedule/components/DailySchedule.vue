@@ -1,13 +1,15 @@
 ﻿<template>
     <div class="dailySchedule">
-        <lesson v-for="lesson in dailySchedule"
+        <div>{{getDayOfWeek(date)}}</div>
+        <lesson v-for="(lesson, i) in dailySchedule"
+                :previousEqual="i != 0 && dailySchedule[i - 1].order == lesson.order"
                 :order="lesson.order"
                 :title="lesson.title"
                 :type="lesson.type"
                 :teacher="getTeachers(lesson)"
                 :auditorium="getAuditoriums(lesson)"
-                dateFrom="14 сентября"
-                dateTo="23 декабря"></lesson>
+                :dateFrom="lesson.dateFrom"
+                :dateTo="lesson.dateTo"></lesson>
     </div>
 </template>
 
@@ -18,6 +20,7 @@ import Lesson from '../../../domain/schedule/model/lesson';
 
     const dailySchedule = defineComponent({
         props: {
+            date: Date,
             dailySchedule: Array
         },
         components: {
@@ -29,6 +32,10 @@ import Lesson from '../../../domain/schedule/model/lesson';
             },
             getAuditoriums(lesson: Lesson): String {
                 return lesson.auditoriums.map(it => it.title).join(', ')
+            },
+            getDayOfWeek(date: Date): string {
+                const moment = require('moment');
+                return moment(date).format('dddd');
             }
         }
     });
@@ -38,8 +45,6 @@ import Lesson from '../../../domain/schedule/model/lesson';
 
 <style scoped>
     .dailySchedule {
-        margin-right: 10px;
-        margin-left: 10px;
         flex-grow: 1;
         flex-shrink: 1;
         flex-basis: 0%;

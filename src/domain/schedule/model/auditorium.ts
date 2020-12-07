@@ -1,6 +1,4 @@
-export default class Auditorium {
-    constructor(
-        public readonly title: string,
-        public readonly color: string
-    ) { }
+export default interface Auditorium {
+    readonly title: string;
+    readonly color: string;
 }

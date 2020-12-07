@@ -1,14 +1,26 @@
 <template>
-    <h1>ййй</h1>
-    <p>
-        Расписание занятий
-        <a href="https://vuejs.org" target="_blank">Vue.js</a> and
-        <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>.
-    </p>
     <div class="schedule">
-        <button @click="update">Update</button>
+        <input v-model="group" />
+        <button @click="download">Загрузить</button>
+        Фильтр по дате: showEnded
+        <input type="checkbox" v-model="showEnded" />
+        showCurrent
+        <input type="checkbox" v-model="showCurrent" />
+        showNotStarted
+        <input type="checkbox" v-model="showNotStarted" />
+        <br />
+        <button @click="setPreviousWeek">Предыдущая неделя</button>
+        <div>Неделя {{getFormattedDate(dates[0])}} - {{getFormattedDate(dates[6])}}</div>
+        <button @click="setNextWeek">Следующая неделя</button>
 
-        <weeklySchedule :dailySchedules="lesson"></weeklySchedule>
+        <weeklySchedule :dailySchedules="dailySchedules"
+                        :dates="dates"></weeklySchedule>
+        <arraySelector :originalArray="groupList" @arrayChanged="groupListChanged" />
+        <arraySelector :originalArray="teacherList" @arrayChanged="teacherListChanged" />
+        <arraySelector :originalArray="auditoriumList" @arrayChanged="auditoriumListChanged" />
+        <arraySelector :originalArray="titleList" @arrayChanged="titleListChanged" />
+        <arraySelector :originalArray="typeList" @arrayChanged="typeListChanged" />
+        <button @click="advancedSearch">Поиск</button>
     </div>
 
 </template>
@@ -19,21 +31,17 @@
     import Teacher from '@/domain/schedule/model/teacher';
     import Auditorium from '@/domain/schedule/model/auditorium';
     import Group from '../../../domain/schedule/model/group';
-    import weeklySchedule from "@/features/schedule/components/WeeklySchedule.vue"
-    import ScheduleApi from "@/data/schedule/api/scheduleApi"
+    import weeklySchedule from "@/features/schedule/components/WeeklySchedule.vue";
+    import arraySelector from "@/features/schedule/components/ArraySelector.vue";
+    import ScheduleUseCase from "@/domain/schedule/usecase/scheduleUseCase";
+    import Schedule from "@/domain/schedule/model/schedule";
+    import { getLessons } from "@/domain/schedule/utils/scheduleUtils"
+    import * as moment from 'moment';
+    import 'moment/locale/ru';
 
-    var q = new Lesson(
-        1,
-        'Технология кроссплатформенного программирования',
-        'Лаб. работа',
-        [new Teacher(['Морозов', 'Юрий', 'Владимирович'])],
-        [new Auditorium('Пр2610', '#ffaaaa')],
-        [new Group('181-721', false)],
-        new Date(2020, 9, 14),
-        new Date(2020, 12, 3)
-    );
-    var d = [q, q, q, q, q, q];
-    var api = new ScheduleApi();
+    moment.locale('ru');
+
+    const useCase = new ScheduleUseCase();
     
 
     const schedule = defineComponent({
@@ -41,25 +49,138 @@
         },
         data() {
             return {
-                lesson: [d, d, d, d, d, d, d]
+                dailySchedules: [new Array<Lesson>(), [], [], [], [], [], []],
+                group: "",
+                showEnded: false,
+                showCurrent: true,
+                showNotStarted: false,
+                dates: [new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date()],
+                schedule: null as (Schedule | null),
+                groupList: new Array<String>(),
+                teacherList: new Array<String>(),
+                auditoriumList: new Array<String>(),
+                titleList: new Array<String>(),
+                typeList: new Array<String>(),
+                checkedGroupList: new Array<String>(),
+                checkedTeacherList: new Array<String>(),
+                checkedAuditoriumList: new Array<String>(),
+                checkedTitleList: new Array<String>(),
+                checkedTypeList: new Array<String>()
+            }
+        },
+        watch: {
+            showEnded(newValue, oldValue) {
+                this.update();
+            },
+            showCurrent(newValue, oldValue) {
+                this.update();
+            },
+            showNotStarted(newValue, oldValue) {
+                this.update();
+            },
+            schedule(newValue, oldValue) {
+                this.update();
             }
         },
         components: {
-            weeklySchedule
+            weeklySchedule,
+            arraySelector
         },
         methods: {
-            update() {
-                api.getSchedule().then(value => {
-                    console.log("123");
-                    console.log(value);
-                    this.upd(value?.dailySchedules)
+            getFormattedDate(date: Date) {
+                const moment = require('moment');
+                return moment(date).format('D MMMM');
+            },
+            download() {
+                useCase.getScheduleByGroup(this.group).then(value => {
+                    this.schedule = value;
+                });
+                useCase.getGroupList().then(value => {
+                    this.groupList = value;
+                });
+                useCase.getTeacherList().then(value => {
+                    this.teacherList = value;
+                });
+                useCase.getAuditoriumList().then(value => {
+                    this.auditoriumList = value;
+                });
+                useCase.getTitleList().then(value => {
+                    this.titleList = value;
+                });
+                useCase.getTypeList().then(value => {
+                    this.typeList = value;
                 });
             },
-            upd(sch: Array<Array<Lesson>> | undefined) {
-                if (sch) {
-                    this.lesson = sch;
+            advancedSearch() {
+                useCase.getSchedule(
+                    this.checkedGroupList,
+                    this.checkedTeacherList,
+                    this.checkedAuditoriumList,
+                    this.checkedTitleList,
+                    this.checkedTypeList
+                ).then(value => {
+                    this.schedule = value;
+                });
+            },
+            update() {
+                let dailySchedules = new Array<Array<Lesson>>();
+                for (let i = 0; i < 7; i++) {
+                    dailySchedules[i] = this.schedule ?
+                        getLessons(
+                            this.schedule,
+                            this.dates[i],
+                            this.showEnded,
+                            this.showCurrent,
+                            this.showNotStarted
+                        ) : [];
                 }
+                this.dailySchedules = dailySchedules;
+            },
+            setCurrentWeek() {
+                let today = new Date();
+                let dayOfWeek = today.getDay();
+                if (dayOfWeek == 0) {
+                    dayOfWeek = 7;
+                }
+                const monday = 1;
+                today.setDate(today.getDate() - (dayOfWeek - monday));
+                let dates = new Array<Date>();
+                for (let i = 0; i < 7; i++) {
+                    dates[i] = new Date(today);
+                    today.setDate(today.getDate() + 1)
+                }
+                this.dates = dates;
+            },
+            setNextWeek() {
+                for (const date of this.dates) {
+                    date.setDate(date.getDate() + 7);
+                }
+                this.update();
+            },
+            setPreviousWeek() {
+                for (const date of this.dates) {
+                    date.setDate(date.getDate() - 7);
+                }
+                this.update();
+            },
+            groupListChanged(value: Array<String>) {
+                this.checkedGroupList = value;
+            },
+            teacherListChanged(value: Array<String>) {
+                this.checkedTeacherList = value;
+            },
+            auditoriumListChanged(value: Array<String>) {
+                this.checkedAuditoriumList = value;
+            },
+            titleListChanged(value: Array<String>) {
+                this.checkedTitleList = value;
+            },
+            typeListChanged(value: Array<String>) {
+                this.checkedTypeList = value;
             }
+        },
+        created() {
+            this.setCurrentWeek();
         }
     });
 

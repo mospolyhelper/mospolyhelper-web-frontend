@@ -4,6 +4,7 @@
         <HeaderLink to="/schedule">Schedule</HeaderLink>
         <HeaderLink to="/deadlines">Deadlines</HeaderLink>
         <HeaderLink to="/map">Map</HeaderLink>
+        <HeaderLink to="/deadlines">Deadlines</HeaderLink>
     </div>
 </template>
 
