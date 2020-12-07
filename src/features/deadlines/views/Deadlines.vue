@@ -8,6 +8,7 @@
     <br />
     <input type="checkbox" v-model="hideCompleted" />Скрыть выполненные
     <br />
+    <div v-if="deadlinesArray.length==0">Дедлайнов нет:(</div>
     <deadlineList :deadlinesList="deadlinesArray"
                   v-on:removeFromArray="deleteElement"
                   v-on:update="setUpdated"

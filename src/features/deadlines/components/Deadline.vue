@@ -1,11 +1,11 @@
 ﻿<template>
     <div class="deadline" vhide>
-        <div>{{name}}</div>
+        <img class="pinned" v-if="pinned" width="30" height="30" src="@/features/deadlines/components/pin.png" />
+        <div class="title">{{name}}</div>
         <div>{{description}}</div>
-        <div>{{date}}</div>
-        <div>{{isImportant}}</div>
-        <div>{{isCompleted}}</div>
-        <div>{{isPinned}}</div>
+        <div class="importance">{{isImportant}}</div>
+        <div class="completed">{{isCompleted}}</div> <br />
+        <div class="date" >{{date}}</div>
         <button @click="removeFormElement">Удалить</button>
         <button v-if="false" @click="update">Редактировать</button>
         <button @click="pin">{{isPinnedBtn}}</button>
@@ -44,9 +44,6 @@
             isCompleted: function (): String {
                 return this.completed ? "Выполнено" : "Не выполнено";
             },
-            isPinned: function (): String {
-                return this.pinned ? "Закреплено" : "Не закреплено";
-            },
             isImportant: function (): String {
                 switch (this.importance) {
                     case 0: return "Не важно";
@@ -68,4 +65,51 @@
 </script>
 
 <style scoped>
+    .deadline {
+        background: #fff;
+        box-shadow: 0 0 6px rgba(0,0,0,0.5);
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        padding: 10px;
+        border-radius: 25px;
+        min-width: 200px;
+        max-width: 500px;
+    }
+
+    .importance {
+        background: #d1eafd;
+        color: #4985a3;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        margin-right: 2px;
+        padding: 6px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+
+    .completed {
+        background: #fac6ac;
+        color: #4985a3;
+        margin-top: 4px;
+        margin-bottom: 4px;
+        margin-right: 2px;
+        padding: 6px;
+        border-radius: 10px;
+        display: inline-block;
+    }
+
+    .date {
+        float: right;
+        font-weight: bold;
+    }
+
+    .pinned {
+        float: right;
+    }
+
+    .title {
+        font-weight: bold;
+    }
 </style>

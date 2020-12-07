@@ -66,4 +66,16 @@
 </script>
 
 <style scoped>
+    .formDeadline {
+        background: #fff;
+        box-shadow: 0 0 6px rgba(0,0,0,0.5);
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        padding: 10px;
+        border-radius: 25px;
+        min-width: 200px;
+        max-width: 500px;
+    }
 </style>
