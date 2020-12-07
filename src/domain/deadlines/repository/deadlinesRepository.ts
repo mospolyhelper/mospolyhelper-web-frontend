@@ -1,8 +1,11 @@
 ﻿import Deadline from "@/domain/deadlines/model/deadline";
+import deadline from "../../../features/deadlines/components/Deadline.vue";
+const fs = require('browserify-fs');
 
 export default class Repository {
-    private fs = require('browserify-fs');
-    private deadlines: Deadline[]
+    //private fs = require('browserify-fs');
+    
+    private deadlines: Deadline[];
 
     constructor() {
         this.deadlines = [];
@@ -11,16 +14,17 @@ export default class Repository {
 
     private saveToJson() {
         var json = JSON.stringify(this.deadlines);
-        this.fs.writeFile('deadlines.json', json, 'utf8', function writeFileCallback(err: any, data: string) {
+        fs.writeFile('deadlines.json', json, 'utf8', function writeFileCallback(err: any, data: string) {
             if (err) {
                 console.log(err);
             }
         });
+        console.log(json);
     }
 
     addDeadline(d: Deadline) {
         if (this.deadlines.length > 0)
-            d.id = this.deadlines[this.deadlines.length].id + 1;
+            d.id = this.deadlines[this.deadlines.length-1].id + 1;
         else
             d.id = 1;
         this.deadlines.push(d);
@@ -31,27 +35,79 @@ export default class Repository {
         return this.deadlines;
     }
 
+    getDeadline(id: number): Deadline {
+        for (let deadline of this.deadlines) {
+            if (deadline.id == id) {
+                console.log("got ", deadline)
+                return deadline;
+            }
+        }
+        return new Deadline("", "");
+    }
+
     loadDeadlines() {
-        let deadline: Deadline[] = [];
-        this.fs.readFile('deadlines.json', 'utf8', function readFileCallback(err: any, data: string) {
+        let self = this;
+        fs.readFile('deadlines.json', 'utf8', function readFileCallback(err: any, data: string) {
             if (err) {
                 console.log(err);
             } else {
-                deadline = JSON.parse(data);
+                self.deadlines = JSON.parse(data);
             }
         });
-        this.deadlines = deadline;
     }
 
-    deleteDeadline(d: Deadline) {
-        this.deadlines.filter(function (element, index, array) {
-            return (element.id != d.id);
-        });
+    deleteDeadline(id: number) {
+        for (let i = 0; i <= this.deadlines.length; i++) {
+            if (this.deadlines[i].id == id) {
+                const index = this.deadlines.indexOf(this.deadlines[i], 0);
+                if (index > -1) {
+                    this.deadlines.splice(index, 1);
+                }
+                console.log('deleted element index ', i, "with id ", id);
+                break;
+            }
+        }
+        this.saveToJson();
+    }
+
+    editDeadline(d: Deadline) {
+        let id = 0;
+        for (let deadline of this.deadlines) {
+            if (deadline.id == d.id) {
+                break;
+            } 
+            id++;
+        }
+        console.log('updating element', this.deadlines[id], "to ", d);
+        this.deadlines[id] = d;
+        this.saveToJson();
+        console.log('updated element', this.deadlines[id], "to ", d);
+    }
+
+    setPinned(id: number) {
+        for (let i = 0; i <= this.deadlines.length; i++) {
+            if (this.deadlines[i].id == id) {
+                this.deadlines[i].pinned = !(this.deadlines[i].pinned);
+                console.log('updated element', this.deadlines[i]);
+                break;
+            }
+        }
+        this.saveToJson();
+    }
+
+    setCompleted(id: number) {
+        for (let i = 0; i <= this.deadlines.length; i++) {
+            if (this.deadlines[i].id == id) {
+                this.deadlines[i].completed = !(this.deadlines[i].completed);
+                console.log('updated element', this.deadlines[i]);
+                break;
+            }
+        }
         this.saveToJson();
     }
 
     showjson() {
-        this.fs.readFile('deadlines.json', 'utf8', function readFileCallback(err: any, data: string) {
+        fs.readFile('deadlines.json', 'utf8', function readFileCallback(err: any, data: string) {
             if (err) {
                 console.log(err);
             } else {

@@ -49,6 +49,12 @@
     <Content Include="src\features\deadlines\components\Deadline.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\features\deadlines\components\DeadlineList.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\deadlines\components\FormDeadline.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\features\deadlines\views\Deadlines.vue">
       <SubType>Code</SubType>
     </Content>
