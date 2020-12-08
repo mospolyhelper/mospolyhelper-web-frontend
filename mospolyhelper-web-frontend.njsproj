@@ -75,6 +75,15 @@
     <Content Include="src\features\schedule\views\Schedule.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\features\search\components\SearchElement.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\search\components\SearchList.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\search\views\Search.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -107,11 +116,14 @@
     <Folder Include="src\features\home\" />
     <Folder Include="src\features\home\views\" />
     <Folder Include="src\features\deadlines\" />
+    <Folder Include="src\features\search\" />
     <Folder Include="src\features\schedule\" />
     <Folder Include="src\features\common\router\" />
     <Folder Include="src\features\schedule\components\" />
     <Folder Include="src\features\schedule\views\" />
     <Folder Include="src\features\common\views\" />
+    <Folder Include="src\features\search\components\" />
+    <Folder Include="src\features\search\views\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\features\main.ts" />
