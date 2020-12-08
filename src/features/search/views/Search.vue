@@ -12,12 +12,16 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
-    import searchList from "@/features/search/components/SearchList.vue"
+    import searchList from "@/features/search/components/SearchList.vue";
+    import SearchUseCase from "@/domain/search/usecase/searchUseCase";
+import SearchEntity from "../../../domain/search/model/SearchEntity";
+
+    let useCase = new SearchUseCase();
 
     const search = defineComponent({
         data() {
             return {
-                searchRes: [],
+                searchRes: new Array<SearchEntity>(),
                 findStr: ""
             }
         },
@@ -25,8 +29,11 @@
             searchList
         },
         methods: {
-            find(s: String) {
-                console.log(s);
+            find(s: String, page: number = 0) {
+                useCase.getScheduleByGroup(s, page).then(value => {
+                    this.searchRes = value;
+                })
+                console.log(this.searchRes);
             }
         },
         watch: {

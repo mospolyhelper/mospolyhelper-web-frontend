@@ -95,6 +95,10 @@
     <Folder Include="src\data\schedule\api\" />
     <Folder Include="src\data\schedule\remote\" />
     <Folder Include="src\data\schedule\repository\" />
+    <Folder Include="src\data\search\" />
+    <Folder Include="src\data\search\api\" />
+    <Folder Include="src\data\search\remote\" />
+    <Folder Include="src\data\search\repository\" />
     <Folder Include="src\domain\deadlines\" />
     <Folder Include="src\domain\deadlines\model\" />
     <Folder Include="src\domain\deadlines\usecase\" />
@@ -104,6 +108,10 @@
     <Folder Include="src\domain\schedule\utils\" />
     <Folder Include="src\domain\schedule\repository\" />
     <Folder Include="src\domain\schedule\usecase\" />
+    <Folder Include="src\domain\search\" />
+    <Folder Include="src\domain\search\model\" />
+    <Folder Include="src\domain\search\repository\" />
+    <Folder Include="src\domain\search\usecase\" />
     <Folder Include="src\features\common\assets\" />
     <Folder Include="src\features\common\components\" />
     <Folder Include="src\features\" />
@@ -140,6 +148,15 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\data\schedule\repository\scheduleRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\search\api\searchApi.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\search\remote\searchRemoteDataSource.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\search\repository\searchRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\deadlines\model\deadline.ts">
@@ -184,6 +201,8 @@
     <TypeScriptCompile Include="src\domain\schedule\utils\teacherUtils.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\search\model\SearchEntity.ts" />
+    <TypeScriptCompile Include="src\domain\search\usecase\searchUseCase.ts" />
     <TypeScriptCompile Include="src\features\common\router\router.ts" />
     <TypeScriptCompile Include="src\main.ts" />
   </ItemGroup>
