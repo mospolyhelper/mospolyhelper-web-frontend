@@ -4,8 +4,10 @@
         <a href="https://vuejs.org" target="_blank">Vue.js</a> and
         <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>.
     </p>
-    <input type="text" placeholder="Поиск" v-model.trim="findStr" />
-    <!--<button @click="find">Найти</button>-->
+    <input type="text" placeholder="Поиск" v-model.trim.lazy="findStr" />
+    <button @click="find(findStr)">Найти</button>
+    <searchList :searchList="searchRes">
+    </searchList>
     <br />
 
 </template>
@@ -14,7 +16,7 @@
     import { defineComponent } from "vue";
     import searchList from "@/features/search/components/SearchList.vue";
     import SearchUseCase from "@/domain/search/usecase/searchUseCase";
-import SearchEntity from "../../../domain/search/model/SearchEntity";
+    import SearchEntity from "../../../domain/search/model/SearchEntity";
 
     let useCase = new SearchUseCase();
 
@@ -39,7 +41,7 @@ import SearchEntity from "../../../domain/search/model/SearchEntity";
         watch: {
             findStr(newStr, oldStr) {
                 if (newStr !== oldStr) {
-                    this.find(newStr);
+                    //this.find(newStr);
                 }
             }
         },

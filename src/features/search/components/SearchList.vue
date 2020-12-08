@@ -1,7 +1,14 @@
 ﻿<template>
     <div class="searchList">
         <searchElement v-for="(element, index) in searchList"
-                  :name="123" />
+                       v-bind:key="element.id"
+                       :name="element.name"
+                       :group="element.group"
+                       :direction="element.direction"
+                       :specialization="element.specialization"
+                       :course="element.course"
+                       :educationForm="element.educationForm"
+                   />
     </div>
 
 </template>

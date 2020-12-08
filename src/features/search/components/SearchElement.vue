@@ -1,8 +1,12 @@
 ﻿<template>
     <div class="searchElement">
-       
-        <div class="title">{{name}}</div>
 
+        <div class="title">{{name}}</div>
+        <div>{{group}}</div>
+        <div>{{direction}}</div>
+        <div>{{specialization}}</div>
+        <div>{{course}}</div>
+        <div>{{educationForm}}</div>
 
     </div>
 </template>
@@ -14,7 +18,11 @@
     const searchElement = defineComponent({
         props: {
             name: String,
-
+            group: String,
+            direction: String,
+            specialization: String,
+            course: String,
+            educationForm: String
         },
         methods: {
             
