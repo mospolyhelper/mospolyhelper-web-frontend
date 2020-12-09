@@ -16,8 +16,10 @@ export default class SearchUseCase {
             let grp = val.group.toLocaleLowerCase().includes(group.toLocaleLowerCase());
             let crs = false;
             course.forEach(v => { if (v == val.course) crs = true });
+            if (course.length == 0) crs = true;
             let frm = false;
             form.forEach(v => { if (v == val.educationForm) frm = true });
+            if (form.length == 0) frm = true;
             return dir && prof && grp && crs && frm;
                 })
     }

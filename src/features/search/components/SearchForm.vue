@@ -15,13 +15,17 @@
         <input type="checkbox" value="Очно-заочная" v-model="form" />Очно-заочная<br />
         <input type="checkbox" value="Заочная" v-model="form" />Заочная<br />
         <button @click="">Применить</button>
+        <button @click="$emit('stopSearch')" v-if="isSearch">Остановить поиск</button>
     </form>
 </template>
 
 <script lang="ts">
     import { defineComponent } from "vue";
 
-    const FormDeadline = defineComponent({
+    const SearchForm = defineComponent({
+        props: {
+            isSearch: Boolean,
+        },
         data() {
             return {
                 isVisible: false,
@@ -35,12 +39,12 @@
         methods: {
             send() {
                 console.log("applied", this.direction, this.profile, this.group, this.course, this.form);
-                this.$emit('apply', this.direction, this.profile, this.group, this.course, this.form);
+                this.$emit('applyFilter', this.direction, this.profile, this.group, this.course, this.form);
             }
         }
     });
 
-    export default FormDeadline;
+    export default SearchForm;
 </script>
 
 <style scoped>

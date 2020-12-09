@@ -7,8 +7,9 @@
     <input type="text" placeholder="Поиск" v-model.trim.lazy="findStr" />
     <button @click="find(findStr, page = 1)">Найти</button>
     <br />
-    <searchForm v-on:apply="advancedSearch"
-
+    <searchForm v-on:applyFilter="advancedSearch"
+                v-on:stopSearch="isSearching=false"
+                :isSearch="isSearching"
                 />
     <searchList :searchList="searchRes"
                 :isLoading="isLoading">
@@ -36,7 +37,8 @@
                 findStr: "",
                 page: 1,
                 pagesCount: 1,
-                isLoading: false
+                isLoading: false,
+                isSearching: false
             }
         },
         components: {
@@ -45,11 +47,13 @@
         },
         methods: {
             find(s: String, page: number) {
+                this.isSearching = false;
                 console.log("loading data at page", page)
                 this.isLoading = true;
                 if (this.page == 1) {
                     this.searchRes = [];
                     useCase.searchByQuery(this.findStr, this.page).then((val: SearchResult | null) => {
+                        window.addEventListener('scroll', this.handleScroll);
                         if (val != null) {
                             this.searchRes = val.portolios;
                             this.pagesCount = val.pagesCount;
@@ -75,8 +79,10 @@
                 }
             },
             advancedSearch(direction: string, profile: string, group: string, course: string[], form: string[]) {
+                window.removeEventListener('scroll', this.handleScroll);
                 this.page = 1
                 console.log("loading data at page", 1)
+                this.isSearching = true;
                 this.isLoading = true;
                 this.searchRes = [];
                 useCase.searchByQuery(this.findStr, this.page).then((val: SearchResult | null) => {
@@ -86,29 +92,29 @@
                     }
                     else
                         this.searchRes = [];
-                    this.isLoading = false;
                     console.log("loaded data at page", 1, val)
+                    this.isLoading = false;
                     this.recursiveSearch(direction, profile, group, course, form)
                 });
             },
             recursiveSearch(direction: string, profile: string, group: string, course: string[], form: string[]) {
-                if (this.page < this.pagesCount) {
-                    console.log("loading data at page", this.page)
+                if (this.page < this.pagesCount && this.isSearching) {
+                    console.log("loading data at page", this.page + 1)
                     this.isLoading = true;
                     useCase.searchByQuery(this.findStr, ++this.page).then((val: SearchResult | null) => {
                         if (val != null) {
                             useCase.filter(val.portolios, direction, profile, group, course, form).forEach(v => this.searchRes.push(v));
                         }
-                        this.isLoading = false;
                         console.log("loaded data at page", this.page, val)
+                        this.isLoading = false;
                         this.recursiveSearch(direction, profile, group, course, form)
                     });
                 }
             }
         },
-        created() {
-            window.addEventListener('scroll', this.handleScroll);
-        },
+        //created() {
+        //    window.addEventListener('scroll', this.handleScroll);
+        //},
         unmounted() {
             window.removeEventListener('scroll', this.handleScroll);
         }
