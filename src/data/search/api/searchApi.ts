@@ -13,5 +13,5 @@ export default class ScheduleApi {
         );
         return response.result ?? new Array<SearchEntity>();
     }
-
+    
 }
