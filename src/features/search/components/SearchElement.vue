@@ -56,6 +56,9 @@
                     if (d?.indexOf("05") != -1) {
                         res = "Специалитет"
                     }
+                    if (d?.indexOf("06") != -1) {
+                        res = "Аспирантура"
+                    }
                 }
                 return res;
             }

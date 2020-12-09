@@ -5,11 +5,15 @@
         <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>.
     </p>
     <input type="text" placeholder="Поиск" v-model.trim.lazy="findStr" />
-    <button @click="find(findStr, page = 0)">Найти</button>
+    <button @click="find(findStr, page = 1)">Найти</button>
+    <br />
+    <searchForm v-on:apply="advancedSearch"
+
+                />
     <searchList :searchList="searchRes"
                 :isLoading="isLoading">
     </searchList>
-    
+
     <br />
 
 </template>
@@ -17,9 +21,11 @@
 <script lang="ts">
     import { defineComponent } from "vue";
     import searchList from "@/features/search/components/SearchList.vue";
+    import searchForm from "@/features/search/components/SearchForm.vue";
     import SearchUseCase from "@/domain/search/usecase/searchUseCase";
     import SearchEntity from "../../../domain/search/model/SearchEntity";
     import BootstrapVue from 'bootstrap-vue'
+    import SearchResult from "../../../domain/search/model/SearchResult";
 
     let useCase = new SearchUseCase();
 
@@ -28,37 +34,75 @@
             return {
                 searchRes: new Array<SearchEntity>(),
                 findStr: "",
-                page: 0,
+                page: 1,
+                pagesCount: 1,
                 isLoading: false
             }
         },
         components: {
-            searchList
+            searchList,
+            searchForm
         },
         methods: {
-            find(s: String, page: number = 0) {
+            find(s: String, page: number) {
                 console.log("loading data at page", page)
                 this.isLoading = true;
-                if (this.page == 0) {
+                if (this.page == 1) {
                     this.searchRes = [];
-                    useCase.getScheduleByGroup(this.findStr).then(val => {
-                        this.searchRes = val;
+                    useCase.searchByQuery(this.findStr, this.page).then((val: SearchResult | null) => {
+                        if (val != null) {
+                            this.searchRes = val.portolios;
+                            this.pagesCount = val.pagesCount;
+                        }
+                        else
+                            this.searchRes = [];
                         this.isLoading = false;
-                        console.log("loaded data at page", page, this.searchRes)
+                        console.log("loaded data at page", page, val)
                     });
                 } else {
-                    useCase.getScheduleByGroup(this.findStr).then(val => {
-                        this.searchRes.concat(val);
-                        val.forEach(v => this.searchRes.push(v));
+                    useCase.searchByQuery(this.findStr, this.page).then(val => {
+                        if (val != null)
+                            val.portolios.forEach(v => this.searchRes.push(v));
                         this.isLoading = false;
-                        console.log("loaded data at page", page, this.searchRes);
+                        console.log("loaded data at page", page, val);
                     });
                 }
             },
             handleScroll(event: Event) {
-                console.log(window.scrollY, window.innerHeight, document.body.scrollHeight);
-                if (window.scrollY + window.innerHeight >= document.body.scrollHeight && !this.isLoading) {
+                console.log(window.scrollY, window.innerHeight, document.body.scrollHeight, this.pagesCount);
+                if (window.scrollY + window.innerHeight >= document.body.scrollHeight && !this.isLoading && this.page < this.pagesCount) {
                     this.find(this.findStr, ++this.page);
+                }
+            },
+            advancedSearch(direction: string, profile: string, group: string, course: string[], form: string[]) {
+                this.page = 1
+                console.log("loading data at page", 1)
+                this.isLoading = true;
+                this.searchRes = [];
+                useCase.searchByQuery(this.findStr, this.page).then((val: SearchResult | null) => {
+                    if (val != null) {
+                        this.searchRes = useCase.filter(val.portolios, direction, profile, group, course, form);
+                        this.pagesCount = val.pagesCount;
+                    }
+                    else
+                        this.searchRes = [];
+                    this.isLoading = false;
+                    console.log("loaded data at page", 1, val)
+                    this.recursiveSearch(direction, profile, group, course, form)
+                });
+            },
+            recursiveSearch(direction: string, profile: string, group: string, course: string[], form: string[]) {
+                if (this.page < this.pagesCount) {
+                    console.log("loading data at page", this.page)
+                    this.isLoading = true;
+                    useCase.searchByQuery(this.findStr, ++this.page).then((val: SearchResult | null) => {
+                        if (val != null) {
+                            useCase.filter(val.portolios, direction, profile, group, course, form).forEach(v => this.searchRes.push(v));
+                        }
+                        this.isLoading = false;
+                        console.log("loaded data at page", this.page, val)
+                        this.recursiveSearch(direction, profile, group, course, form)
+                    });
                 }
             }
         },

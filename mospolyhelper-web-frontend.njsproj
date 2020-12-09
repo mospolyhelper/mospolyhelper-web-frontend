@@ -78,6 +78,9 @@
     <Content Include="src\features\search\components\SearchElement.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\features\search\components\SearchForm.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\features\search\components\SearchList.vue">
       <SubType>Code</SubType>
     </Content>
@@ -202,6 +205,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\search\model\SearchEntity.ts" />
+    <TypeScriptCompile Include="src\domain\search\model\SearchResult.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\search\usecase\searchUseCase.ts" />
     <TypeScriptCompile Include="src\features\common\router\router.ts" />
     <TypeScriptCompile Include="src\main.ts" />
