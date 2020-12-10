@@ -1,5 +1,5 @@
 ﻿<template>
-    <div class="deadline" vhide>
+    <div class="deadline">
         <img class="pinned" v-if="pinned" width="30" height="30" src="@/features/deadlines/components/pin.png" />
         <div class="title">{{name}}</div>
         <div>{{description}}</div>
