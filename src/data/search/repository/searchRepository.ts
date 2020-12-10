@@ -7,6 +7,7 @@ export default class SearchRepository {
 
     searchByQuery(query: String, page: number): Promise<SearchResult | null> {
         return this.remoteDataSource.searchByQuery(query, page);
+
     }
 
 }
