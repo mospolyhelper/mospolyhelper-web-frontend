@@ -1,7 +1,8 @@
-﻿import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+﻿import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import Home from "@/features/home/views/Home.vue";
-import Schedule from "@/features/schedule/views/Schedule.vue"
-import Deadlines from "@/features/deadlines/views/Deadlines.vue"
+import Schedule from "@/features/schedule/views/Schedule.vue";
+import Deadlines from "@/features/deadlines/views/Deadlines.vue";
+import Search from "@/features/search/views/Search.vue"
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -9,12 +10,16 @@ const routes: Array<RouteRecordRaw> = [
         component: Home
     },
     {
-        path: "/Schedule",
+        path: "/schedule",
         component: Schedule
     },
     {
-        path: "/Deadlines",
+        path: "/deadlines",
         component: Deadlines
+    },
+    {
+        path: "/search",
+        component: Search
     },
     {
         path: "/:pathMatch(.*)*",
@@ -23,7 +28,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes
 });
 

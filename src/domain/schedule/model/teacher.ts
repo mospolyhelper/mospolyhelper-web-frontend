@@ -1,5 +1,3 @@
-export default class Teacher {
-    constructor(
-        public readonly names: Array<string>
-    ) { }
+export default interface Teacher {
+    readonly names: Array<string>;
 }

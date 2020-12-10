@@ -32,8 +32,17 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="public\android-chrome-192x192.png" />
+    <Content Include="public\android-chrome-512x512.png" />
+    <Content Include="public\apple-touch-icon.png" />
+    <Content Include="public\browserconfig.xml" />
+    <Content Include="public\favicon-16x16.png" />
+    <Content Include="public\favicon-32x32.png" />
     <Content Include="public\favicon.ico" />
     <Content Include="public\index.html" />
+    <Content Include="public\mstile-150x150.png" />
+    <Content Include="public\safari-pinned-tab.svg" />
+    <Content Include="public\site.webmanifest" />
     <Content Include="src\features\App.vue" />
     <Content Include="src\features\common\components\Header.vue" />
     <Content Include="src\features\common\components\HeaderLink.vue" />
@@ -51,10 +60,31 @@
     </Content>
     <Content Include="src\features\home\views\Home.vue" />
     <Content Include="src\features\common\views\NotFound.vue" />
+    <Content Include="src\features\schedule\components\ArraySelector.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\schedule\components\DailySchedule.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\features\schedule\components\Lesson.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\features\schedule\components\WeeklySchedule.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\features\schedule\views\Schedule.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\search\components\SearchElement.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\search\components\SearchForm.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\search\components\SearchList.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\search\views\Search.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="tsconfig.json" />
@@ -68,14 +98,23 @@
     <Folder Include="src\data\schedule\api\" />
     <Folder Include="src\data\schedule\remote\" />
     <Folder Include="src\data\schedule\repository\" />
+    <Folder Include="src\data\search\" />
+    <Folder Include="src\data\search\api\" />
+    <Folder Include="src\data\search\remote\" />
+    <Folder Include="src\data\search\repository\" />
     <Folder Include="src\domain\deadlines\" />
     <Folder Include="src\domain\deadlines\model\" />
     <Folder Include="src\domain\deadlines\usecase\" />
     <Folder Include="src\domain\deadlines\repository\" />
     <Folder Include="src\domain\schedule\" />
     <Folder Include="src\domain\schedule\model\" />
+    <Folder Include="src\domain\schedule\utils\" />
     <Folder Include="src\domain\schedule\repository\" />
     <Folder Include="src\domain\schedule\usecase\" />
+    <Folder Include="src\domain\search\" />
+    <Folder Include="src\domain\search\model\" />
+    <Folder Include="src\domain\search\repository\" />
+    <Folder Include="src\domain\search\usecase\" />
     <Folder Include="src\features\common\assets\" />
     <Folder Include="src\features\common\components\" />
     <Folder Include="src\features\" />
@@ -88,11 +127,14 @@
     <Folder Include="src\features\home\" />
     <Folder Include="src\features\home\views\" />
     <Folder Include="src\features\deadlines\" />
+    <Folder Include="src\features\search\" />
     <Folder Include="src\features\schedule\" />
     <Folder Include="src\features\common\router\" />
     <Folder Include="src\features\schedule\components\" />
     <Folder Include="src\features\schedule\views\" />
     <Folder Include="src\features\common\views\" />
+    <Folder Include="src\features\search\components\" />
+    <Folder Include="src\features\search\views\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\features\main.ts" />
@@ -109,6 +151,15 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\data\schedule\repository\scheduleRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\search\api\searchApi.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\search\remote\searchRemoteDataSource.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\search\repository\searchRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\deadlines\model\deadline.ts">
@@ -141,6 +192,23 @@
     <TypeScriptCompile Include="src\domain\schedule\usecase\scheduleUseCase.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\schedule\utils\groupUtils.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\schedule\utils\lessonTimes.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\schedule\utils\scheduleUtils.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\schedule\utils\teacherUtils.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\search\model\SearchEntity.ts" />
+    <TypeScriptCompile Include="src\domain\search\model\SearchResult.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\search\usecase\searchUseCase.ts" />
     <TypeScriptCompile Include="src\features\common\router\router.ts" />
     <TypeScriptCompile Include="src\main.ts" />
   </ItemGroup>

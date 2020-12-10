@@ -1,0 +1,52 @@
+﻿<template>
+    <div class="dailySchedule">
+        <div>{{getDayOfWeek(date)}}</div>
+        <lesson v-for="(lesson, i) in dailySchedule"
+                :previousEqual="i != 0 && dailySchedule[i - 1].order == lesson.order"
+                :order="lesson.order"
+                :title="lesson.title"
+                :type="lesson.type"
+                :teacher="getTeachers(lesson)"
+                :auditorium="getAuditoriums(lesson)"
+                :dateFrom="lesson.dateFrom"
+                :dateTo="lesson.dateTo"></lesson>
+    </div>
+</template>
+
+<script lang="ts">
+    import { defineComponent } from "vue";
+    import lesson from "@/features/schedule/components/Lesson.vue"
+import Lesson from '../../../domain/schedule/model/lesson';
+
+    const dailySchedule = defineComponent({
+        props: {
+            date: Date,
+            dailySchedule: Array
+        },
+        components: {
+            lesson
+        },
+        methods: {
+            getTeachers(lesson: Lesson): String {
+                return lesson.teachers.map(it => it.names.join(' ')).join(', ')
+            },
+            getAuditoriums(lesson: Lesson): String {
+                return lesson.auditoriums.map(it => it.title).join(', ')
+            },
+            getDayOfWeek(date: Date): string {
+                const moment = require('moment');
+                return moment(date).format('dddd');
+            }
+        }
+    });
+
+    export default dailySchedule;
+</script>
+
+<style scoped>
+    .dailySchedule {
+        flex-grow: 1;
+        flex-shrink: 1;
+        flex-basis: 0%;
+    }
+</style>
