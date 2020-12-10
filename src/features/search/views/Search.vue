@@ -35,6 +35,7 @@
             return {
                 searchRes: new Array<SearchEntity>(),
                 findStr: "",
+                searchString: "",
                 page: 1,
                 pagesCount: 1,
                 isLoading: false,
@@ -46,8 +47,9 @@
             searchForm
         },
         methods: {
-            find(s: String, page: number) {
+            find(s: string, page: number) {
                 this.isSearching = false;
+                this.searchString = s;
                 console.log("loading data at page", page)
                 this.isLoading = true;
                 if (this.page == 1) {
@@ -75,7 +77,7 @@
             handleScroll(event: Event) {
                 console.log(window.scrollY, window.innerHeight, document.body.scrollHeight, this.pagesCount);
                 if (window.scrollY + window.innerHeight >= document.body.scrollHeight && !this.isLoading && this.page < this.pagesCount) {
-                    this.find(this.findStr, ++this.page);
+                    this.find(this.searchString, ++this.page);
                 }
             },
             advancedSearch(direction: string, profile: string, group: string, course: string[], form: string[]) {
