@@ -7,7 +7,7 @@
         <div class="completed">{{isCompleted}}</div> <br />
         <div class="date" >{{date}}</div>
         <button @click="removeFormElement">Удалить</button>
-        <button v-if="false" @click="update">Редактировать</button>
+        <button @click="update">Редактировать</button>
         <button @click="pin">{{isPinnedBtn}}</button>
         <button @click="complete">{{isCompletedBtn}}</button>
     </div>
