@@ -1,4 +1,5 @@
 ﻿<template>
+    <button @click="toClipboard(numeratedStudentsNames)">Копировать в буфер обмена</button>
     <div class="searchList">
         <searchElement v-for="(element, index) in searchList"
                        v-bind:key="element.id"
@@ -31,9 +32,14 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
-    import searchElement from "@/features/search/components/SearchElement.vue"
+    import { toClipboard } from '@soerenmartius/vue3-clipboard'
+    import searchElement from "@/features/search/components/SearchElement.vue";
+    import SearchEntity from "../../../domain/search/model/SearchEntity";
 
     const searchList = defineComponent({
+        setup() {
+            return { toClipboard }
+        },
         props: {
             searchList: Array,
             isLoading: Boolean
@@ -41,8 +47,16 @@
         components: {
             searchElement
         },
-        methods: {
-
+        computed: {
+            numeratedStudentsNames: function (): string {
+                let searchList = this.searchList as Array<SearchEntity>;
+                let names = "";
+                for (let i = 0; i < searchList.length; i++) {
+                    names += `${i + 1}. ${searchList[i].name}\n`;
+                }
+                console.log(names);
+                return names;
+            }
         }
     });
 

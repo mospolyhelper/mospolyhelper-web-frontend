@@ -21,7 +21,7 @@ str
         },
         data() {
             return {
-                checkedStrings: new Array<String>()
+                checkedStrings: new Array<string>()
             }
         },
         emits: ['arrayChanged'],

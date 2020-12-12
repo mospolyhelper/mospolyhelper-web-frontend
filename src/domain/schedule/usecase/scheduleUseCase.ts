@@ -4,16 +4,16 @@ import ScheduleRepository from '@/data/schedule/repository/scheduleRepository'
 export default class ScheduleUseCase {
     private repository = new ScheduleRepository();
 
-    getScheduleByGroup(group: String): Promise<Schedule | null> {
+    getScheduleByGroup(group: string): Promise<Schedule | null> {
         return this.repository.getScheduleByGroup(group);
     }
 
     async getSchedule(
-        groupList: Array<String>,
-        teacherList: Array<String>,
-        auditoriumList: Array<String>,
-        titleList: Array<String>,
-        typeList: Array<String>
+        groupList: Array<string>,
+        teacherList: Array<string>,
+        auditoriumList: Array<string>,
+        titleList: Array<string>,
+        typeList: Array<string>
     ): Promise<Schedule | null> {
         return this.repository.getSchedule(
             groupList,
