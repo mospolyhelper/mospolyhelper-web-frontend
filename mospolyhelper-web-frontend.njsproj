@@ -90,6 +90,10 @@
     <Content Include="src\features\search\views\Search.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\features\account\teachersSearch\components\SearchElement.vue" />
+    <Content Include="src\features\account\teachersSearch\components\SearchForm.vue" />
+    <Content Include="src\features\account\teachersSearch\components\SearchList.vue" />
+    <Content Include="src\features\account\teachersSearch\views\TeachersSearch.vue" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -111,6 +115,10 @@
     <Folder Include="src\data\search\api\" />
     <Folder Include="src\data\search\remote\" />
     <Folder Include="src\data\search\repository\" />
+    <Folder Include="src\data\account\teachersSearch\" />
+    <Folder Include="src\data\account\teachersSearch\api\" />
+    <Folder Include="src\data\account\teachersSearch\remote\" />
+    <Folder Include="src\data\account\teachersSearch\repository\" />
     <Folder Include="src\domain\account\auth\repository\" />
     <Folder Include="src\domain\account\auth\usecase\" />
     <Folder Include="src\domain\deadlines\" />
@@ -128,6 +136,9 @@
     <Folder Include="src\domain\search\model\" />
     <Folder Include="src\domain\search\repository\" />
     <Folder Include="src\domain\search\usecase\" />
+    <Folder Include="src\domain\account\teachersSearch\" />
+    <Folder Include="src\domain\account\teachersSearch\model\" />
+    <Folder Include="src\domain\account\teachersSearch\usecase\" />
     <Folder Include="src\features\account\auth\" />
     <Folder Include="src\features\account\auth\views\" />
     <Folder Include="src\features\common\assets\" />
@@ -151,6 +162,9 @@
     <Folder Include="src\features\common\views\" />
     <Folder Include="src\features\search\components\" />
     <Folder Include="src\features\search\views\" />
+    <Folder Include="src\features\account\teachersSearch\" />
+    <Folder Include="src\features\account\teachersSearch\components\" />
+    <Folder Include="src\features\account\teachersSearch\views\" />
     <Folder Include="src\utils\" />
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +203,9 @@
     <TypeScriptCompile Include="src\data\search\repository\searchRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\account\teachersSearch\api\searchApi.ts" />
+    <TypeScriptCompile Include="src\data\account\teachersSearch\remote\searchRemoteDataSource.ts" />
+    <TypeScriptCompile Include="src\data\account\teachersSearch\repository\searchRepository.ts" />
     <TypeScriptCompile Include="src\domain\account\auth\repository\authRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -242,6 +259,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\search\usecase\searchUseCase.ts" />
+    <TypeScriptCompile Include="src\domain\account\teachersSearch\model\SearchEntity.ts" />
+    <TypeScriptCompile Include="src\domain\account\teachersSearch\model\SearchResult.ts" />
+    <TypeScriptCompile Include="src\domain\account\teachersSearch\usecase\searchUseCase.ts" />
     <TypeScriptCompile Include="src\features\common\router\router.ts" />
     <TypeScriptCompile Include="src\main.ts" />
     <TypeScriptCompile Include="src\utils\cookieUtils.ts">

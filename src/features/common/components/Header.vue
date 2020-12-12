@@ -9,6 +9,7 @@
             <button class="dropbtn">Account</button>
             <div class="dropdown-content">
                 <HeaderLink to="/account/auth">Auth</HeaderLink>
+                <HeaderLink to="/account/teachersSearch">Teachers Search</HeaderLink>
             </div>
         </div>
     </div>

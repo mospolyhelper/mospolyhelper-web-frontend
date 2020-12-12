@@ -4,6 +4,7 @@ import Schedule from "@/features/schedule/views/Schedule.vue";
 import Deadlines from "@/features/deadlines/views/Deadlines.vue";
 import Search from "@/features/search/views/Search.vue"
 import Auth from "@/features/account/auth/views/Auth.vue"
+import TeachersSearch from "@/features/account/teachersSearch/views/TeachersSearch.vue"
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -25,6 +26,10 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/account/auth",
         component: Auth
+    },
+    {
+        path: "/account/teachersSearch",
+        component: TeachersSearch
     },
     {
         path: "/:pathMatch(.*)*",
