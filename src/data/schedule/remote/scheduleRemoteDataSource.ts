@@ -4,16 +4,16 @@ import ScheduleApi from '../api/scheduleApi'
 export default class ScheduleRemoteDataSource {
     private api = new ScheduleApi();
 
-    getScheduleByGroup(group: String): Promise<Schedule | null> {
+    getScheduleByGroup(group: string): Promise<Schedule | null> {
         return this.api.getScheduleByGroup(group);
     }
 
     async getSchedule(
-        groupList: Array<String>,
-        teacherList: Array<String>,
-        auditoriumList: Array<String>,
-        titleList: Array<String>,
-        typeList: Array<String>
+        groupList: Array<string>,
+        teacherList: Array<string>,
+        auditoriumList: Array<string>,
+        titleList: Array<string>,
+        typeList: Array<string>
     ): Promise<Schedule | null> {
         return this.api.getSchedule(
             groupList,

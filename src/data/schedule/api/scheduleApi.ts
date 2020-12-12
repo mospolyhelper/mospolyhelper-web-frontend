@@ -11,7 +11,7 @@ export default class ScheduleApi {
     private URL_TITLE_LIST = '/title-list';
     private URL_TYPE_LIST = '/type-list';
 
-    async getScheduleByGroup(group: String): Promise<Schedule | null> {
+    async getScheduleByGroup(group: string): Promise<Schedule | null> {
         const rest = new RestClient(undefined, this.URL_BASE);
         const response = await rest.get<Schedule>(
             `${this.URL_MODULE}${this.URL_SCHEDULE}?id=${group}`,
@@ -21,11 +21,11 @@ export default class ScheduleApi {
     }
 
     async getSchedule(
-        groupList: Array<String>,
-        teacherList: Array<String>,
-        auditoriumList: Array<String>,
-        titleList: Array<String>,
-        typeList: Array<String>
+        groupList: Array<string>,
+        teacherList: Array<string>,
+        auditoriumList: Array<string>,
+        titleList: Array<string>,
+        typeList: Array<string>
     ): Promise<Schedule | null> {
         const rest = new RestClient(undefined, this.URL_BASE);
         const response = await rest.create<Schedule>(
@@ -85,9 +85,9 @@ export default class ScheduleApi {
 }
 
 interface ScheduleSearch {
-    groups: Array<String>;
-    teachers: Array<String>;
-    auditoriums: Array<String>;
-    types: Array<String>;
-    titles: Array<String>;
+    groups: Array<string>;
+    teachers: Array<string>;
+    auditoriums: Array<string>;
+    types: Array<string>;
+    titles: Array<string>;
 }
