@@ -2,8 +2,8 @@
 
 export default class SearchResult {
     constructor(
-        public pagesCount: number,
+        public pageCount: number,
         public currentPage: number,
-        public portolios: Array<SearchEntity>
+        public portfolios: Array<SearchEntity>
     ) { }
 }
