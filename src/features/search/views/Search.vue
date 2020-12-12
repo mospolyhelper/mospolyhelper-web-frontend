@@ -25,7 +25,7 @@
     import searchForm from "@/features/search/components/SearchForm.vue";
     import SearchUseCase from "@/domain/search/usecase/searchUseCase";
     import SearchEntity from "../../../domain/search/model/SearchEntity";
-    import BootstrapVue from 'bootstrap-vue'
+    //import BootstrapVue from 'bootstrap-vue'
     import SearchResult from "../../../domain/search/model/SearchResult";
 
     let useCase = new SearchUseCase();

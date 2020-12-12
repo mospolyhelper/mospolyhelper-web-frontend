@@ -64,16 +64,18 @@
                     } else if (hideC) {
                         return !(val as Deadline).completed;
                     } else return true;
-                })
-                arr.sort(function (val1, val2): number {
-                    if ((val1 as Deadline).completed < (val2 as Deadline).completed) {
-                        return -1
-                    }
-                    if ((val1 as Deadline).completed > (val2 as Deadline).completed) {
-                        return 1
-                    }
-                    return 0
-                })
+                }) as Array<Deadline>
+                if (!hideC) {
+                    arr.sort(function (val1, val2): number {
+                        if ((val1 as Deadline).completed < (val2 as Deadline).completed) {
+                            return -1
+                        }
+                        if ((val1 as Deadline).completed > (val2 as Deadline).completed) {
+                            return 1
+                        }
+                        return 0
+                    })
+                }
                 arr.sort(function (val1, val2): number {
                     if ((val2 as Deadline).pinned < (val1 as Deadline).pinned) {
                         return -1
@@ -83,7 +85,7 @@
                     }
                     return 0
                 })
-                return arr as Array<Deadline>;
+                return arr;
             }
         }
     });
