@@ -43,6 +43,9 @@
     <Content Include="public\mstile-150x150.png" />
     <Content Include="public\safari-pinned-tab.svg" />
     <Content Include="public\site.webmanifest" />
+    <Content Include="src\features\account\auth\views\auth.vue">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="src\features\App.vue" />
     <Content Include="src\features\common\components\Header.vue" />
     <Content Include="src\features\common\components\HeaderLink.vue" />
@@ -94,6 +97,12 @@
   <ItemGroup>
     <Folder Include="public\" />
     <Folder Include="src\" />
+    <Folder Include="src\data\account\" />
+    <Folder Include="src\data\account\auth\" />
+    <Folder Include="src\data\account\auth\api\" />
+    <Folder Include="src\data\account\auth\local\" />
+    <Folder Include="src\data\account\auth\repository\" />
+    <Folder Include="src\data\account\auth\remote\" />
     <Folder Include="src\data\schedule\" />
     <Folder Include="src\data\schedule\api\" />
     <Folder Include="src\data\schedule\remote\" />
@@ -102,10 +111,14 @@
     <Folder Include="src\data\search\api\" />
     <Folder Include="src\data\search\remote\" />
     <Folder Include="src\data\search\repository\" />
+    <Folder Include="src\domain\account\auth\repository\" />
+    <Folder Include="src\domain\account\auth\usecase\" />
     <Folder Include="src\domain\deadlines\" />
     <Folder Include="src\domain\deadlines\model\" />
     <Folder Include="src\domain\deadlines\usecase\" />
     <Folder Include="src\domain\deadlines\repository\" />
+    <Folder Include="src\domain\account\auth\" />
+    <Folder Include="src\domain\account\" />
     <Folder Include="src\domain\schedule\" />
     <Folder Include="src\domain\schedule\model\" />
     <Folder Include="src\domain\schedule\utils\" />
@@ -115,6 +128,8 @@
     <Folder Include="src\domain\search\model\" />
     <Folder Include="src\domain\search\repository\" />
     <Folder Include="src\domain\search\usecase\" />
+    <Folder Include="src\features\account\auth\" />
+    <Folder Include="src\features\account\auth\views\" />
     <Folder Include="src\features\common\assets\" />
     <Folder Include="src\features\common\components\" />
     <Folder Include="src\features\" />
@@ -127,6 +142,7 @@
     <Folder Include="src\features\home\" />
     <Folder Include="src\features\home\views\" />
     <Folder Include="src\features\deadlines\" />
+    <Folder Include="src\features\account\" />
     <Folder Include="src\features\search\" />
     <Folder Include="src\features\schedule\" />
     <Folder Include="src\features\common\router\" />
@@ -135,6 +151,7 @@
     <Folder Include="src\features\common\views\" />
     <Folder Include="src\features\search\components\" />
     <Folder Include="src\features\search\views\" />
+    <Folder Include="src\utils\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\features\main.ts" />
@@ -144,6 +161,16 @@
     <Content Include="babel.config.js" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\data\account\auth\api\authApi.ts" />
+    <TypeScriptCompile Include="src\data\account\auth\local\authLocalDataSource.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\account\auth\remote\authRemoteDataSource.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\account\auth\repository\authRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\data\schedule\api\scheduleApi.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -160,6 +187,12 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\data\search\repository\searchRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\account\auth\repository\authRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\account\auth\usecase\authUseCase.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\deadlines\model\deadline.ts">
@@ -211,6 +244,15 @@
     <TypeScriptCompile Include="src\domain\search\usecase\searchUseCase.ts" />
     <TypeScriptCompile Include="src\features\common\router\router.ts" />
     <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\utils\cookieUtils.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\utils\result.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\utils\unauthorizedAccessError.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

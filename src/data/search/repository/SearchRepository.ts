@@ -5,7 +5,7 @@ import SearchResult from '../../../domain/search/model/SearchResult';
 export default class SearchRepository {
     private remoteDataSource = new SearchRemoteDataSource();
 
-    searchByQuery(query: String, page: number): Promise<SearchResult | null> {
+    searchByQuery(query: string, page: number): Promise<SearchResult | null> {
         return this.remoteDataSource.searchByQuery(query, page);
     }
 
