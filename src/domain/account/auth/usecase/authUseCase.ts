@@ -1,4 +1,4 @@
-import AuthRepository from "../repository/authRepository";
+Ôªøimport AuthRepository from "../repository/authRepository";
 
 export default class AuthUseCase {
     constructor(
@@ -9,7 +9,7 @@ export default class AuthUseCase {
         const sesId = await this.repository.getSessionId(login, password);
         if (sesId) {
             this.repository.setSessionId(sesId);
-            console.log("—ÂÒÒËˇ " + sesId);
+            console.log("–°–µ—Å—Å–∏—è " + sesId);
             return Promise.resolve(true);
         } else {
             return Promise.resolve(false);
