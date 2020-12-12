@@ -43,7 +43,7 @@
     <Content Include="public\mstile-150x150.png" />
     <Content Include="public\safari-pinned-tab.svg" />
     <Content Include="public\site.webmanifest" />
-    <Content Include="src\features\account\auth\views\auth.vue">
+    <Content Include="src\features\account\auth\views\Auth.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\features\App.vue" />

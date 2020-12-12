@@ -3,7 +3,8 @@
     <br />
     <input type="password" v-model="password" />
     <br />
-    <button @click="logIn">Ввойти</button>
+    <button @click="logIn">Войти</button>
+    <div v-if="success != null">Результат авторизации {{success}}</div>
 
 </template>
 
@@ -26,12 +27,14 @@ import AuthRepositoryImpl from "../../../../data/account/auth/repository/authRep
         data() {
             return {
                 login: '',
-                password: ''
+                password: '',
+                success: null as boolean | null
             }
         },
         methods: {
             logIn() {
-                useCase.logIn(this.login, this.password);
+                const res = useCase.logIn(this.login, this.password);
+                res.then(it => this.success = it);
             }
         }
     });

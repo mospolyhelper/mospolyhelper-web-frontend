@@ -3,7 +3,7 @@ import Home from "@/features/home/views/Home.vue";
 import Schedule from "@/features/schedule/views/Schedule.vue";
 import Deadlines from "@/features/deadlines/views/Deadlines.vue";
 import Search from "@/features/search/views/Search.vue"
-import Auth from "@/features/account/auth/views/auth.vue"
+import Auth from "@/features/account/auth/views/Auth.vue"
 
 const routes: Array<RouteRecordRaw> = [
     {
