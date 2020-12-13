@@ -28,11 +28,12 @@
     //import BootstrapVue from 'bootstrap-vue'
     import SearchResult from "@/domain/account/teachersSearch/model/SearchResult";
     import AuthLocalDataSource from "../../../../data/account/auth/local/authLocalDataSource";
+import UnauthorizedAccessError from "../../../../utils/unauthorizedAccessError";
 
     let useCase = new SearchUseCase();
     const sessionId = new AuthLocalDataSource().getSessionId();
-    
 
+    console.log(sessionId);
     const search = defineComponent({
         data() {
             return {
@@ -53,15 +54,20 @@
             find(s: string, page: number) {
                 this.isSearching = false;
                 this.searchString = s;
+                let self = this
                 console.log("loading data at page", page)
                 this.isLoading = true;
                 if (this.page == 1) {
                     this.searchRes = [];
-                    useCase.searchByQuery(this.findStr, this.page, sessionId).then(val => {
+                    useCase.searchByQuery(this.searchString, this.page).then(val => {
                         window.addEventListener('scroll', this.handleScroll);
                         if (val != null) {
-                            this.searchRes = val.teachers;
-                            this.pagesCount = val.pageCount;
+                            if (val.isSuccess) {
+                                this.searchRes = val.value.teachers;
+                                this.pagesCount = val.value.pageCount;
+                            } else if (val.isFailure) {
+                                alert(val.errorOrNull()?.message);
+                            }
                         }
                         else
                             this.searchRes = [];
@@ -69,9 +75,13 @@
                         console.log("loaded data at page", page, val)
                     });
                 } else {
-                    useCase.searchByQuery(this.findStr, this.page, sessionId).then(val => {
+                    useCase.searchByQuery(this.searchString, this.page).then(val => {
                         if (val != null)
-                            val.teachers.forEach(v => this.searchRes.push(v));
+                            if (val.isSuccess) {
+                                val.value.teachers.forEach(function (v: SearchEntity) { self.searchRes.push(v) });
+                            } else if (val.isFailure) {
+                                alert(val.errorOrNull()?.message);
+                            }
                         this.isLoading = false;
                         console.log("loaded data at page", page, val);
                     });
