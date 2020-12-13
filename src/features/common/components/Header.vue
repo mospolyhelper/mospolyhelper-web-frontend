@@ -3,7 +3,7 @@
         <HeaderLink to="/" exact>Home</HeaderLink>
         <HeaderLink to="/schedule">Schedule</HeaderLink>
         <HeaderLink to="/deadlines">Deadlines</HeaderLink>
-        <HeaderLink to="/map">Map</HeaderLink>
+        <HeaderLink to="/locations">Locations</HeaderLink>
         <HeaderLink to="/search">Search</HeaderLink>
         <div class="dropdown">
             <button class="dropbtn">Account</button>
