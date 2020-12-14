@@ -1,10 +1,10 @@
 ﻿<template>
     <div class="searchElement">
+        <div class="status">{{status}}</div>
         <div class="title">{{name}}</div>
-        <div>{{info}}</div>
-        <div>Профиль: {{avatarUrl}}</div>
-        <div>{{status}}</div>
-        <div>{{dialogKey}}</div>
+        <img class="image" :src="imageSrc" />
+        <div v-if="info.length != 0">Информация: {{info}}</div>
+        <div>dialog key: {{dialogKey}}</div>
     </div>
 </template>
 
@@ -23,7 +23,10 @@
             
         },
         computed: {
-           
+            imageSrc: function (): String {
+                console.log("https://e.mospolytech.ru/" + this.avatarUrl);
+                return `https://e.mospolytech.ru/${this.avatarUrl}`
+            }
         }
     });
 
@@ -49,7 +52,7 @@
         font-weight: bold;
     }
 
-    .form {
+    .status {
         background: #d1eafd;
         color: #4985a3;
         margin-top: 4px;
@@ -57,18 +60,14 @@
         margin-right: 2px;
         padding: 6px;
         border-radius: 10px;
-        display: inline-block;
+        display: block;
+        float: right;
     }
 
-    .course {
-        background: #fac6ac;
-        color: #4985a3;
-        margin-top: 4px;
-        margin-bottom: 4px;
-        margin-right: 2px;
-        padding: 6px;
-        border-radius: 10px;
-        display: inline-block;
+    .image {
+       /*float:left;*/
+        width:100px;
+        height:100px;
     }
 
     .group {

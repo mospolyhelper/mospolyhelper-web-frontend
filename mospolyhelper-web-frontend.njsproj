@@ -91,7 +91,6 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\features\account\teachersSearch\components\SearchElement.vue" />
-    <Content Include="src\features\account\teachersSearch\components\SearchForm.vue" />
     <Content Include="src\features\account\teachersSearch\components\SearchList.vue" />
     <Content Include="src\features\account\teachersSearch\views\TeachersSearch.vue" />
     <Content Include="tsconfig.json" />

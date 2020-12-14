@@ -9,21 +9,23 @@ export default class ScheduleApi {
     private URL_BASE = 'https://mospolyhelper.herokuapp.com';
     private URL_MODULE = '/account';
     private URL_SEARCH = '/teachers';
-    private sessionId = new AuthLocalDataSource().getSessionId();
+    private session = new AuthLocalDataSource();
 
     async searchByQuery(query: string, page: number): Promise<Result<SearchResult>> {
         const rest = new RestClient(undefined, this.URL_BASE);
-        let options = { additionalHeaders: { 'sessionId': this.sessionId } };
-        const response = await rest.get<SearchResult>(
-            `${this.URL_MODULE}${this.URL_SEARCH}?searchQuery=${query}&page=${page}`,
-            options
-        );
-        if (response.statusCode = 200) {
+        let options = { additionalHeaders: { 'sessionId': this.session.getSessionId() } };
+        try {
+            const response = await rest.get<SearchResult>(
+                `${this.URL_MODULE}${this.URL_SEARCH}?searchQuery=${query}&page=${page}`,
+                options
+            );
             return Result.success(response.result ?? new SearchResult(1, 1, Array<SearchEntity>()));
-        } else if (response.statusCode = 401) {
-            return Result.failure(new UnauthorizedAccessError("Требуется авторизация!"));
-        } else {
-            return Result.failure(new Error(response.statusCode.toString()));
+        }
+        catch (err) {
+            console.log(err.title);
+            if (err['status'] == 401) {
+                return Result.failure(new UnauthorizedAccessError("Авторизируйтесь!"));
+            } else return Result.failure(err);
         }
     }
     
