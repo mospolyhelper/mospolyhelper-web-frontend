@@ -8,19 +8,19 @@ import AuthLocalDataSource from '../../auth/local/authLocalDataSource';
 export default class ScheduleApi {
     private URL_BASE = 'https://mospolyhelper.herokuapp.com';
     private URL_MODULE = '/account';
-    private URL_SEARCH = '/teachers';
+    private URL_SEARCH = '/classmates';
     private session = new AuthLocalDataSource();
 
-    async searchByQuery(query: string, page: number): Promise<Result<SearchResult>> {
+    async searchByQuery(): Promise<Result<Array<SearchEntity>>> {
         const rest = new RestClient(undefined, this.URL_BASE);
         console.log(this.session.getSessionId());
         let options = { additionalHeaders: { 'sessionId': this.session.getSessionId() } };
         try {
-            const response = await rest.get<SearchResult>(
-                `${this.URL_MODULE}${this.URL_SEARCH}?searchQuery=${query}&page=${page}`,
+            const response = await rest.get<Array<SearchEntity>>(
+                `${this.URL_MODULE}${this.URL_SEARCH}`,
                 options
             );
-            return Result.success(response.result ?? new SearchResult(1, 1, Array<SearchEntity>()));
+            return Result.success(response.result ?? Array<SearchEntity>());
         }
         catch (err) {
             if (err['status'] == 401) {
