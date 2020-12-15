@@ -20,10 +20,10 @@ export default class ScheduleApi {
                 options
             );
             console.log("loaded", response.result);
-            return Result.success(response.result ?? new Marks({}));
+            return Result.success(response.result ?? new Marks({ }));
         }
         catch (err) {
-            if (err['status'] == 401) {
+            if (err['statusCode'] == 401) {
                 return Result.failure(new UnauthorizedAccessError("Авторизируйтесь!"));
             } else return Result.failure(err);
         }
