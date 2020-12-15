@@ -1,8 +1,6 @@
 import Predmet from "./predmet";
 
-export default class Marks {
-    constructor(
+export default interface Marks {
         //marks: Record<string, Record<string, Predmet[]>>
-        marks: Map<string, Map<string, Array<Predmet>>>
-    ) { }
+        readonly marks: Map<string, Map<string, Array<Predmet>>>
 }

@@ -1,6 +1,5 @@
-export default class Predmet {
-    constructor(
-        subject: string,
-        loadType: string,
-        mark: string) { }
+export default interface Predmet {
+        readonly subject: string,
+        readonly loadType: string,
+        readonly mark: string
 }

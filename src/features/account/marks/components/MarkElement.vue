@@ -1,9 +1,8 @@
 ﻿<template>
-    <div class="searchElement">
-        <div class="status">{{status}}</div>
-        <div class="title">{{name}}</div>
-        <img class="image" :src="imageSrc" />
-        <div>dialog key: {{dialogKey}}</div>
+    <div class="subject">
+        <div >{{subject}}</div>
+        <div >{{loadType}}</div>
+        <div>{{mark}}</div>
     </div>
 </template>
 
@@ -12,19 +11,15 @@
 
     const searchElement = defineComponent({
         props: {
-            name: String,
-            avatarUrl: String,
-            status: String,
-            dialogKey: String
+            subject: String,
+            loadType: String,
+            mark: String
         },
         methods: {
             
         },
         computed: {
-            imageSrc: function (): String {
-                console.log("https://e.mospolytech.ru/" + this.avatarUrl);
-                return `https://e.mospolytech.ru/${this.avatarUrl}`
-            }
+
         }
     });
 
@@ -45,12 +40,7 @@
         max-width: 500px;
     }
 
-
-    .title {
-        font-weight: bold;
-    }
-
-    .status {
+    .mark {
         background: #d1eafd;
         color: #4985a3;
         margin-top: 4px;
@@ -62,13 +52,7 @@
         float: right;
     }
 
-    .image {
-       /*float:left;*/
-        width:100px;
-        height:100px;
-    }
-
-    .group {
+    .subject {
         background: #66CDAA;
         color: #4985a3;
         margin-top: 4px;

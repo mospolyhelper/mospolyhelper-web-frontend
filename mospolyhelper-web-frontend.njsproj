@@ -46,8 +46,14 @@
     <Content Include="src\features\account\auth\views\Auth.vue">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\features\account\marks\components\SearchElement.vue" />
-    <Content Include="src\features\account\marks\components\SearchList.vue" />
+    <Content Include="src\features\account\marks\components\MarkCourse.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\account\marks\components\MarkElement.vue" />
+    <Content Include="src\features\account\marks\components\MarkSemestr.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\account\marks\components\MarkList.vue" />
     <Content Include="src\features\account\marks\views\Marks.vue" />
     <Content Include="src\features\account\classmates\components\SearchElement.vue" />
     <Content Include="src\features\account\classmates\components\SearchList.vue" />

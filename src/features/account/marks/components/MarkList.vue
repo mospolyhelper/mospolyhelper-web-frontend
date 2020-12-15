@@ -1,11 +1,8 @@
 ﻿<template>
     <div class="searchList">
-        <searchElement v-for="(element, index) in searchList"
-                       v-bind:key="element.id"
-                       :name="element.name"
-                       :avatarUrl="element.avatarUrl"
-                       :status="element.status"
-                       :dialogKey="element.dialogKey"/>
+        <markCourse v-for="(value, key) in courses"
+                       :course="value"
+                       :semesters="key"/>
         <div class="windows8" v-if="isLoading">
             <div class="wBall" id="wBall_1">
                 <div class="wInnerBall"></div>
@@ -29,15 +26,14 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
-    import searchElement from "@/features/account/classmates/components/SearchElement.vue"
+    import markCourse from "@/features/account/marks/components/MarkCourse.vue"
 
     const searchList = defineComponent({
         props: {
-            searchList: Array,
-            isLoading: Boolean
+            courses: Map
         },
         components: {
-            searchElement
+            markCourse
         },
         methods: {
 

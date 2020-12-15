@@ -4,9 +4,9 @@
         <a href="https://vuejs.org" target="_blank">Vue.js</a> and
         <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>.
     </p>
-    <!--<searchList :searchList="searchRes"
+    <markList :courses="searchRes"
                 :isLoading="isLoading">
-    </searchList>-->
+    </markList>
 
     <br />
 
@@ -14,7 +14,7 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
-    import searchList from "@/features/account/marks/components/SearchList.vue";
+    import markList from "@/features/account/marks/components/MarkList.vue";
     import SearchUseCase from "@/domain/account/marks/usecase/marksUseCase";
 
     let useCase = new SearchUseCase();
@@ -22,12 +22,12 @@
     const search = defineComponent({
         data() {
             return {
-                searchRes: { },
+                searchRes: new Map(),
                 isLoading: false
             }
         },
         components: {
-            //searchList
+            markList
         },
         methods: {
             find() {
@@ -41,8 +41,6 @@
                             alert(val.errorOrNull());
                         }
                     }
-                    else
-                        this.searchRes = [];
                     this.isLoading = false;
                     console.log("loaded data", val)
                 });
