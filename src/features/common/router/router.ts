@@ -2,7 +2,10 @@
 import Home from "@/features/home/views/Home.vue";
 import Schedule from "@/features/schedule/views/Schedule.vue";
 import Deadlines from "@/features/deadlines/views/Deadlines.vue";
-import Search from "@/features/search/views/Search.vue"
+import Search from "@/features/search/views/Search.vue";
+import Auth from "@/features/account/auth/views/Auth.vue";
+import TeachersSearch from "@/features/account/teachersSearch/views/TeachersSearch.vue";
+import Classmates from "@/features/account/classmates/views/Classmates.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -20,6 +23,18 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/search",
         component: Search
+    },
+    {
+        path: "/account/auth",
+        component: Auth
+    },
+    {
+        path: "/account/teachersSearch",
+        component: TeachersSearch
+    },
+    {
+        path: "/account/classmates",
+        component: Classmates
     },
     {
         path: "/:pathMatch(.*)*",

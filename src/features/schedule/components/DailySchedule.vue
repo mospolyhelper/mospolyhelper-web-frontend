@@ -27,10 +27,10 @@ import Lesson from '../../../domain/schedule/model/lesson';
             lesson
         },
         methods: {
-            getTeachers(lesson: Lesson): String {
+            getTeachers(lesson: Lesson): string {
                 return lesson.teachers.map(it => it.names.join(' ')).join(', ')
             },
-            getAuditoriums(lesson: Lesson): String {
+            getAuditoriums(lesson: Lesson): string {
                 return lesson.auditoriums.map(it => it.title).join(', ')
             },
             getDayOfWeek(date: Date): string {

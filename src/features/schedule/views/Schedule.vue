@@ -56,16 +56,16 @@
                 showNotStarted: false,
                 dates: [new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date()],
                 schedule: null as (Schedule | null),
-                groupList: new Array<String>(),
-                teacherList: new Array<String>(),
-                auditoriumList: new Array<String>(),
-                titleList: new Array<String>(),
-                typeList: new Array<String>(),
-                checkedGroupList: new Array<String>(),
-                checkedTeacherList: new Array<String>(),
-                checkedAuditoriumList: new Array<String>(),
-                checkedTitleList: new Array<String>(),
-                checkedTypeList: new Array<String>()
+                groupList: new Array<string>(),
+                teacherList: new Array<string>(),
+                auditoriumList: new Array<string>(),
+                titleList: new Array<string>(),
+                typeList: new Array<string>(),
+                checkedGroupList: new Array<string>(),
+                checkedTeacherList: new Array<string>(),
+                checkedAuditoriumList: new Array<string>(),
+                checkedTitleList: new Array<string>(),
+                checkedTypeList: new Array<string>()
             }
         },
         watch: {
@@ -163,19 +163,19 @@
                 }
                 this.update();
             },
-            groupListChanged(value: Array<String>) {
+            groupListChanged(value: Array<string>) {
                 this.checkedGroupList = value;
             },
-            teacherListChanged(value: Array<String>) {
+            teacherListChanged(value: Array<string>) {
                 this.checkedTeacherList = value;
             },
-            auditoriumListChanged(value: Array<String>) {
+            auditoriumListChanged(value: Array<string>) {
                 this.checkedAuditoriumList = value;
             },
-            titleListChanged(value: Array<String>) {
+            titleListChanged(value: Array<string>) {
                 this.checkedTitleList = value;
             },
-            typeListChanged(value: Array<String>) {
+            typeListChanged(value: Array<string>) {
                 this.checkedTypeList = value;
             }
         },
