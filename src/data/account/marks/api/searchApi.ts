@@ -20,7 +20,7 @@ export default class ScheduleApi {
                 options
             );
             console.log("loaded", response.result);
-            return Result.success(response.result ?? new Marks({ }));
+            return Result.success(response.result ?? new Marks(new Map()));
         }
         catch (err) {
             if (err['statusCode'] == 401) {
