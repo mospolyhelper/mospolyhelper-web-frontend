@@ -46,6 +46,9 @@
     <Content Include="src\features\account\auth\views\Auth.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\features\account\marks\components\SearchElement.vue" />
+    <Content Include="src\features\account\marks\components\SearchList.vue" />
+    <Content Include="src\features\account\marks\views\Marks.vue" />
     <Content Include="src\features\account\classmates\components\SearchElement.vue" />
     <Content Include="src\features\account\classmates\components\SearchList.vue" />
     <Content Include="src\features\account\classmates\views\Classmates.vue" />
@@ -109,6 +112,10 @@
     <Folder Include="src\data\account\auth\local\" />
     <Folder Include="src\data\account\auth\repository\" />
     <Folder Include="src\data\account\auth\remote\" />
+    <Folder Include="src\data\account\marks\" />
+    <Folder Include="src\data\account\marks\api\" />
+    <Folder Include="src\data\account\marks\remote\" />
+    <Folder Include="src\data\account\marks\repository\" />
     <Folder Include="src\data\account\classmates\" />
     <Folder Include="src\data\account\classmates\api\" />
     <Folder Include="src\data\account\classmates\remote\" />
@@ -130,6 +137,9 @@
     <Folder Include="src\domain\account\classmates\" />
     <Folder Include="src\domain\account\classmates\model\" />
     <Folder Include="src\domain\account\classmates\usecase\" />
+    <Folder Include="src\domain\account\marks\" />
+    <Folder Include="src\domain\account\marks\model\" />
+    <Folder Include="src\domain\account\marks\usecase\" />
     <Folder Include="src\domain\deadlines\" />
     <Folder Include="src\domain\deadlines\model\" />
     <Folder Include="src\domain\deadlines\usecase\" />
@@ -150,6 +160,9 @@
     <Folder Include="src\domain\account\teachersSearch\usecase\" />
     <Folder Include="src\features\account\auth\" />
     <Folder Include="src\features\account\auth\views\" />
+    <Folder Include="src\features\account\marks\" />
+    <Folder Include="src\features\account\marks\components\" />
+    <Folder Include="src\features\account\marks\views\" />
     <Folder Include="src\features\account\classmates\" />
     <Folder Include="src\features\account\classmates\components\" />
     <Folder Include="src\features\account\classmates\views\" />
@@ -197,6 +210,9 @@
     <TypeScriptCompile Include="src\data\account\auth\repository\authRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\account\marks\api\searchApi.ts" />
+    <TypeScriptCompile Include="src\data\account\marks\remote\searchRemoteDataSource.ts" />
+    <TypeScriptCompile Include="src\data\account\marks\repository\searchRepository.ts" />
     <TypeScriptCompile Include="src\data\account\classmates\api\searchApi.ts" />
     <TypeScriptCompile Include="src\data\account\classmates\remote\searchRemoteDataSource.ts" />
     <TypeScriptCompile Include="src\data\account\classmates\repository\searchRepository.ts" />
@@ -229,6 +245,11 @@
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\account\classmates\model\SearchEntity.ts" />
     <TypeScriptCompile Include="src\domain\account\classmates\usecase\searchUseCase.ts" />
+    <TypeScriptCompile Include="src\domain\account\marks\model\marks.ts" />
+    <TypeScriptCompile Include="src\domain\account\marks\model\predmet.ts" />
+    <TypeScriptCompile Include="src\domain\account\marks\usecase\marksUseCase.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\deadlines\model\deadline.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

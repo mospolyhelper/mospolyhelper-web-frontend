@@ -11,6 +11,7 @@
                 <HeaderLink to="/account/auth">Auth</HeaderLink>
                 <HeaderLink to="/account/teachersSearch">Teachers Search</HeaderLink>
                 <HeaderLink to="/account/classmates">Classmates</HeaderLink>
+                <HeaderLink to="/account/marks">Marks</HeaderLink>
             </div>
         </div>
     </div>
