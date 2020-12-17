@@ -1,34 +1,19 @@
-﻿import Deadline from "@/domain/deadlines/model/deadline";
-import deadline from "../../../features/deadlines/components/Deadline.vue";
-const fs = require('browserify-fs');
+﻿import Deadline from "@/domain/account/deadlines/model/deadline";
 
-export default class Repository {
-    //private fs = require('browserify-fs');
-    
-    private deadlines: Deadline[];
+export default class DeadlinesLocalRepository {
+
+    private deadlines: Array<Deadline>;
 
     constructor() {
         this.deadlines = [];
-        this.loadDeadlines();
-    }
-
-    private saveToJson() {
-        var json = JSON.stringify(this.deadlines);
-        fs.writeFile('deadlines.json', json, 'utf8', function writeFileCallback(err: any, data: string) {
-            if (err) {
-                console.log(err);
-            }
-        });
-        console.log(json);
     }
 
     addDeadline(d: Deadline) {
         if (this.deadlines.length > 0)
-            d.id = this.deadlines[this.deadlines.length-1].id + 1;
+            d.id = this.deadlines[this.deadlines.length - 1].id + 1;
         else
             d.id = 1;
         this.deadlines.push(d);
-        this.saveToJson();
     }
 
     getDeadlines(): Deadline[] {
@@ -45,15 +30,9 @@ export default class Repository {
         return new Deadline("", "");
     }
 
-    loadDeadlines() {
-        let self = this;
-        fs.readFile('deadlines.json', 'utf8', function readFileCallback(err: any, data: string) {
-            if (err) {
-                console.log(err);
-            } else {
-                self.deadlines = JSON.parse(data);
-            }
-        });
+    setDeadlines(deadlines: Array<Deadline>) {
+        this.deadlines = [];
+        deadlines.forEach(val => this.deadlines.push(val))
     }
 
     deleteDeadline(id: number) {
@@ -67,7 +46,6 @@ export default class Repository {
                 break;
             }
         }
-        this.saveToJson();
     }
 
     editDeadline(d: Deadline) {
@@ -75,12 +53,11 @@ export default class Repository {
         for (let deadline of this.deadlines) {
             if (deadline.id == d.id) {
                 break;
-            } 
+            }
             id++;
         }
         console.log('updating element', this.deadlines[id], "to ", d);
         this.deadlines[id] = d;
-        this.saveToJson();
         console.log('updated element', this.deadlines[id], "to ", d);
     }
 
@@ -92,7 +69,6 @@ export default class Repository {
                 break;
             }
         }
-        this.saveToJson();
     }
 
     setCompleted(id: number) {
@@ -103,17 +79,6 @@ export default class Repository {
                 break;
             }
         }
-        this.saveToJson();
-    }
-
-    showjson() {
-        fs.readFile('deadlines.json', 'utf8', function readFileCallback(err: any, data: string) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log(data);
-            }
-        });
     }
 
 }
