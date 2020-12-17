@@ -46,6 +46,9 @@
     <Content Include="src\features\account\auth\views\Auth.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\features\account\classmates\components\SearchElement.vue" />
+    <Content Include="src\features\account\classmates\components\SearchList.vue" />
+    <Content Include="src\features\account\classmates\views\Classmates.vue" />
     <Content Include="src\features\App.vue" />
     <Content Include="src\features\common\components\Header.vue" />
     <Content Include="src\features\common\components\HeaderLink.vue" />
@@ -90,6 +93,9 @@
     <Content Include="src\features\search\views\Search.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\features\account\teachersSearch\components\SearchElement.vue" />
+    <Content Include="src\features\account\teachersSearch\components\SearchList.vue" />
+    <Content Include="src\features\account\teachersSearch\views\TeachersSearch.vue" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -103,6 +109,10 @@
     <Folder Include="src\data\account\auth\local\" />
     <Folder Include="src\data\account\auth\repository\" />
     <Folder Include="src\data\account\auth\remote\" />
+    <Folder Include="src\data\account\classmates\" />
+    <Folder Include="src\data\account\classmates\api\" />
+    <Folder Include="src\data\account\classmates\remote\" />
+    <Folder Include="src\data\account\classmates\repository\" />
     <Folder Include="src\data\account\deadlines\" />
     <Folder Include="src\data\account\deadlines\api\" />
     <Folder Include="src\data\account\deadlines\local\" />
@@ -116,8 +126,15 @@
     <Folder Include="src\data\search\api\" />
     <Folder Include="src\data\search\remote\" />
     <Folder Include="src\data\search\repository\" />
+    <Folder Include="src\data\account\teachersSearch\" />
+    <Folder Include="src\data\account\teachersSearch\api\" />
+    <Folder Include="src\data\account\teachersSearch\remote\" />
+    <Folder Include="src\data\account\teachersSearch\repository\" />
     <Folder Include="src\domain\account\auth\repository\" />
     <Folder Include="src\domain\account\auth\usecase\" />
+    <Folder Include="src\domain\account\classmates\" />
+    <Folder Include="src\domain\account\classmates\model\" />
+    <Folder Include="src\domain\account\classmates\usecase\" />
     <Folder Include="src\domain\account\deadlines\" />
     <Folder Include="src\domain\account\deadlines\model\" />
     <Folder Include="src\domain\account\deadlines\usecase\" />
@@ -132,8 +149,14 @@
     <Folder Include="src\domain\search\model\" />
     <Folder Include="src\domain\search\repository\" />
     <Folder Include="src\domain\search\usecase\" />
+    <Folder Include="src\domain\account\teachersSearch\" />
+    <Folder Include="src\domain\account\teachersSearch\model\" />
+    <Folder Include="src\domain\account\teachersSearch\usecase\" />
     <Folder Include="src\features\account\auth\" />
     <Folder Include="src\features\account\auth\views\" />
+    <Folder Include="src\features\account\classmates\" />
+    <Folder Include="src\features\account\classmates\components\" />
+    <Folder Include="src\features\account\classmates\views\" />
     <Folder Include="src\features\common\assets\" />
     <Folder Include="src\features\common\components\" />
     <Folder Include="src\features\" />
@@ -155,6 +178,9 @@
     <Folder Include="src\features\common\views\" />
     <Folder Include="src\features\search\components\" />
     <Folder Include="src\features\search\views\" />
+    <Folder Include="src\features\account\teachersSearch\" />
+    <Folder Include="src\features\account\teachersSearch\components\" />
+    <Folder Include="src\features\account\teachersSearch\views\" />
     <Folder Include="src\utils\" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +201,9 @@
     <TypeScriptCompile Include="src\data\account\auth\repository\authRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\account\classmates\api\searchApi.ts" />
+    <TypeScriptCompile Include="src\data\account\classmates\remote\searchRemoteDataSource.ts" />
+    <TypeScriptCompile Include="src\data\account\classmates\repository\searchRepository.ts" />
     <TypeScriptCompile Include="src\data\account\deadlines\api\apiDeadlines.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -202,12 +231,17 @@
     <TypeScriptCompile Include="src\data\search\repository\searchRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\account\teachersSearch\api\searchApi.ts" />
+    <TypeScriptCompile Include="src\data\account\teachersSearch\remote\searchRemoteDataSource.ts" />
+    <TypeScriptCompile Include="src\data\account\teachersSearch\repository\searchRepository.ts" />
     <TypeScriptCompile Include="src\domain\account\auth\repository\authRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\account\auth\usecase\authUseCase.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\account\classmates\model\SearchEntity.ts" />
+    <TypeScriptCompile Include="src\domain\account\classmates\usecase\searchUseCase.ts" />
     <TypeScriptCompile Include="src\data\account\deadlines\local\deadlinesLocalRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -258,6 +292,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\search\usecase\searchUseCase.ts" />
+    <TypeScriptCompile Include="src\domain\account\teachersSearch\model\SearchEntity.ts" />
+    <TypeScriptCompile Include="src\domain\account\teachersSearch\model\SearchResult.ts" />
+    <TypeScriptCompile Include="src\domain\account\teachersSearch\usecase\searchUseCase.ts" />
     <TypeScriptCompile Include="src\features\common\router\router.ts" />
     <TypeScriptCompile Include="src\main.ts" />
     <TypeScriptCompile Include="src\utils\cookieUtils.ts">

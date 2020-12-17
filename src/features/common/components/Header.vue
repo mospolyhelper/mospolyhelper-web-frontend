@@ -9,6 +9,8 @@
             <div class="dropdown-content">
                 <HeaderLink to="/account/auth">Auth</HeaderLink>
                 <HeaderLink to="/account/deadlines">Deadlines</HeaderLink>
+                <HeaderLink to="/account/teachersSearch">Teachers Search</HeaderLink>
+                <HeaderLink to="/account/classmates">Classmates</HeaderLink>
             </div>
         </div>
     </div>
