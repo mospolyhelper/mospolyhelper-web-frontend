@@ -1,4 +1,4 @@
-import Predmet from "./predmet";
+﻿import Predmet from "./predmet";
 
 export default interface Marks {
         //marks: Record<string, Record<string, Predmet[]>>

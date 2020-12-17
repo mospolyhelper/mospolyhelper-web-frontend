@@ -1,8 +1,8 @@
 ﻿<template>
     <div class="searchList">
-        <markCourse v-for="(value, key) in courses"
-                       :course="value"
-                       :semesters="key"/>
+        <markCourse v-for="(value, index) in list"
+                       :course="index"
+                       :semesters="value"/>
         <div class="windows8" v-if="isLoading">
             <div class="wBall" id="wBall_1">
                 <div class="wInnerBall"></div>
@@ -27,17 +27,26 @@
 <script lang="ts">
     import { defineComponent } from "vue";
     import markCourse from "@/features/account/marks/components/MarkCourse.vue"
+    import Predmet from "../../../../domain/account/marks/model/predmet";
 
     const searchList = defineComponent({
         props: {
-            courses: Map
+            courses: Object,
+            isLoading: Boolean
         },
         components: {
             markCourse
         },
         methods: {
 
+        },
+        computed: {
+            list: function (): Map<string, Map<string, Array<Predmet>>> {
+                console.log("course", this.courses);
+                return this.courses as Map<string, Map<string, Array<Predmet>>>;
         }
+    }
+
     });
 
     export default searchList;
