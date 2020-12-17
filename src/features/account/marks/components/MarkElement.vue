@@ -1,5 +1,5 @@
 ﻿<template>
-    <div class="subject">
+    <div class="searchElement">
         <div >{{subject}}</div>
         <div >{{loadType}}</div>
         <div>{{mark}}</div>
@@ -40,28 +40,6 @@
         max-width: 500px;
     }
 
-    .mark {
-        background: #d1eafd;
-        color: #4985a3;
-        margin-top: 4px;
-        margin-bottom: 4px;
-        margin-right: 2px;
-        padding: 6px;
-        border-radius: 10px;
-        display: block;
-        float: right;
-    }
-
-    .subject {
-        background: #66CDAA;
-        color: #4985a3;
-        margin-top: 4px;
-        margin-bottom: 4px;
-        margin-right: 2px;
-        padding: 6px;
-        border-radius: 10px;
-        display: inline-block;
-    }
 
     .degree {
         background: #fac6ac;

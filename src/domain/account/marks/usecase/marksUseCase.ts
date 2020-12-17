@@ -1,4 +1,4 @@
-import SearchRepository from '../../../../data/account/marks/repository/searchRepository';
+﻿import SearchRepository from '../../../../data/account/marks/repository/searchRepository';
 import Result from '../../../../utils/result';
 import Marks from '../model/marks';
 
