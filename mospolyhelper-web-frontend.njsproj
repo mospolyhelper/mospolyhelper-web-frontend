@@ -49,13 +49,13 @@
     <Content Include="src\features\App.vue" />
     <Content Include="src\features\common\components\Header.vue" />
     <Content Include="src\features\common\components\HeaderLink.vue" />
-    <Content Include="src\features\deadlines\components\Deadline.vue">
+    <Content Include="src\features\account\deadlines\components\Deadline.vue">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\features\deadlines\components\DeadlineList.vue">
+    <Content Include="src\features\account\deadlines\components\DeadlineList.vue">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\features\deadlines\components\FormDeadline.vue">
+    <Content Include="src\features\account\deadlines\components\FormDeadline.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\features\deadlines\views\Deadlines.vue">
@@ -103,6 +103,11 @@
     <Folder Include="src\data\account\auth\local\" />
     <Folder Include="src\data\account\auth\repository\" />
     <Folder Include="src\data\account\auth\remote\" />
+    <Folder Include="src\data\account\deadlines\" />
+    <Folder Include="src\data\account\deadlines\api\" />
+    <Folder Include="src\data\account\deadlines\local\" />
+    <Folder Include="src\data\account\deadlines\repository\" />
+    <Folder Include="src\data\account\deadlines\remote\" />
     <Folder Include="src\data\schedule\" />
     <Folder Include="src\data\schedule\api\" />
     <Folder Include="src\data\schedule\remote\" />
@@ -113,10 +118,9 @@
     <Folder Include="src\data\search\repository\" />
     <Folder Include="src\domain\account\auth\repository\" />
     <Folder Include="src\domain\account\auth\usecase\" />
-    <Folder Include="src\domain\deadlines\" />
-    <Folder Include="src\domain\deadlines\model\" />
-    <Folder Include="src\domain\deadlines\usecase\" />
-    <Folder Include="src\domain\deadlines\repository\" />
+    <Folder Include="src\domain\account\deadlines\" />
+    <Folder Include="src\domain\account\deadlines\model\" />
+    <Folder Include="src\domain\account\deadlines\usecase\" />
     <Folder Include="src\domain\account\auth\" />
     <Folder Include="src\domain\account\" />
     <Folder Include="src\domain\schedule\" />
@@ -137,11 +141,11 @@
     <Folder Include="src\domain\" />
     <Folder Include="src\di\" />
     <Folder Include="src\features\common\" />
-    <Folder Include="src\features\deadlines\components\" />
+    <Folder Include="src\features\account\deadlines\components\" />
     <Folder Include="src\features\deadlines\views\" />
     <Folder Include="src\features\home\" />
     <Folder Include="src\features\home\views\" />
-    <Folder Include="src\features\deadlines\" />
+    <Folder Include="src\features\account\deadlines\" />
     <Folder Include="src\features\account\" />
     <Folder Include="src\features\search\" />
     <Folder Include="src\features\schedule\" />
@@ -171,6 +175,15 @@
     <TypeScriptCompile Include="src\data\account\auth\repository\authRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\account\deadlines\api\apiDeadlines.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\account\deadlines\remote\deadlinesRemoteDataSource.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\account\deadlines\repository\deadlinesRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\data\schedule\api\scheduleApi.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -195,13 +208,16 @@
     <TypeScriptCompile Include="src\domain\account\auth\usecase\authUseCase.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\domain\deadlines\model\deadline.ts">
+    <TypeScriptCompile Include="src\data\account\deadlines\local\deadlinesLocalRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\domain\deadlines\repository\deadlinesRepository.ts">
+    <TypeScriptCompile Include="src\domain\account\deadlines\model\deadline.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\domain\deadlines\usecase\deadlinesUseCase.ts">
+    <TypeScriptCompile Include="src\domain\account\deadlines\model\myPortfolio.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\account\deadlines\usecase\deadlinesUseCase.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\schedule\model\auditorium.ts">

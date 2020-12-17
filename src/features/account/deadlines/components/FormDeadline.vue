@@ -14,13 +14,13 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
-    import Deadline from "../../../domain/deadlines/model/deadline";
-    import DeadlinesUseCase from "@/domain/deadlines/usecase/deadlinesUseCase";
+    import Deadline from "@/domain/account/deadlines/model/deadline";
+    import DeadlinesUseCase from "@/domain/account/deadlines/usecase/deadlinesUseCase";
 
     let useCase = new DeadlinesUseCase();
     const FormDeadline = defineComponent({
         props: {
-            id: Number
+            d: Deadline
         },
         data() {
             return {
@@ -35,37 +35,32 @@
         methods: {
             send() {
                 console.log("sent", this.name, this.description, this.pinned, this.datestring)
-                if (this.id != -1) {
-                    this.$emit('update', new Deadline(this.name, this.description, this.pinned, (this.datestring.length != 0 ? new Date(this.datestring).toLocaleString() : this.datestring), +(this.picked), this.id))
+                if (this.d?.id != -1) {
+                    this.$emit('update', new Deadline(this.name, this.description, this.pinned, (this.datestring.length == 0 ? this.d?.date : this.datestring.replace("-", ".").replace("-", ".").replace("T", ", ")), +(this.picked), this.d?.id))
                 } else {
-                    this.$emit('add', new Deadline(this.name, this.description, this.pinned, (this.datestring.length != 0 ? new Date(this.datestring).toLocaleString() : this.datestring), +(this.picked)))
+                    this.$emit('add', new Deadline(this.name, this.description, this.pinned, (this.datestring.length != 0 ? new Date(this.datestring).toLocaleString().replace(":00", "") : this.datestring.replace(":00", "")), +(this.picked)))
                     this.name = "";
                     this.description = "";
                     this.pinned = false;
-                    this.datestring = "";
                     this.picked = 0;
                 }
             },
         },
         computed: {
             init: function (): String {
-                if (this.id != -1 && this.id != undefined) {
-                    console.log(this.id);
-                    let d = useCase.getDeadline(this.id)
+                if (this.d?.id != -1 && this.d != null) {
+                    let d = this.d;
                     this.name = d.name;
                     this.description = d.description;
                     this.pinned = d.pinned;
-                    this.datestring = d.date;
                     this.picked = d.importance;
                     this.formVisible = true;
                     console.log(this.formVisible);
                     return "Обновить"
                 } else {
-                    console.log(this.id);
                     this.name = "";
                     this.description = "";
                     this.pinned = false;
-                    this.datestring = "";
                     this.picked = 0;
                     return "Добавить"
                 }
