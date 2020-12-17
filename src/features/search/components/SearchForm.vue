@@ -26,6 +26,7 @@
         props: {
             isSearch: Boolean,
         },
+        emits: ["applied", "applyFilter", "stopSearch"],
         data() {
             return {
                 isVisible: false,
@@ -39,7 +40,7 @@
         methods: {
             send() {
                 console.log("applied", this.direction, this.profile, this.group, this.course, this.form);
-                this.$emit('applyFilter', this.direction, this.profile, this.group, this.course, this.form);
+                this.$emit("applyFilter", this.direction, this.profile, this.group, this.course, this.form);
             }
         }
     });
