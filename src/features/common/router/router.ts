@@ -18,7 +18,7 @@ const routes: Array<RouteRecordRaw> = [
         component: Schedule
     },
     {
-        path: "/deadlines",
+        path: "/account/deadlines",
         component: Deadlines
     },
     {
