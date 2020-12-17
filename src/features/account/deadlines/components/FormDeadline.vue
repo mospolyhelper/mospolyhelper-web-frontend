@@ -22,6 +22,7 @@
         props: {
             d: Deadline
         },
+        emits: ["update", "add"],
         data() {
             return {
                 name: "",

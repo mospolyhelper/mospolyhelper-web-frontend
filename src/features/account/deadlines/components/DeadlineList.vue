@@ -45,6 +45,7 @@
             isSaving: Boolean,
             isChanged: Boolean
         },
+        emits: ["removeFromArray", "setCompleted", 'update', 'save', 'setPinned'],
         data() {
             return {
                 hideCompleted: false,
