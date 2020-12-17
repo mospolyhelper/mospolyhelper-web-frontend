@@ -1,4 +1,4 @@
-import Deadline from "@/domain/account/deadlines/model/deadline";
+﻿import Deadline from "@/domain/account/deadlines/model/deadline";
 
 export default class DeadlinesLocalRepository {
 

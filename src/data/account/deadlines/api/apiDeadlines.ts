@@ -1,4 +1,4 @@
-import { RestClient } from 'typed-rest-client/RestClient';
+п»їimport { RestClient } from 'typed-rest-client/RestClient';
 import MyPortfolio from '../../../../domain/account/deadlines/model/myPortfolio';
 import Result from '../../../../utils/result';
 import UnauthorizedAccessError from '../../../../utils/unauthorizedAccessError';
@@ -29,7 +29,7 @@ export default class DealinesApi {
         } catch (err) {
             console.log(err);
             if (err['statusCode'] == 401) {
-                return Result.failure(new UnauthorizedAccessError("Авторизируйтесь!"));
+                return Result.failure(new UnauthorizedAccessError("РђРІС‚РѕСЂРёР·РёСЂСѓР№С‚РµСЃСЊ!"));
             } else return Result.failure(err);
         }
     }
@@ -48,7 +48,7 @@ export default class DealinesApi {
         catch (err) {
             console.log(err);
             if (err['statusCode'] == 401) {
-                return Result.failure(new UnauthorizedAccessError("Авторизируйтесь!"));
+                return Result.failure(new UnauthorizedAccessError("РђРІС‚РѕСЂРёР·РёСЂСѓР№С‚РµСЃСЊ!"));
             } else return Result.failure(err);
         }
     }
