@@ -26,6 +26,7 @@
             completed: Boolean,
             pinned: Boolean
         },
+        emits: ["setCompleted", 'update', 'remove', 'setPinned'],
         methods: {
             pin() {
                 this.$emit('setPinned');

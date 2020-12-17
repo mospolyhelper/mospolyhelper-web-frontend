@@ -2,7 +2,6 @@
 import DeadlinesLocalRepository from "../../../../data/account/deadlines/local/deadlinesLocalRepository";
 import DeadlinesRepository from "../../../../data/account/deadlines/repository/deadlinesRepository";
 import Result from "../../../../utils/result";
-import deadlines from "../../../features/deadlines/views/Deadlines.vue";
 import MyPortfolio from "../model/myPortfolio";
 
 export default class DeadlinesUseCase {
@@ -54,9 +53,9 @@ export default class DeadlinesUseCase {
     jsonToArray(json: string): Array<Deadline> {
         console.log(json);
         try {
-            return JSON.parse(json.replace(/&quot;/g, '"'));
+            return JSON.parse(json);
         } catch (err) {
-            console.log('не получается прочитать поле дополнительной информации', err);
+            console.log('не получается спарсить поле дополнительной информации', err);
             return Array<Deadline>();
         }
     }
@@ -66,7 +65,7 @@ export default class DeadlinesUseCase {
     }
 
     compareReceived(localDeadlines: Array<Deadline>, sent: string): boolean {
-        return new Intl.Collator().compare(sent.replace(/&quot;/g, '"'), this.arrayToJson(localDeadlines)) == 0
+        return new Intl.Collator().compare(sent, this.arrayToJson(localDeadlines)) == 0
     }
 
 }
