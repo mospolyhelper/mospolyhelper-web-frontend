@@ -12,9 +12,8 @@
     "clean": "vue-cli-service build"
   },
   "dependencies": {
+    "@soerenmartius/vue3-clipboard": "^0.1.0",
     "axios": "^0.21.0",
-    "bootstrap-vue": "^2.20.1",
-    "browserify-fs": "^1.0.0",
     "inversify": "^5.0.1",
     "moment": "^2.29.1",
     "typed-rest-client": "^1.8.0",

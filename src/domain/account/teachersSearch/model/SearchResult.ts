@@ -4,6 +4,6 @@ export default class SearchResult {
     constructor(
         public pageCount: number,
         public currentPage: number,
-        public portfolios: Array<SearchEntity>
+        public teachers: Array<SearchEntity>
     ) { }
 }

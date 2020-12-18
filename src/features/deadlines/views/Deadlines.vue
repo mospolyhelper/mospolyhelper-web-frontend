@@ -4,69 +4,43 @@
         <a href="https://vuejs.org" target="_blank">Vue.js</a> and
         <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>.
     </p>
-    <input type="text" placeholder="Поиск" v-model.trim="findStr" />
-    <br />
-    <input type="checkbox" v-model="hideCompleted" />Скрыть выполненные
-    <br />
-    <div v-if="deadlinesArray.length==0">Дедлайнов нет:(</div>
-    <deadlineList :deadlinesList="deadlinesArray"
+    <input type="checkbox" v-model="saveMode" />(dev) сохранять изменения сразу <br />
+    <deadlineList :deadlinesList="deadlineArr"
+                  :isLoading="isLoading"
+                  :isSaving="isSaving"
+                  :isChanged="isChanged"
                   v-on:removeFromArray="deleteElement"
                   v-on:update="setUpdated"
                   v-on:setCompleted="setCompleted"
-                  v-on:setPinned="setPinned" />
-    <button @click="formVisible=!formVisible">{{buttonText}}</button>
-    <formDeadline :id="idUpdate"
-                  v-if="formVisible"
+                  v-on:setPinned="setPinned" 
+                  v-on:save="upd()"/>
+    <formDeadline :d="dUpdate"
                   v-on:update="updateDeadline"
-                  v-on:add="addDeadline">
+                  v-on:add="addDeadline"
+                  v-if="!isLoading">
     </formDeadline>
 
 </template>
 
 <script lang="ts">
     import { defineComponent } from "vue";
-    import Deadline from "@/domain/deadlines/model/deadline";
-    import deadlineList from "@/features/deadlines/components/DeadlineList.vue";
-    import formDeadline from "@/features/deadlines/components/FormDeadline.vue";
-    import DeadlinesUseCase from "@/domain/deadlines/usecase/deadlinesUseCase";
+    import Deadline from "@/domain/account/deadlines/model/deadline";
+    import deadlineList from "@/features/account/deadlines/components/DeadlineList.vue";
+    import formDeadline from "@/features/account/deadlines/components/FormDeadline.vue";
+    import DeadlinesUseCase from "@/domain/account/deadlines/usecase/deadlinesUseCase";
 
     let useCase = new DeadlinesUseCase();
-    useCase.addDeadline(new Deadline(
-        "Технология кроссплатформенного программирования1",
-        '123',
-        false))
-    useCase.addDeadline(new Deadline(
-        "Технология кроссплатформенного программирования2",
-        '123',
-        false))
-
-    useCase.addDeadline(new Deadline(
-        "Технология кроссплатформенного программирования3",
-        '123',
-        false))
-
-    useCase.addDeadline(new Deadline(
-        "Технология кроссплатформенного программирования4",
-        '123',
-        false))
-
-    useCase.addDeadline(new Deadline(
-        "Технология кроссплатформенного программирования5",
-        '123',
-        false
-    ))
 
     const deadlines = defineComponent({
-        props: {
-        },
         data() {
             return {
-                deadlineArr: useCase.getDeadlines(),
-                formVisible: false,
-                hideCompleted: false,
-                idUpdate: -1,
-                isUpdated: false,
-                findStr: ""
+                deadlineArr: Array<Deadline>(),
+                dUpdate: new Deadline("",""),
+                isLoading: false,
+                isSaving: false,
+                isChanged: false,
+                processArray: Array<string>(),
+                saveMode: true
             }
         },
         components: {
@@ -75,60 +49,68 @@
         },
         methods: {
             upd() {
-                let d: Deadline[] = useCase.getDeadlines(this.hideCompleted)
+                this.isSaving = true;
+                this.processArray.push("сохраняется");
+                let d: Array<Deadline> = useCase.getLocalDeadlines();
+                useCase.setDeadlines(d).then(result => {
+                    if (result.isSuccess) {
+                        console.log(result.value.otherInformation);
+                        this.processArray.pop()
+                        this.isSaving = this.processArray.length != 0
+                    } else {
+                        alert(result.errorOrNull());
+                        this.isSaving = false
+                    }
+                })
+                this.isChanged = false;
+            },
+            updateList() {
+                let d: Array<Deadline> = useCase.getLocalDeadlines();
                 this.deadlineArr = [];
                 d.forEach(val => this.deadlineArr.push(Object.assign({}, val)));
-                this.isUpdated = true;
+                this.isChanged = true;
             },
             deleteElement(id: number) {
                 useCase.deleteDeadline(id)
-                this.upd();
-
+                this.updateList();
+                if (this.saveMode) this.upd();
             },
             setCompleted(id: number) {
                 useCase.setCompleted(id);
-                this.upd();
+                this.updateList();
+                if (this.saveMode) this.upd();
             },
             setPinned(id: number) {
                 useCase.setPinned(id);
-                this.upd();
+                this.updateList();
+                if (this.saveMode) this.upd();
             },
             addDeadline(d: Deadline) {
                 useCase.addDeadline(d);
-                this.upd();
-                this.formVisible = !this.formVisible;
+                this.updateList();
+                if (this.saveMode) this.upd();
             },
             setUpdated(id: number) {
-                this.idUpdate = id;
-
+                this.dUpdate = useCase.getDeadline(id)
             },
             updateDeadline(d: Deadline) {
                 useCase.editDeadline(d);
-                this.idUpdate = -1;
-                this.upd();
-            },
-        },
-        watch: {
-            hideCompleted(newHide, oldHide) {
-                if (newHide !== oldHide) {
-                    this.upd();
-                }
+                this.dUpdate = new Deadline("", "");
+                this.updateList();
+                if (this.saveMode) this.upd();
             }
         },
-        computed: {
-            deadlinesArray: function (): Deadline[] {
-                if (this.isUpdated) {
-                    this.isUpdated = false;
+        created() {
+            this.isLoading = true;
+            useCase.getPortfolio().then(result => {
+                if (result.isSuccess) {
+                    console.log(result);
+                    useCase.setLocalDeadlines(useCase.jsonToArray(result.value.otherInformation)).forEach(val => this.deadlineArr.push(Object.assign({}, val)));
+                } else if (result.isFailure) {
+                    alert(result.errorOrNull());
                 }
-                if (this.findStr.length > 0) {
-                    return useCase.search(this.findStr, this.hideCompleted);
-                } else {
-                    return this.deadlineArr
-                }
-            },
-            buttonText: function (): String {
-                return this.formVisible ? "X" : "Добавить";
-            }
+                this.isLoading = false
+            })
         }
     });
 

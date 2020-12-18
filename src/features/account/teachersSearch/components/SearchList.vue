@@ -1,14 +1,12 @@
 ﻿<template>
-    <button @click="toClipboard(numeratedStudentsNames)">Копировать в буфер обмена</button>
     <div class="searchList">
         <searchElement v-for="(element, index) in searchList"
                        v-bind:key="element.id"
                        :name="element.name"
-                       :group="element.group"
-                       :direction="element.direction"
-                       :specialization="element.specialization"
-                       :course="element.course"
-                       :educationForm="element.educationForm" />
+                       :info="element.info"
+                       :avatarUrl="element.avatarUrl"
+                       :status="element.status"
+                       :dialogKey="element.dialogKey"/>
         <div class="windows8" v-if="isLoading">
             <div class="wBall" id="wBall_1">
                 <div class="wInnerBall"></div>
@@ -32,14 +30,9 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
-    import { toClipboard } from '@soerenmartius/vue3-clipboard'
-    import searchElement from "@/features/search/components/SearchElement.vue";
-    import SearchEntity from "../../../domain/search/model/SearchEntity";
+    import searchElement from "@/features/account/teachersSearch/components/SearchElement.vue"
 
     const searchList = defineComponent({
-        setup() {
-            return { toClipboard }
-        },
         props: {
             searchList: Array,
             isLoading: Boolean
@@ -47,16 +40,8 @@
         components: {
             searchElement
         },
-        computed: {
-            numeratedStudentsNames: function (): string {
-                let searchList = this.searchList as Array<SearchEntity>;
-                let names = "";
-                for (let i = 0; i < searchList.length; i++) {
-                    names += `${i + 1}. ${searchList[i].name}\n`;
-                }
-                console.log(names);
-                return names;
-            }
+        methods: {
+
         }
     });
 

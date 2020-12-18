@@ -1,14 +1,8 @@
 ﻿<template>
-    <button @click="toClipboard(numeratedStudentsNames)">Копировать в буфер обмена</button>
     <div class="searchList">
-        <searchElement v-for="(element, index) in searchList"
-                       v-bind:key="element.id"
-                       :name="element.name"
-                       :group="element.group"
-                       :direction="element.direction"
-                       :specialization="element.specialization"
-                       :course="element.course"
-                       :educationForm="element.educationForm" />
+        <markCourse v-for="(value, index) in list"
+                       :course="index"
+                       :semesters="value"/>
         <div class="windows8" v-if="isLoading">
             <div class="wBall" id="wBall_1">
                 <div class="wInnerBall"></div>
@@ -32,32 +26,27 @@
 
 <script lang="ts">
     import { defineComponent } from "vue";
-    import { toClipboard } from '@soerenmartius/vue3-clipboard'
-    import searchElement from "@/features/search/components/SearchElement.vue";
-    import SearchEntity from "../../../domain/search/model/SearchEntity";
+    import markCourse from "@/features/account/marks/components/MarkCourse.vue"
+    import Predmet from "../../../../domain/account/marks/model/predmet";
 
     const searchList = defineComponent({
-        setup() {
-            return { toClipboard }
-        },
         props: {
-            searchList: Array,
+            courses: Object,
             isLoading: Boolean
         },
         components: {
-            searchElement
+            markCourse
+        },
+        methods: {
+
         },
         computed: {
-            numeratedStudentsNames: function (): string {
-                let searchList = this.searchList as Array<SearchEntity>;
-                let names = "";
-                for (let i = 0; i < searchList.length; i++) {
-                    names += `${i + 1}. ${searchList[i].name}\n`;
-                }
-                console.log(names);
-                return names;
-            }
+            list: function (): Map<string, Map<string, Array<Predmet>>> {
+                console.log("course", this.courses);
+                return this.courses as Map<string, Map<string, Array<Predmet>>>;
         }
+    }
+
     });
 
     export default searchList;
