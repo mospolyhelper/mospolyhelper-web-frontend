@@ -2,8 +2,8 @@
 import Home from "@/features/home/views/Home.vue";
 import Schedule from "@/features/schedule/views/Schedule.vue";
 import Deadlines from "@/features/deadlines/views/Deadlines.vue";
-import Search from "@/features/search/views/Search.vue"
-import Auth from "@/features/account/auth/views/Auth.vue"
+import Search from "@/features/search/views/Search.vue";
+import Auth from "@/features/account/auth/views/Auth.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -28,7 +28,7 @@ const routes: Array<RouteRecordRaw> = [
     },
     {
         path: "/locations",
-        component: () => import('@/features/locations/views/Locations.vue')
+        component: () => import("@/features/locations/views/Locations.vue")
     },
     {
         path: "/:pathMatch(.*)*",

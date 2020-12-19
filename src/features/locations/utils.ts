@@ -1,3 +1,5 @@
+import { Coords } from "@/domain/locations/model/Locations";
+
 export enum Lang {
     RU = "ru_RU",
     EN = "en_EN"
@@ -40,7 +42,7 @@ export const CENTER_OF_MOSCOW: LatLng = {
 export const DEFAULT_MAP_SETTINGS: MapSettings = {
     apiKey: '8239b260-067a-4165-a7a4-e64e5d0c4bd2',
     lang: Lang.RU,
-    load: 'Map,Placemark,GeoObjectCollection',
+    load: "Map,Placemark,Balloon,GeoObjectCollection",
     center: CENTER_OF_MOSCOW,
     zoom: 11
 };
@@ -54,3 +56,5 @@ export const mapLoader = (settings: MapSettings) =>
         ymScript.onload = () => ymaps.ready(resolve);
         ymScript.onerror = reject;
     });
+
+export const coordsToArray = (coords: Coords) => [coords.latitude, coords.longitude];

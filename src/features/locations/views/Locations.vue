@@ -1,30 +1,45 @@
 <template>
-    <div class="map">
-        <YandexMap />
-    </div>
+    <!--    <div class="map">-->
+    <YandexMap />
+    <!--    </div>-->
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted, ref, watch } from "vue";
 import YandexMap from "@/features/locations/components/YandexMap.vue";
+import getLocations from "@/data/locations/repository/locationsRepository";
+import {
+    Campus,
+    Coords,
+    Gym,
+    Hostel,
+    Locations
+} from "@/domain/locations/model/Locations";
 
 const Locations = defineComponent({
     components: { YandexMap },
     setup() {
-
+        // const locations = ref<Locations>({});
+        // getLocations().then(data => locations.value = data);
+        // return { locations };
     }
 });
+
+// function campusToGeoObject(campus: Campus): ymaps.GeoObject {
+//     return new ymaps.Placemark(coordsToArray(campus.coordinates), {});
+// }
+//
+// function gymToGeoObject(gym: Gym): ymaps.GeoObject {
+//     return new ymaps.Placemark(coordsToArray(gym.coordinates), {});
+// }
+//
+// function hostelToGeoObject(hostel: Hostel): ymaps.GeoObject {
+//     return new ymaps.Placemark(coordsToArray(hostel.coordinates), {});
+// }
+//
+// const coordsToArray = (coords: Coords) => [coords.latitude, coords.longitude];
 
 export default Locations;
 </script>
 
-<style scoped>
-.map {
-    width: 90vw;
-    height: 80vh;
-
-    display: flex;
-    align-self: center;
-    justify-self: center;
-}
-</style>
+<style scoped></style>
