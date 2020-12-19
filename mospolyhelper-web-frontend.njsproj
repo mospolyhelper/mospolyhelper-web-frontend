@@ -131,6 +131,9 @@
     <Folder Include="src\data\account\deadlines\local\" />
     <Folder Include="src\data\account\deadlines\repository\" />
     <Folder Include="src\data\account\deadlines\remote\" />
+    <Folder Include="src\data\common\" />
+    <Folder Include="src\data\common\local\" />
+    <Folder Include="src\data\common\repository\" />
     <Folder Include="src\data\schedule\" />
     <Folder Include="src\data\schedule\api\" />
     <Folder Include="src\data\schedule\remote\" />
@@ -156,6 +159,8 @@
     <Folder Include="src\domain\account\marks\usecase\" />
     <Folder Include="src\domain\account\auth\" />
     <Folder Include="src\domain\account\" />
+    <Folder Include="src\domain\common\" />
+    <Folder Include="src\domain\common\repository\" />
     <Folder Include="src\domain\schedule\" />
     <Folder Include="src\domain\schedule\model\" />
     <Folder Include="src\domain\schedule\utils\" />
@@ -236,6 +241,9 @@
     <TypeScriptCompile Include="src\data\account\deadlines\repository\deadlinesRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\common\local\storageLocalDataSource.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\data\schedule\api\scheduleApi.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -278,6 +286,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\account\deadlines\usecase\deadlinesUseCase.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\common\repository\storageRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\schedule\model\auditorium.ts">
