@@ -7,6 +7,6 @@
         public pinned: boolean = false,
         public date: string = new Date().toLocaleString(),
         public importance: number = 0,
-        public id: number = 0
+        public id: number = -1
     ) { }
 }

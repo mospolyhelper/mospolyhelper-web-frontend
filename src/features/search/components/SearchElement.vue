@@ -24,9 +24,6 @@
             course: String,
             educationForm: String
         },
-        methods: {
-            
-        },
         computed: {
             degree: function (): string {
                 let d = this.direction;

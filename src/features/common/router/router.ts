@@ -6,6 +6,7 @@ import Search from "@/features/search/views/Search.vue";
 import Auth from "@/features/account/auth/views/Auth.vue";
 import TeachersSearch from "@/features/account/teachersSearch/views/TeachersSearch.vue";
 import Classmates from "@/features/account/classmates/views/Classmates.vue";
+import Marks from "@/features/account/marks/views/Marks.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -17,7 +18,7 @@ const routes: Array<RouteRecordRaw> = [
         component: Schedule
     },
     {
-        path: "/deadlines",
+        path: "/account/deadlines",
         component: Deadlines
     },
     {
@@ -35,6 +36,10 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/account/classmates",
         component: Classmates
+    },
+    {
+        path: "/account/marks",
+        component: Marks
     },
     {
         path: "/:pathMatch(.*)*",
