@@ -23,6 +23,7 @@ export default class ScheduleApi {
             return Result.success(response.result ?? <Marks>{ marks: new Map() });
         }
         catch (err) {
+            console.log('неУспех');
             if (err['statusCode'] == 401) {
                 return Result.failure(new UnauthorizedAccessError("Авторизируйтесь!"));
             } else return Result.failure(err);
