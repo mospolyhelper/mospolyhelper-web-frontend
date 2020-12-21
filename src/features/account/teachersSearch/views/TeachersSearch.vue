@@ -1,16 +1,10 @@
 ﻿<template>
-    <p>
-        Поиск
-        <a href="https://vuejs.org" target="_blank">Vue.js</a> and
-        <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>.
-    </p>
-    <input type="text" placeholder="Поиск" v-model.trim.lazy="findStr" />
-    <button @click="find(findStr, page = 1)">Найти</button>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <form class="example" @submit.prevent="find(findStr, page = 1)">
+        <input type="text" name="search" placeholder="Поиск" v-model.trim.lazy="findStr">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
     <br />
-    <!--<searchForm v-on:applyFilter="advancedSearch"
-                v-on:stopSearch="isSearching=false"
-                :isSearch="isSearching"
-                />-->
     <searchList :searchList="searchRes"
                 :isLoading="isLoading">
     </searchList>
@@ -94,5 +88,40 @@
 </script>
 
 <style scoped>
-    
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Style the search field */
+    form.example input[type=text] {
+        padding: 10px;
+        font-size: 17px;
+        border: 1px solid grey;
+        min-width:300px;
+        float: left;
+        background: #f1f1f1;
+    }
+    /* Style the submit button */
+    form.example button {
+        float: left;
+        padding: 10px;
+        background: #2196F3;
+        color: white;
+        font-size: 17px;
+        border: 1px solid grey;
+        border-left: none; /* Prevent double borders */
+        cursor: pointer;
+        min-width: 50px;
+    }
+
+        form.example button:hover {
+            background: #0b7dda;
+        }
+
+    /* Clear floats */
+    form.example::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
 </style>
