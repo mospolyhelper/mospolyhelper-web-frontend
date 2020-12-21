@@ -9,6 +9,7 @@
                 <button class="dropbtn">Аккаунт</button>
                 <div class="dropdown-content">
                     <HeaderLink to="/account/auth">Авторизация</HeaderLink>
+                    <HeaderLink to="/account/info">Info</HeaderLink>
                     <HeaderLink to="/account/deadlines">Дедлайны</HeaderLink>
                     <HeaderLink to="/account/teachersSearch">Поиск преподавателей</HeaderLink>
                     <HeaderLink to="/account/classmates">Одногруппники</HeaderLink>

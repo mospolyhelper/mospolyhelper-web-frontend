@@ -4,6 +4,7 @@ import Schedule from "@/features/schedule/views/Schedule.vue";
 import Deadlines from "@/features/account/deadlines/views/Deadlines.vue";
 import Search from "@/features/search/views/Search.vue";
 import Auth from "@/features/account/auth/views/Auth.vue";
+import AccountInfoPage from "@/features/account/info/views/AccountInfoPage.vue";
 import TeachersSearch from "@/features/account/teachersSearch/views/TeachersSearch.vue";
 import Classmates from "@/features/account/classmates/views/Classmates.vue";
 import Marks from "@/features/account/marks/views/Marks.vue";
@@ -28,6 +29,10 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/account/auth",
         component: Auth
+    },
+    {
+        path: "/account/info",
+        component: AccountInfoPage
     },
     {
         path: "/account/teachersSearch",
