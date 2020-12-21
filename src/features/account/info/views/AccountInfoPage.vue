@@ -1,13 +1,15 @@
 <template>
-    <p class="info-heading">{{ info.name }}</p>
-    <About v-if="info" :fields="fields" />
-    
-    <p class="info-heading">Приказы</p>
-    <TextRow
-        v-for="(order, idx) in info.orders"
-        :key="'order' + idx"
-        :text="order"
-    />
+    <div style="margin: 64px 15%;">
+        <p v-if="info?.name" class="info-heading">{{ info.name }}</p>
+        <About v-if="info" :fields="fields" />
+        
+        <p v-if="info?.orders" class="info-heading">Приказы</p>
+        <TextRow
+            v-for="(order, idx) in info?.orders"
+            :key="'order' + idx"
+            :text="order"
+        />
+    </div>
 </template>
 
 <script lang="ts">
@@ -103,6 +105,7 @@ export default AccountInfoPage;
 
 <style scoped>
 .info-heading {
+    margin-left: -24px;
     color: cornflowerblue;
     font-size: 1.6em;
     font-weight: bold;
