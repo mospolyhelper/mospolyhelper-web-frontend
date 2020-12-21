@@ -1,8 +1,8 @@
 ﻿<template>
     <div class="searchElement">
-        <div >{{subject}}</div>
-        <div >{{loadType}}</div>
-        <div>{{mark}}</div>
+        <div class="mark" v-bind:class="(mark == 'Зачтено' || mark == 'Отлично' || mark == 'Хорошо' || mark == 'Удовлетворительно') ? good : bad">{{mark}}</div>
+        <div><b>{{subject}}</b></div>
+        <div>{{loadType}}</div>
     </div>
 </template>
 
@@ -20,6 +20,12 @@
         },
         computed: {
 
+        },
+        data() {
+            return {
+                good: 'good',
+                bad: 'bad'
+            }
         }
     });
 
@@ -27,6 +33,7 @@
 </script>
 
 <style scoped>
+
     .searchElement {
         background: #fff;
         box-shadow: 0 0 6px rgba(0,0,0,0.5);
@@ -38,18 +45,27 @@
         border-radius: 25px;
         min-width: 200px;
         max-width: 500px;
+        min-height: 50px;
     }
 
 
-    .degree {
-        background: #fac6ac;
-        float: right;
-        color: #4985a3;
+    .mark {
+        color: white;
         margin-top: 4px;
         margin-bottom: 4px;
         margin-right: 2px;
         padding: 6px;
         border-radius: 10px;
+        display: inline-block;
+        float:right;
+    }
+
+    .good {
+        background-color: #4CAF50cf;
+    }
+    /* Green */
+    .bad {
+        background-color: #f44336ea;
     }
     
 </style>

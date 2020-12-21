@@ -10,11 +10,11 @@ export default class AuthRepositoryImpl implements AuthRepository {
     ) { }
 
 
-    getSessionId(login: string | null = null, password: string | null = null): Promise<string | null> {
+    getSessionId(login: string | null = null, password: string | null = null): Promise<Result<string>> {
         if (login != null && password != null) {
             return this.remoteDataSource.getSessionId(login, password);
         } else {
-            return Promise.resolve(this.localDataSource.getSessionId());
+            return Promise.resolve(Result.success(this.localDataSource.getSessionId()));
         }
     }
 

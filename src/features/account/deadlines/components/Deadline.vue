@@ -1,15 +1,16 @@
 ﻿<template>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="deadline">
-        <img class="pinned" v-if="pinned" width="30" height="30" src="@/features/deadlines/components/pin.png" />
+        <img class="pinned" v-if="pinned" width="30" height="30" src="@/features/account/deadlines/components/pin.png" />
         <div class="title">{{name}}</div>
         <div>{{description}}</div>
         <div class="importance">{{isImportant}}</div>
         <div class="completed">{{isCompleted}}</div> <br />
-        <div class="date" >{{date}}</div>
-        <button @click="removeFormElement">Удалить</button>
-        <button @click="update">Редактировать</button>
-        <button @click="pin">{{isPinnedBtn}}</button>
-        <button @click="complete">{{isCompletedBtn}}</button>
+        <div class="date">{{date}}</div>
+        <button class="btn" @click="removeFormElement"><i class="fa fa-trash"></i></button>
+        <button class="btn" @click="update"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+        <button class="btn" @click="pin"><i class="fa fa-thumb-tack" aria-hidden="true"></i></button>
+        <button class="btn" @click="complete"><i class="fa fa-check" aria-hidden="true"></i></button>
     </div>
 </template>
 
@@ -113,4 +114,19 @@
     .title {
         font-weight: bold;
     }
+
+    .btn {
+        background-color: DodgerBlue; /* Blue background */
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        padding: 12px 16px; /* Some padding */
+        font-size: 16px; /* Set a font size */
+        cursor: pointer; /* Mouse pointer on hover */
+        margin:5px;
+    }
+
+        /* Darker background on mouse-over */
+        .btn:hover {
+            background-color: RoyalBlue;
+        }
 </style>

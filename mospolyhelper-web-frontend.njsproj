@@ -35,6 +35,7 @@
     <Content Include="public\android-chrome-192x192.png" />
     <Content Include="public\android-chrome-512x512.png" />
     <Content Include="public\apple-touch-icon.png" />
+    <Content Include="src\assets\background.jpg" />
     <Content Include="public\browserconfig.xml" />
     <Content Include="public\favicon-16x16.png" />
     <Content Include="public\favicon-32x32.png" />
@@ -70,7 +71,10 @@
     <Content Include="src\features\account\deadlines\components\FormDeadline.vue">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\features\deadlines\views\Deadlines.vue">
+    <Content Include="src\features\common\components\lodingAnimation.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\account\deadlines\views\Deadlines.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\features\home\views\Home.vue" />
@@ -131,6 +135,9 @@
     <Folder Include="src\data\account\deadlines\local\" />
     <Folder Include="src\data\account\deadlines\repository\" />
     <Folder Include="src\data\account\deadlines\remote\" />
+    <Folder Include="src\data\common\" />
+    <Folder Include="src\data\common\local\" />
+    <Folder Include="src\data\common\repository\" />
     <Folder Include="src\data\schedule\" />
     <Folder Include="src\data\schedule\api\" />
     <Folder Include="src\data\schedule\remote\" />
@@ -156,6 +163,8 @@
     <Folder Include="src\domain\account\marks\usecase\" />
     <Folder Include="src\domain\account\auth\" />
     <Folder Include="src\domain\account\" />
+    <Folder Include="src\domain\common\" />
+    <Folder Include="src\domain\common\repository\" />
     <Folder Include="src\domain\schedule\" />
     <Folder Include="src\domain\schedule\model\" />
     <Folder Include="src\domain\schedule\utils\" />
@@ -184,8 +193,7 @@
     <Folder Include="src\di\" />
     <Folder Include="src\features\common\" />
     <Folder Include="src\features\account\deadlines\components\" />
-    <Folder Include="src\features\deadlines\" />
-    <Folder Include="src\features\deadlines\views\" />
+    <Folder Include="src\features\account\deadlines\views\" />
     <Folder Include="src\features\home\" />
     <Folder Include="src\features\home\views\" />
     <Folder Include="src\features\account\deadlines\" />
@@ -201,6 +209,7 @@
     <Folder Include="src\features\account\teachersSearch\" />
     <Folder Include="src\features\account\teachersSearch\components\" />
     <Folder Include="src\features\account\teachersSearch\views\" />
+    <Folder Include="src\assets\" />
     <Folder Include="src\utils\" />
   </ItemGroup>
   <ItemGroup>
@@ -234,6 +243,12 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\data\account\deadlines\repository\deadlinesRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\common\local\storageLocalDataSource.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\common\repository\preferencesRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\data\schedule\api\scheduleApi.ts">
@@ -278,6 +293,9 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\account\deadlines\usecase\deadlinesUseCase.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\common\repository\storageRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\schedule\model\auditorium.ts">

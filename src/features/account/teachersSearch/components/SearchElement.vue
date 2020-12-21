@@ -1,10 +1,11 @@
 ﻿<template>
-    <div class="searchElement">
-        <div class="status">{{status}}</div>
-        <div class="title">{{name}}</div>
-        <img class="image" :src="imageSrc" />
-        <div v-if="info.length != 0">Информация: {{info}}</div>
-        <div>dialog key: {{dialogKey}}</div>
+    <div class="card">
+        <img :src="imageSrc" alt="Avatar"> <br />
+        <div class="container">
+            <div class="status" v-bind:class="[status=='Пользователь не на сайте' ? offline : online]"> </div>
+            <div class="title"><b>{{name}}</b></div>
+            <div v-if="info.length != 0">Информация: {{info}}</div>
+        </div>
     </div>
 </template>
 
@@ -22,6 +23,12 @@
         methods: {
             
         },
+        data() {
+            return {
+                online: 'online',
+                offline: 'offline'
+            }
+        },
         computed: {
             imageSrc: function (): String {
                 console.log("https://e.mospolytech.ru/" + this.avatarUrl);
@@ -34,62 +41,57 @@
 </script>
 
 <style scoped>
-    .searchElement {
-        background: #fff;
-        box-shadow: 0 0 6px rgba(0,0,0,0.5);
-        margin-top: 10px;
-        margin-bottom: 10px;
-        margin-left: 10px;
-        margin-right: 10px;
-        padding: 10px;
-        border-radius: 25px;
-        min-width: 200px;
-        max-width: 500px;
-    }
-
-
     .title {
-        font-weight: bold;
+        
     }
 
     .status {
-        background: #d1eafd;
-        color: #4985a3;
-        margin-top: 4px;
-        margin-bottom: 4px;
-        margin-right: 2px;
+        color: white;
         padding: 6px;
-        border-radius: 10px;
+        border-radius: 100%;
         display: block;
         float: right;
+        margin-bottom: 5px;
     }
 
-    .image {
-       /*float:left;*/
-        width:100px;
-        height:100px;
+    .online {
+        background-color: #4CAF50cf;
     }
+    /* Green */
+    .offline {
+        background-color: #f44336ea;
+    }
+    /* Red */
 
-    .group {
-        background: #66CDAA;
-        color: #4985a3;
-        margin-top: 4px;
-        margin-bottom: 4px;
-        margin-right: 2px;
-        padding: 6px;
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 230px;
         border-radius: 10px;
         display: inline-block;
+        margin-top: 10px;
+        margin-bottom: 3px;
+        margin-left: 10px;
+        margin-right: 10px;
+        opacity: 1;
+        vertical-align: top;
     }
 
-    .degree {
-        background: #fac6ac;
-        float: right;
-        color: #4985a3;
-        margin-top: 4px;
-        margin-bottom: 4px;
-        margin-right: 2px;
-        padding: 6px;
-        border-radius: 10px;
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            opacity: 0.6;
+        }
+
+    img {
+        border-radius: 10px 10px 0 0;
+        width: 230px;
+        height: 230px;
+    }
+
+    .container {
+        padding: 5px;
+        margin-bottom: 5px;
+        min-height: 70px;
     }
     
 </style>

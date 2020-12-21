@@ -1,18 +1,20 @@
-<template>
-    <div class="nav-header">
-        <HeaderLink to="/" exact>Home</HeaderLink>
-        <HeaderLink to="/schedule">Schedule</HeaderLink>
-        <HeaderLink to="/map">Map</HeaderLink>
-        <HeaderLink to="/search">Search</HeaderLink>
-        <div class="dropdown">
-            <button class="dropbtn">Account</button>
-            <div class="dropdown-content">
-                <HeaderLink to="/account/auth">Auth</HeaderLink>
-                <HeaderLink to="/account/info">Info</HeaderLink>
-                <HeaderLink to="/account/deadlines">Deadlines</HeaderLink>
-                <HeaderLink to="/account/teachersSearch">Teachers Search</HeaderLink>
-                <HeaderLink to="/account/classmates">Classmates</HeaderLink>
-                <HeaderLink to="/account/marks">Marks</HeaderLink>
+﻿<template>
+    <div class="navbar-outer">
+        <div class="navbar">
+            <HeaderLink to="/" exact>Главная</HeaderLink>
+            <HeaderLink to="/schedule">Расписание</HeaderLink>
+            <HeaderLink to="/map">Map</HeaderLink>
+            <HeaderLink to="/search">Поиск студентов</HeaderLink>
+            <div class="dropdown">
+                <button class="dropbtn">Аккаунт</button>
+                <div class="dropdown-content">
+                    <HeaderLink to="/account/auth">Авторизация</HeaderLink>
+                    <HeaderLink to="/account/info">Info</HeaderLink>
+                    <HeaderLink to="/account/deadlines">Дедлайны</HeaderLink>
+                    <HeaderLink to="/account/teachersSearch">Поиск преподавателей</HeaderLink>
+                    <HeaderLink to="/account/classmates">Одногруппники</HeaderLink>
+                    <HeaderLink to="/account/marks">Оценки</HeaderLink>
+                </div>
             </div>
         </div>
     </div>
@@ -32,60 +34,61 @@ export default Header;
 </script>
 
 <style scoped>
-.nav-header {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-    /* Dropdown Button */
-    .dropbtn {
-        background-color: #4CAF50;
-        color: white;
-        padding-left: 16px;
-        padding-right: 16px;
-        padding-top: 4px;
-        padding-bottom: 4px;
-        font-size: 16px;
-        border: none;
+    .navbar-outer {
+        background-color: #fff;
     }
-
-    /* The container <div> - needed to position the dropdown content */
+    .navbar {
+        display: table;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+    /* The dropdown container */
     .dropdown {
-        position: relative;
-        display: inline-block;
+        float: left;
+        overflow: hidden;
     }
 
-    /* Dropdown Content (Hidden by Default) */
+        /* Dropdown button */
+        .dropdown .dropbtn {
+            font-size: 20px;
+            border: none;
+            outline: none;
+            color: #918b8f;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit; /* Important for vertical align on mobile phones */
+            margin: 0; /* Important for vertical align on mobile phones */
+        }
+
+    /* Dropdown content (hidden by default) */
     .dropdown-content {
         display: none;
         position: absolute;
-        background-color: #f1f1f1;
+        background-color: #f9f9f9;
         min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
     }
-
         /* Links inside the dropdown */
-        .dropdown-content a {
+        .dropdown-content div {
+            float: none;
             color: black;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
+            text-align: left;
         }
 
-            /* Change color of dropdown links on hover */
-            .dropdown-content a:hover {
+            /* Add a grey background color to dropdown links on hover */
+            .dropdown-content div:hover {
                 background-color: #ddd;
             }
-
     /* Show the dropdown menu on hover */
     .dropdown:hover .dropdown-content {
         display: block;
     }
-
-    /* Change the background color of the dropdown button when the dropdown content is shown */
-    .dropdown:hover .dropbtn {
-        background-color: #3e8e41;
-    } 
+    /* Add a red background color to navbar links on hover */
+    .navbar .dropdown:hover .dropbtn {
+        background-color: #cbedff;
+    }
 </style>

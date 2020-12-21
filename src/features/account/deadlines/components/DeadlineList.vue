@@ -1,8 +1,13 @@
 ﻿<template>
-    <input type="text" placeholder="Поиск" v-model.trim="findStr" />
+    <form class="example" @submit.prevent="">
+        <input type="text" placeholder="Поиск" v-model.trim="findStr">
+    </form>
     <br />
-    <input type="checkbox" v-model="hideCompleted" />Скрыть выполненные
-    <br />
+    <label class="container">
+        Скрыть выполненные
+        <input type="checkbox" v-model="hideCompleted">
+        <span class="checkmark"></span>
+    </label>
     <button @click="save()" v-if="isChanged">Сохранить</button>
     <div v-if="list.length==0 && !isLoading && !isSaving">Дедлайнов нет:(</div>
     <div class="deadlineList">
@@ -18,17 +23,8 @@
                   :importance="deadline.importance"
                   :completed="deadline.completed"
                   :pinned="deadline.pinned" />
-        <div class="text">{{textLoading}}</div>
-        <div id="circularG" v-show="isLoading || isSaving">
-            <div id="circularG_1" class="circularG"></div>
-            <div id="circularG_2" class="circularG"></div>
-            <div id="circularG_3" class="circularG"></div>
-            <div id="circularG_4" class="circularG"></div>
-            <div id="circularG_5" class="circularG"></div>
-            <div id="circularG_6" class="circularG"></div>
-            <div id="circularG_7" class="circularG"></div>
-            <div id="circularG_8" class="circularG"></div>
-        </div>
+        <loadingAnim :showing="textLoading != ''" />
+
     </div>
 
 </template>
@@ -37,6 +33,7 @@
     import { defineComponent } from "vue";
     import deadline from "@/features/account/deadlines/components/Deadline.vue"
     import Deadline from "@/domain/account/deadlines/model/deadline";
+    import loadingAnim from "@/features/common/components/lodingAnimation.vue"
 
     const deadlineList = defineComponent({
         props: {
@@ -53,7 +50,8 @@
             }
         },
         components: {
-            deadline
+            deadline,
+            loadingAnim
         },
         methods: {
             removeFromList(id: number) {
@@ -122,178 +120,94 @@
 <style scoped>
 
     #text {
-        display:inline-block
+        display: inline-block;
+        vertical-align: middle;
     }
 
-    #circularG {
+    .example {
+        text-align: right;
+    }
+
+    form.example input[type=text] {
+        padding: 10px;
+        font-size: 17px;
+        border: 1px solid grey;
+        min-width: 300px;
+        float: left;
+        background: #f1f1f1;
+    }
+
+    form.example::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .container {
+        display: block;
         position: relative;
-        width: 28px;
-        height: 28px;
-        margin:inherit;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
-    
 
-    .circularG {
+        /* Hide the browser's default checkbox */
+        .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+    /* Create a custom checkbox */
+    .checkmark {
         position: absolute;
-        background-color: rgb(0,0,0);
-        width: 7px;
-        height: 7px;
-        border-radius: 4px;
-        -o-border-radius: 4px;
-        -ms-border-radius: 4px;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        animation-name: bounce_circularG;
-        -o-animation-name: bounce_circularG;
-        -ms-animation-name: bounce_circularG;
-        -webkit-animation-name: bounce_circularG;
-        -moz-animation-name: bounce_circularG;
-        animation-duration: 1.1s;
-        -o-animation-duration: 1.1s;
-        -ms-animation-duration: 1.1s;
-        -webkit-animation-duration: 1.1s;
-        -moz-animation-duration: 1.1s;
-        animation-iteration-count: infinite;
-        -o-animation-iteration-count: infinite;
-        -ms-animation-iteration-count: infinite;
-        -webkit-animation-iteration-count: infinite;
-        -moz-animation-iteration-count: infinite;
-        animation-direction: normal;
-        -o-animation-direction: normal;
-        -ms-animation-direction: normal;
-        -webkit-animation-direction: normal;
-        -moz-animation-direction: normal;
-    }
-
-    #circularG_1 {
-        left: 0;
-        top: 11px;
-        animation-delay: 0.41s;
-        -o-animation-delay: 0.41s;
-        -ms-animation-delay: 0.41s;
-        -webkit-animation-delay: 0.41s;
-        -moz-animation-delay: 0.41s;
-    }
-
-    #circularG_2 {
-        left: 3px;
-        top: 3px;
-        animation-delay: 0.55s;
-        -o-animation-delay: 0.55s;
-        -ms-animation-delay: 0.55s;
-        -webkit-animation-delay: 0.55s;
-        -moz-animation-delay: 0.55s;
-    }
-
-    #circularG_3 {
         top: 0;
-        left: 11px;
-        animation-delay: 0.69s;
-        -o-animation-delay: 0.69s;
-        -ms-animation-delay: 0.69s;
-        -webkit-animation-delay: 0.69s;
-        -moz-animation-delay: 0.69s;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
     }
 
-    #circularG_4 {
-        right: 3px;
-        top: 3px;
-        animation-delay: 0.83s;
-        -o-animation-delay: 0.83s;
-        -ms-animation-delay: 0.83s;
-        -webkit-animation-delay: 0.83s;
-        -moz-animation-delay: 0.83s;
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+        background-color: #ccc;
     }
 
-    #circularG_5 {
-        right: 0;
-        top: 11px;
-        animation-delay: 0.97s;
-        -o-animation-delay: 0.97s;
-        -ms-animation-delay: 0.97s;
-        -webkit-animation-delay: 0.97s;
-        -moz-animation-delay: 0.97s;
+    /* When the checkbox is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+        background-color: #2196F3;
     }
 
-    #circularG_6 {
-        right: 3px;
-        bottom: 3px;
-        animation-delay: 1.1s;
-        -o-animation-delay: 1.1s;
-        -ms-animation-delay: 1.1s;
-        -webkit-animation-delay: 1.1s;
-        -moz-animation-delay: 1.1s;
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
     }
 
-    #circularG_7 {
-        left: 11px;
-        bottom: 0;
-        animation-delay: 1.24s;
-        -o-animation-delay: 1.24s;
-        -ms-animation-delay: 1.24s;
-        -webkit-animation-delay: 1.24s;
-        -moz-animation-delay: 1.24s;
+    /* Show the checkmark when checked */
+    .container input:checked ~ .checkmark:after {
+        display: block;
     }
 
-    #circularG_8 {
-        left: 3px;
-        bottom: 3px;
-        animation-delay: 1.38s;
-        -o-animation-delay: 1.38s;
-        -ms-animation-delay: 1.38s;
-        -webkit-animation-delay: 1.38s;
-        -moz-animation-delay: 1.38s;
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
     }
 
-
-
-    @keyframes bounce_circularG {
-        0% {
-            transform: scale(1);
-        }
-
-        100% {
-            transform: scale(.3);
-        }
-    }
-
-    @-o-keyframes bounce_circularG {
-        0% {
-            -o-transform: scale(1);
-        }
-
-        100% {
-            -o-transform: scale(.3);
-        }
-    }
-
-    @-ms-keyframes bounce_circularG {
-        0% {
-            -ms-transform: scale(1);
-        }
-
-        100% {
-            -ms-transform: scale(.3);
-        }
-    }
-
-    @-webkit-keyframes bounce_circularG {
-        0% {
-            -webkit-transform: scale(1);
-        }
-
-        100% {
-            -webkit-transform: scale(.3);
-        }
-    }
-
-    @-moz-keyframes bounce_circularG {
-        0% {
-            -moz-transform: scale(1);
-        }
-
-        100% {
-            -moz-transform: scale(.3);
-        }
-    }
 </style>
