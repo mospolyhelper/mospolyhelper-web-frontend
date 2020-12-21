@@ -20,6 +20,9 @@ export default class AuthApi {
                 sessionId: sessionId
             }
         );
+        console.log(login);
+        console.log(sessionId);
+        console.log(response.result);
         return response.result;
     }
 }
