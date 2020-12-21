@@ -1,10 +1,11 @@
 <template>
-    <div>
-        <router-link :to="to"
-                     class="nav-link"
-                     v-bind:class="active ? 'font-weighted-bold' : null">
-            <slot />
-        </router-link>
+    <div class="nav-link-div">
+        <div class="nav-link-center">
+            <router-link :to="to"
+                         class="nav-link">
+                <slot />
+            </router-link>
+        </div>
     </div>
 </template>
 
@@ -35,10 +36,25 @@
 </script>
 
 <style scoped>
-    .nav-link {
-        font-size: 22px;
-        text-decoration: none;
-        color: cadetblue;
-        margin: 0 6px;
+    .nav-link-center {
+        margin: 0;
+        position: relative;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        margin: auto 15px;
     }
+    .nav-link {      
+        font-size: 20px;
+        text-decoration: none;
+        color: #918b8f;
+    }
+    .nav-link-div {
+        text-align: center;
+        height: 50px;
+        float: left;
+    }
+        .nav-link-div:hover {
+            background-color: #cbedff;
+        }
 </style>

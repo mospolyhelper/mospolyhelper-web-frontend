@@ -22,4 +22,20 @@ export default App;
 .font-weighted-bold {
     font-weight: bold;
 }
+    html {
+        height: 100%;
+        margin: 0px !important;
+        padding: 0px !important;
+    }
+    body {
+        font-family: sans-serif;
+        height: 100%;
+        margin: 0px !important;
+        padding: 0px !important;
+        background-color: #eaeef7;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: auto;
+        background-attachment: fixed;
+    }
 </style>
