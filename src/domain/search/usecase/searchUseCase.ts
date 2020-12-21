@@ -5,7 +5,7 @@ import SearchResult from '../model/SearchResult';
 export default class SearchUseCase {
     private repository = new SearchRepository();
 
-    searchByQuery(query: String, page: number): Promise<SearchResult | null> {
+    searchByQuery(query: string, page: number): Promise<SearchResult | null> {
         return this.repository.searchByQuery(query, page);
     }
 

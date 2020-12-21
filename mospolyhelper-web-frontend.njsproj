@@ -35,6 +35,7 @@
     <Content Include="public\android-chrome-192x192.png" />
     <Content Include="public\android-chrome-512x512.png" />
     <Content Include="public\apple-touch-icon.png" />
+    <Content Include="src\assets\background.jpg" />
     <Content Include="public\browserconfig.xml" />
     <Content Include="public\favicon-16x16.png" />
     <Content Include="public\favicon-32x32.png" />
@@ -43,19 +44,37 @@
     <Content Include="public\mstile-150x150.png" />
     <Content Include="public\safari-pinned-tab.svg" />
     <Content Include="public\site.webmanifest" />
+    <Content Include="src\features\account\auth\views\Auth.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\account\marks\components\MarkCourse.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\account\marks\components\MarkElement.vue" />
+    <Content Include="src\features\account\marks\components\MarkSemestr.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\account\marks\components\MarkList.vue" />
+    <Content Include="src\features\account\marks\views\Marks.vue" />
+    <Content Include="src\features\account\classmates\components\SearchElement.vue" />
+    <Content Include="src\features\account\classmates\components\SearchList.vue" />
+    <Content Include="src\features\account\classmates\views\Classmates.vue" />
     <Content Include="src\features\App.vue" />
     <Content Include="src\features\common\components\Header.vue" />
     <Content Include="src\features\common\components\HeaderLink.vue" />
-    <Content Include="src\features\deadlines\components\Deadline.vue">
+    <Content Include="src\features\account\deadlines\components\Deadline.vue">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\features\deadlines\components\DeadlineList.vue">
+    <Content Include="src\features\account\deadlines\components\DeadlineList.vue">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\features\deadlines\components\FormDeadline.vue">
+    <Content Include="src\features\account\deadlines\components\FormDeadline.vue">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="src\features\deadlines\views\Deadlines.vue">
+    <Content Include="src\features\common\components\lodingAnimation.vue">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="src\features\account\deadlines\views\Deadlines.vue">
       <SubType>Code</SubType>
     </Content>
     <Content Include="src\features\home\views\Home.vue" />
@@ -87,6 +106,9 @@
     <Content Include="src\features\search\views\Search.vue">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="src\features\account\teachersSearch\components\SearchElement.vue" />
+    <Content Include="src\features\account\teachersSearch\components\SearchList.vue" />
+    <Content Include="src\features\account\teachersSearch\views\TeachersSearch.vue" />
     <Content Include="tsconfig.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -94,6 +116,28 @@
   <ItemGroup>
     <Folder Include="public\" />
     <Folder Include="src\" />
+    <Folder Include="src\data\account\" />
+    <Folder Include="src\data\account\auth\" />
+    <Folder Include="src\data\account\auth\api\" />
+    <Folder Include="src\data\account\auth\local\" />
+    <Folder Include="src\data\account\auth\repository\" />
+    <Folder Include="src\data\account\auth\remote\" />
+    <Folder Include="src\data\account\marks\" />
+    <Folder Include="src\data\account\marks\api\" />
+    <Folder Include="src\data\account\marks\remote\" />
+    <Folder Include="src\data\account\marks\repository\" />
+    <Folder Include="src\data\account\classmates\" />
+    <Folder Include="src\data\account\classmates\api\" />
+    <Folder Include="src\data\account\classmates\remote\" />
+    <Folder Include="src\data\account\classmates\repository\" />
+    <Folder Include="src\data\account\deadlines\" />
+    <Folder Include="src\data\account\deadlines\api\" />
+    <Folder Include="src\data\account\deadlines\local\" />
+    <Folder Include="src\data\account\deadlines\repository\" />
+    <Folder Include="src\data\account\deadlines\remote\" />
+    <Folder Include="src\data\common\" />
+    <Folder Include="src\data\common\local\" />
+    <Folder Include="src\data\common\repository\" />
     <Folder Include="src\data\schedule\" />
     <Folder Include="src\data\schedule\api\" />
     <Folder Include="src\data\schedule\remote\" />
@@ -102,10 +146,25 @@
     <Folder Include="src\data\search\api\" />
     <Folder Include="src\data\search\remote\" />
     <Folder Include="src\data\search\repository\" />
-    <Folder Include="src\domain\deadlines\" />
-    <Folder Include="src\domain\deadlines\model\" />
-    <Folder Include="src\domain\deadlines\usecase\" />
-    <Folder Include="src\domain\deadlines\repository\" />
+    <Folder Include="src\data\account\teachersSearch\" />
+    <Folder Include="src\data\account\teachersSearch\api\" />
+    <Folder Include="src\data\account\teachersSearch\remote\" />
+    <Folder Include="src\data\account\teachersSearch\repository\" />
+    <Folder Include="src\domain\account\auth\repository\" />
+    <Folder Include="src\domain\account\auth\usecase\" />
+    <Folder Include="src\domain\account\classmates\" />
+    <Folder Include="src\domain\account\classmates\model\" />
+    <Folder Include="src\domain\account\classmates\usecase\" />
+    <Folder Include="src\domain\account\deadlines\" />
+    <Folder Include="src\domain\account\deadlines\model\" />
+    <Folder Include="src\domain\account\deadlines\usecase\" />
+    <Folder Include="src\domain\account\marks\" />
+    <Folder Include="src\domain\account\marks\model\" />
+    <Folder Include="src\domain\account\marks\usecase\" />
+    <Folder Include="src\domain\account\auth\" />
+    <Folder Include="src\domain\account\" />
+    <Folder Include="src\domain\common\" />
+    <Folder Include="src\domain\common\repository\" />
     <Folder Include="src\domain\schedule\" />
     <Folder Include="src\domain\schedule\model\" />
     <Folder Include="src\domain\schedule\utils\" />
@@ -115,6 +174,17 @@
     <Folder Include="src\domain\search\model\" />
     <Folder Include="src\domain\search\repository\" />
     <Folder Include="src\domain\search\usecase\" />
+    <Folder Include="src\domain\account\teachersSearch\" />
+    <Folder Include="src\domain\account\teachersSearch\model\" />
+    <Folder Include="src\domain\account\teachersSearch\usecase\" />
+    <Folder Include="src\features\account\auth\" />
+    <Folder Include="src\features\account\auth\views\" />
+    <Folder Include="src\features\account\marks\" />
+    <Folder Include="src\features\account\marks\components\" />
+    <Folder Include="src\features\account\marks\views\" />
+    <Folder Include="src\features\account\classmates\" />
+    <Folder Include="src\features\account\classmates\components\" />
+    <Folder Include="src\features\account\classmates\views\" />
     <Folder Include="src\features\common\assets\" />
     <Folder Include="src\features\common\components\" />
     <Folder Include="src\features\" />
@@ -122,11 +192,12 @@
     <Folder Include="src\domain\" />
     <Folder Include="src\di\" />
     <Folder Include="src\features\common\" />
-    <Folder Include="src\features\deadlines\components\" />
-    <Folder Include="src\features\deadlines\views\" />
+    <Folder Include="src\features\account\deadlines\components\" />
+    <Folder Include="src\features\account\deadlines\views\" />
     <Folder Include="src\features\home\" />
     <Folder Include="src\features\home\views\" />
-    <Folder Include="src\features\deadlines\" />
+    <Folder Include="src\features\account\deadlines\" />
+    <Folder Include="src\features\account\" />
     <Folder Include="src\features\search\" />
     <Folder Include="src\features\schedule\" />
     <Folder Include="src\features\common\router\" />
@@ -135,6 +206,11 @@
     <Folder Include="src\features\common\views\" />
     <Folder Include="src\features\search\components\" />
     <Folder Include="src\features\search\views\" />
+    <Folder Include="src\features\account\teachersSearch\" />
+    <Folder Include="src\features\account\teachersSearch\components\" />
+    <Folder Include="src\features\account\teachersSearch\views\" />
+    <Folder Include="src\assets\" />
+    <Folder Include="src\utils\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\features\main.ts" />
@@ -144,6 +220,37 @@
     <Content Include="babel.config.js" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="src\data\account\auth\api\authApi.ts" />
+    <TypeScriptCompile Include="src\data\account\auth\local\authLocalDataSource.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\account\auth\remote\authRemoteDataSource.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\account\auth\repository\authRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\account\marks\api\searchApi.ts" />
+    <TypeScriptCompile Include="src\data\account\marks\remote\searchRemoteDataSource.ts" />
+    <TypeScriptCompile Include="src\data\account\marks\repository\searchRepository.ts" />
+    <TypeScriptCompile Include="src\data\account\classmates\api\searchApi.ts" />
+    <TypeScriptCompile Include="src\data\account\classmates\remote\searchRemoteDataSource.ts" />
+    <TypeScriptCompile Include="src\data\account\classmates\repository\searchRepository.ts" />
+    <TypeScriptCompile Include="src\data\account\deadlines\api\apiDeadlines.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\account\deadlines\remote\deadlinesRemoteDataSource.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\account\deadlines\repository\deadlinesRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\common\local\storageLocalDataSource.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\data\common\repository\preferencesRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\data\schedule\api\scheduleApi.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -162,13 +269,33 @@
     <TypeScriptCompile Include="src\data\search\repository\searchRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\domain\deadlines\model\deadline.ts">
+    <TypeScriptCompile Include="src\data\account\teachersSearch\api\searchApi.ts" />
+    <TypeScriptCompile Include="src\data\account\teachersSearch\remote\searchRemoteDataSource.ts" />
+    <TypeScriptCompile Include="src\data\account\teachersSearch\repository\searchRepository.ts" />
+    <TypeScriptCompile Include="src\domain\account\auth\repository\authRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\domain\deadlines\repository\deadlinesRepository.ts">
+    <TypeScriptCompile Include="src\domain\account\auth\usecase\authUseCase.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="src\domain\deadlines\usecase\deadlinesUseCase.ts">
+    <TypeScriptCompile Include="src\domain\account\classmates\model\SearchEntity.ts" />
+    <TypeScriptCompile Include="src\domain\account\classmates\usecase\searchUseCase.ts" />
+    <TypeScriptCompile Include="src\data\account\deadlines\local\deadlinesLocalRepository.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\account\deadlines\model\deadline.ts" />
+    <TypeScriptCompile Include="src\domain\account\marks\model\marks.ts" />
+    <TypeScriptCompile Include="src\domain\account\marks\model\predmet.ts" />
+    <TypeScriptCompile Include="src\domain\account\marks\usecase\marksUseCase.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\account\deadlines\model\myPortfolio.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\account\deadlines\usecase\deadlinesUseCase.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\common\repository\storageRepository.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\schedule\model\auditorium.ts">
@@ -209,8 +336,20 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\search\usecase\searchUseCase.ts" />
+    <TypeScriptCompile Include="src\domain\account\teachersSearch\model\SearchEntity.ts" />
+    <TypeScriptCompile Include="src\domain\account\teachersSearch\model\SearchResult.ts" />
+    <TypeScriptCompile Include="src\domain\account\teachersSearch\usecase\searchUseCase.ts" />
     <TypeScriptCompile Include="src\features\common\router\router.ts" />
     <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\utils\cookieUtils.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\utils\result.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="src\utils\unauthorizedAccessError.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

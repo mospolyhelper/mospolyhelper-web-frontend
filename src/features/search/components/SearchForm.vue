@@ -1,9 +1,9 @@
 ﻿<template>
     <button  @click="isVisible=!isVisible">Дополнительные параметры поиска</button>
     <form class="searchForm" @submit.prevent="send" v-if="isVisible">
-        <input type="text" placeholder="Направление" v-model.trim="direction" /> <br />
-        <input type="text" placeholder="Профиль" v-model.trim="profile" /><br />
-        <input type="text" placeholder="Группа" v-model.trim="group" /><br />
+        <input type="text" placeholder="Направление" v-model.trim.lazy="direction" /> <br />
+        <input type="text" placeholder="Профиль" v-model.trim.lazy="profile" /><br />
+        <input type="text" placeholder="Группа" v-model.trim.lazy="group" /><br />
         <input type="checkbox" v-model="course" value="1" />1 курс<br />
         <input type="checkbox" v-model="course" value="2" />2 курс<br />
         <input type="checkbox" v-model="course" value="3" />3 курс<br />
@@ -26,6 +26,7 @@
         props: {
             isSearch: Boolean,
         },
+        emits: ["applied", "applyFilter", "stopSearch"],
         data() {
             return {
                 isVisible: false,
@@ -39,7 +40,7 @@
         methods: {
             send() {
                 console.log("applied", this.direction, this.profile, this.group, this.course, this.form);
-                this.$emit('applyFilter', this.direction, this.profile, this.group, this.course, this.form);
+                this.$emit("applyFilter", this.direction, this.profile, this.group, this.course, this.form);
             }
         }
     });

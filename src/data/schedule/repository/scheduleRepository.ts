@@ -4,16 +4,16 @@ import ScheduleRemoteDataSource from '../remote/scheduleRemoteDataSource'
 export default class ScheduleRepository {
     private remoteDataSource = new ScheduleRemoteDataSource();
 
-    getScheduleByGroup(group: String): Promise<Schedule | null> {
+    getScheduleByGroup(group: string): Promise<Schedule | null> {
         return this.remoteDataSource.getScheduleByGroup(group);
     }
 
     async getSchedule(
-        groupList: Array<String>,
-        teacherList: Array<String>,
-        auditoriumList: Array<String>,
-        titleList: Array<String>,
-        typeList: Array<String>
+        groupList: Array<string>,
+        teacherList: Array<string>,
+        auditoriumList: Array<string>,
+        titleList: Array<string>,
+        typeList: Array<string>
     ): Promise<Schedule | null> {
         return this.remoteDataSource.getSchedule(
             groupList,
