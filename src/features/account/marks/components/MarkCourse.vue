@@ -1,6 +1,6 @@
 ﻿<template>
-    <div>
-        <div class="course">{{course}} курс</div>
+    <div class="courseBlock">
+        <div class="course">{{course}} курс</div> <br />
         <markSemestr v-for="(value, index) in list"
                        :searchList="value"
                        :number="index" />
@@ -36,6 +36,11 @@
 </script>
 
 <style scoped>
+    .courseBlock {
+        display: inline-block;
+        vertical-align:top;
+    }
+
     .course {
         background: #d1eafd;
         color: #4985a3;
@@ -44,6 +49,6 @@
         margin-right: 2px;
         padding: 6px;
         border-radius: 10px;
-        display: inline-block;
+        text-align: center;
     }
 </style>

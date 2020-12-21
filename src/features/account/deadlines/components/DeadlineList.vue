@@ -1,8 +1,13 @@
 ﻿<template>
-    <input type="text" placeholder="Поиск" v-model.trim="findStr" />
+    <form class="example" @submit.prevent="">
+        <input type="text" placeholder="Поиск" v-model.trim="findStr">
+    </form>
     <br />
-    <input type="checkbox" v-model="hideCompleted" />Скрыть выполненные
-    <br />
+    <label class="container">
+        Скрыть выполненные
+        <input type="checkbox" v-model="hideCompleted">
+        <span class="checkmark"></span>
+    </label>
     <button @click="save()" v-if="isChanged">Сохранить</button>
     <div v-if="list.length==0 && !isLoading && !isSaving">Дедлайнов нет:(</div>
     <div class="deadlineList">
@@ -18,8 +23,8 @@
                   :importance="deadline.importance"
                   :completed="deadline.completed"
                   :pinned="deadline.pinned" />
-        <div class="text"><loadingAnim :showing="textLoading != ''" />{{textLoading}}</div>
-        
+        <loadingAnim :showing="textLoading != ''" />
+
     </div>
 
 </template>
@@ -117,6 +122,92 @@
     #text {
         display: inline-block;
         vertical-align: middle;
+    }
+
+    .example {
+        text-align: right;
+    }
+
+    form.example input[type=text] {
+        padding: 10px;
+        font-size: 17px;
+        border: 1px solid grey;
+        min-width: 300px;
+        float: left;
+        background: #f1f1f1;
+    }
+
+    form.example::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        /* Hide the browser's default checkbox */
+        .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+        left: 9px;
+        top: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
     }
 
 </style>

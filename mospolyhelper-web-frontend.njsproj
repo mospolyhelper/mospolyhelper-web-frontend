@@ -193,7 +193,6 @@
     <Folder Include="src\di\" />
     <Folder Include="src\features\common\" />
     <Folder Include="src\features\account\deadlines\components\" />
-    <Folder Include="src\features\deadlines\" />
     <Folder Include="src\features\account\deadlines\views\" />
     <Folder Include="src\features\home\" />
     <Folder Include="src\features\home\views\" />

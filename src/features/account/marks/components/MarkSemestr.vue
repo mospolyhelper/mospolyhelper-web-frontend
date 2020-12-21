@@ -37,6 +37,11 @@
 </script>
 
 <style scoped>
+    .searchList {
+        display: inline-block;
+        vertical-align: top;
+    }
+
     .semester {
         background: #66CDAA;
         color: #4985a3;
@@ -45,7 +50,7 @@
         margin-right: 2px;
         padding: 6px;
         border-radius: 10px;
-        display: inline-block;
+        text-align:center;
     }
 
 </style>
