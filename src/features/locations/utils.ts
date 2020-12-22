@@ -42,7 +42,7 @@ export const CENTER_OF_MOSCOW: LatLng = {
 export const DEFAULT_MAP_SETTINGS: MapSettings = {
     apiKey: '8239b260-067a-4165-a7a4-e64e5d0c4bd2',
     lang: Lang.RU,
-    load: "Map,Placemark,Balloon,GeoObjectCollection",
+    load: "package.full",
     center: CENTER_OF_MOSCOW,
     zoom: 11
 };

@@ -16,8 +16,8 @@ const dummyLocations: Locations = {
             title: "пися 2",
             description: "подробности про писю 2",
             coordinates: {
-                latitude: 55.694843,
-                longitude: 37.435023
+                latitude: 55.68843,
+                longitude: 37.75023
             }
         }
     ],

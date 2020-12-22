@@ -1,7 +1,5 @@
 <template>
-    <!--    <div class="map">-->
-    <YandexMap />
-    <!--    </div>-->
+    <YandexMap :markers="locations" />
 </template>
 
 <script lang="ts">
@@ -19,9 +17,12 @@ import {
 const Locations = defineComponent({
     components: { YandexMap },
     setup() {
-        // const locations = ref<Locations>({});
-        // getLocations().then(data => locations.value = data);
-        // return { locations };
+        const locations = ref<Locations>({});
+        getLocations().then(data => {
+            locations.value = data;
+            console.log("got new locations:", data);
+        });
+        return { locations };
     }
 });
 

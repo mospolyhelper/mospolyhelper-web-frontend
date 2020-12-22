@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, PropType, ref, watch } from "vue";
+import { defineComponent, onMounted, PropType, ref, watch, watchEffect } from "vue";
 import {
     coordsToArray,
     DEFAULT_MAP_SETTINGS,
@@ -15,10 +15,13 @@ import {
 import { BasePin, Campus, Locations } from "@/domain/locations/model/Locations";
 import getLocations from "@/data/locations/repository/locationsRepository";
 import { computed } from "@vue/reactivity";
+import { collection } from "yandex-maps";
 
 type YandexMapProps = MapSettings & {
     markers: Locations;
 };
+
+let map: ymaps.Map | null = null;
 
 const YandexMap = defineComponent({
     props: {
@@ -36,77 +39,63 @@ const YandexMap = defineComponent({
         markers: { type: Object as PropType<Locations>, default: {} }
     },
     setup(props: YandexMapProps) {
-        const map = ref<ymaps.Map | null>(null);
-        const pins = ref<Locations>(props.markers);
-
-        watch(map, (map, prev) => {
-            console.log("locations updated", props.markers);
-
-            prev?.destroy();
-            // const pin = new ymaps.Placemark([55.75396, 37.620393], {}, { visible: true });
-            // let pins: BasePin[] = [];
-            // if (props.markers.campuses) pins.push(...props.markers.campuses)
-            // if (props.markers.gyms) pins.push(...props.markers.gyms)
-            // if (props.markers.hostels) pins.push(...props.markers.hostels)
-            //
-            // pins.forEach(pin => {
-            //     const placemark = toPlacemark(pin);
-            //     map?.geoObjects.add(placemark);
-            // });
-            getLocations().then(data => {
-                pins.value = data;
-                console.log("got new locations:", data);
-            });
-        });
-
-        watch(pins, (newPins, prevPins) => {
-            // const newPins = pins.value
-            if (!newPins.campuses) return;
-            console.log("updPins =", newPins.campuses);
-
-            const testPin: Campus = newPins.campuses[0];
-            const mark = new ymaps.Placemark(
-                coordsToArray(testPin.coordinates),
-                {}
-            );
-            map.value?.geoObjects.add(mark);
-
-            // if (!newPins.gyms) return;
-            // const testPin2: Campus = newPins.gyms[0];
-            // const mark2 = new ymaps.Placemark(
-            //     coordsToArray(testPin2.coordinates),
-            //     {}
-            // );
-            // map.value?.geoObjects.add(mark2);
-
-            // if (!newPins.hostels) return;
-            // const testPin3: Campus = newPins.hostels[0];
-            // const mark3 = new ymaps.Placemark(
-            //     coordsToArray(testPin.coordinates),
-            //     {}
-            // );
-            // map.value?.geoObjects.add(mark3);
-        });
-
         onMounted(() => {
             mapLoader(DEFAULT_MAP_SETTINGS).then(() => {
                 const { center, zoom } = props;
-                map.value = new ymaps.Map("yandex-map", {
+                map = new ymaps.Map("yandex-map", {
                     center: [center.latitude, center.longitude],
                     zoom: zoom
+                });
+                console.log('map initialized');
+
+                watchEffect(() => {
+                    console.log('markers in props changes observed');
+                    map?.geoObjects.removeAll();
+                    convertToPlacemarks(props.markers).forEach(collection => map?.geoObjects.add(collection));
                 });
             });
         });
     }
 });
 
-// function toPlacemark(marker: BasePin): ymaps.Placemark {
-//     return new ymaps.Placemark(coordsToArray(marker.coordinates), {
-//         hintContent: marker.title,
-//         balloonContentHeader: marker.title,
-//         balloonContentBody: marker.description
-//     });
-// }
+const campusesOptions = {
+    preset: 'islands#blueEducationCircleIcon'
+}
+
+const gymsOptions = {
+    preset: 'islands#blueSportCircleIcon'
+}
+
+const hostelsOptions = {
+    preset: 'islands#blueHomeCircleIcon'
+}
+/**
+ * 
+ * BE CAREFUL! Invoke only if yandex map's script has already loaded
+ */
+function convertToPlacemarks(locations: Locations): ymaps.GeoObjectCollection[] {
+    const campusesCollection = new ymaps.GeoObjectCollection(undefined, campusesOptions);
+    const gymsCollection = new ymaps.GeoObjectCollection(undefined, gymsOptions);
+    const hostelsCollection = new ymaps.GeoObjectCollection(undefined, hostelsOptions);
+
+    locations.campuses?.forEach(campus => campusesCollection.add(toPlacemark(campus)));
+    locations.gyms?.forEach(gym => gymsCollection.add(toPlacemark(gym)));
+    locations.hostels?.forEach(hostel => hostelsCollection.add(toPlacemark(hostel)));
+    
+    return [
+        campusesCollection,
+        gymsCollection,
+        hostelsCollection
+    ];
+}
+
+function toPlacemark(marker: BasePin): ymaps.Placemark {
+    return new ymaps.Placemark(coordsToArray(marker.coordinates), {
+        hintContent: marker.title,
+        balloonContentHeader: marker.title,
+        balloonContentBody: marker.description
+    });
+}
 
 export default YandexMap;
 </script>
@@ -115,5 +104,6 @@ export default YandexMap;
 .map {
     height: 80vh;
     width: 80vw;
+    margin: 5% auto;
 }
 </style>
