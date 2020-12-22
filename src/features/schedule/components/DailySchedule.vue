@@ -1,6 +1,6 @@
 ﻿<template>
     <div class="dailySchedule">
-        <div>{{getDayOfWeek(date)}}</div>
+        <div class="dayOfWeek">{{getDayOfWeek(date)}}</div>
         <lesson v-for="(lesson, i) in dailySchedule"
                 :previousEqual="i != 0 && dailySchedule[i - 1].order == lesson.order"
                 :order="lesson.order"
@@ -35,7 +35,8 @@ import Lesson from '../../../domain/schedule/model/lesson';
             },
             getDayOfWeek(date: Date): string {
                 const moment = require('moment');
-                return moment(date).format('dddd');
+                const res = moment(date).format('dddd, DD MMM');
+                return res.charAt(0).toUpperCase() + res.slice(1);
             }
         }
     });
@@ -48,5 +49,11 @@ import Lesson from '../../../domain/schedule/model/lesson';
         flex-grow: 1;
         flex-shrink: 1;
         flex-basis: 0%;
+    }
+    .dayOfWeek {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
     }
 </style>

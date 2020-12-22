@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <Header />
-        <router-view />
+        <div id="main-view"> <router-view /></div>
     </div>
 </template>
 
@@ -37,5 +37,8 @@ export default App;
         background-repeat: no-repeat;
         background-size: auto;
         background-attachment: fixed;
+    }
+    #main-view {
+        margin-top: 60px;
     }
 </style>
