@@ -1,9 +1,13 @@
 ﻿import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import Home from "@/features/home/views/Home.vue";
 import Schedule from "@/features/schedule/views/Schedule.vue";
-import Deadlines from "@/features/deadlines/views/Deadlines.vue";
+import Deadlines from "@/features/account/deadlines/views/Deadlines.vue";
 import Search from "@/features/search/views/Search.vue";
 import Auth from "@/features/account/auth/views/Auth.vue";
+import AccountInfoPage from "@/features/account/info/views/AccountInfoPage.vue";
+import TeachersSearch from "@/features/account/teachersSearch/views/TeachersSearch.vue";
+import Classmates from "@/features/account/classmates/views/Classmates.vue";
+import Marks from "@/features/account/marks/views/Marks.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -15,7 +19,7 @@ const routes: Array<RouteRecordRaw> = [
         component: Schedule
     },
     {
-        path: "/deadlines",
+        path: "/account/deadlines",
         component: Deadlines
     },
     {
@@ -29,6 +33,22 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/locations",
         component: () => import("@/features/locations/views/Locations.vue")
+    },
+    {
+        path: "/account/info",
+        component: AccountInfoPage
+    },
+    {
+        path: "/account/teachersSearch",
+        component: TeachersSearch
+    },
+    {
+        path: "/account/classmates",
+        component: Classmates
+    },
+    {
+        path: "/account/marks",
+        component: Marks
     },
     {
         path: "/:pathMatch(.*)*",

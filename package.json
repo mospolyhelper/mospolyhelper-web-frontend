@@ -15,7 +15,6 @@
     "@soerenmartius/vue3-clipboard": "^0.1.0",
     "@types/yandex-maps": "^2.1.14",
     "axios": "^0.21.0",
-    "browserify-fs": "^1.0.0",
     "inversify": "^5.0.1",
     "moment": "^2.29.1",
     "typed-rest-client": "^1.8.0",
