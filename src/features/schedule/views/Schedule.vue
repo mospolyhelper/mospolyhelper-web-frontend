@@ -1,26 +1,37 @@
 <template>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="schedule">
-        <input v-model="group" />
-        <button @click="download">Загрузить</button>
-        Фильтр по дате: showEnded
-        <input type="checkbox" v-model="showEnded" />
-        showCurrent
-        <input type="checkbox" v-model="showCurrent" />
-        showNotStarted
-        <input type="checkbox" v-model="showNotStarted" />
+        <div class="search">
+            <input v-model="group" type="text" placeholder="Номер группы" />
+            <button class="searchBtn" @click="download"><i class="fa fa-search"></i></button>
+        </div>
         <br />
-        <button @click="setPreviousWeek">Предыдущая неделя</button>
-        <div>Неделя {{getFormattedDate(dates[0])}} - {{getFormattedDate(dates[6])}}</div>
-        <button @click="setNextWeek">Следующая неделя</button>
+        <br />
+        <br />
+        <div class="filters">
+            Фильтр по дате:<br />
+            <label><input type="checkbox" v-model="showEnded" />Закончившиеся</label><br />
+            <label><input type="checkbox" v-model="showCurrent" />Текущие</label><br />
+            <label><input type="checkbox" v-model="showNotStarted" />Неначавшиеся</label>
+        </div>
+        <div class="datesOuter">
+            <div class="dates">
+                <a class="prev" @click="setPreviousWeek">&#10094;</a>
+                <div class="dateText">Неделя {{getFormattedDate(dates[0])}} - {{getFormattedDate(dates[6])}}</div>
+                <a class="next" @click="setNextWeek">&#10095;</a>
+            </div>
+        </div>
 
         <weeklySchedule :dailySchedules="dailySchedules"
                         :dates="dates"></weeklySchedule>
-        <arraySelector :originalArray="groupList" @arrayChanged="groupListChanged" />
-        <arraySelector :originalArray="teacherList" @arrayChanged="teacherListChanged" />
-        <arraySelector :originalArray="auditoriumList" @arrayChanged="auditoriumListChanged" />
-        <arraySelector :originalArray="titleList" @arrayChanged="titleListChanged" />
-        <arraySelector :originalArray="typeList" @arrayChanged="typeListChanged" />
-        <button @click="advancedSearch">Поиск</button>
+        <p class="advancedSearchTitle">Продвинутый поиск</p>
+        <arraySelector v-if="groupList?.length" :originalArray="groupList" @arrayChanged="groupListChanged" />
+        <arraySelector v-if="teacherList?.length" :originalArray="teacherList" @arrayChanged="teacherListChanged" />
+        <arraySelector v-if="auditoriumList?.length" :originalArray="auditoriumList" @arrayChanged="auditoriumListChanged" />
+        <arraySelector v-if="titleList?.length" :originalArray="titleList" @arrayChanged="titleListChanged" />
+        <arraySelector v-if="typeList?.length" :originalArray="typeList" @arrayChanged="typeListChanged" />
+        <button v-if="groupList?.length || teacherList?.length || auditoriumList?.length || titleList?.length || typeList?.length" 
+                class="searchBtn" @click="advancedSearch"><i class="fa fa-search"></i></button>
     </div>
 
 </template>
@@ -190,4 +201,73 @@
 </script>
 
 <style scoped>
+    input[type=text] {
+        box-sizing: border-box;
+        padding: 10px;
+        font-size: 17px;
+        border: 0px;
+        float: left;
+        width: 80%;
+        background: #fff;
+    }
+
+    .searchBtn {
+        box-sizing: border-box;
+        float: left;
+        width: 20%;
+        padding: 10px;
+        background: #2196F3;
+        color: white;
+        font-size: 17px;
+        border: 0px;
+        cursor: pointer;
+    }
+
+    .searchBtn:hover {
+        background: #0b7dda;
+    }
+    .search {
+        padding-top: 20px;
+        box-sizing: border-box;
+        margin: auto;
+        max-width: 500px
+    }
+    .datesOuter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .dates {
+        margin-top: 20px;
+        display: inline-block;
+        margin: auto;
+    }
+    .dates > * {
+        display: inline-block;
+    }
+    .dateText {
+        font-size: 20px;
+    }
+    /* Next & previous buttons */
+    .prev, .next {
+        cursor: pointer;
+        width: auto;
+        padding: 16px;
+        margin-top: -22px;
+        color: #000;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+    }
+    /* On smaller screens, decrease text size */
+    @media only screen and (max-width: 300px) {
+        .prev, .next, .text {
+            font-size: 11px
+        }
+    }
+    .advancedSearchTitle {
+        font-size: 30px;
+    }
 </style>

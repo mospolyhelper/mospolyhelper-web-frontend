@@ -1,5 +1,5 @@
 ﻿<template>
-    <div class="navbar-outer">
+    <div class="navbar-outer" id="navbar-outer">
         <div class="navbar">
             <HeaderLink to="/" exact>Главная</HeaderLink>
             <HeaderLink to="/schedule">Расписание</HeaderLink>
@@ -9,6 +9,7 @@
                 <button class="dropbtn">Аккаунт</button>
                 <div class="dropdown-content">
                     <HeaderLink to="/account/auth">Авторизация</HeaderLink>
+                    <HeaderLink to="/account/info">Info</HeaderLink>
                     <HeaderLink to="/account/deadlines">Дедлайны</HeaderLink>
                     <HeaderLink to="/account/teachersSearch">Поиск преподавателей</HeaderLink>
                     <HeaderLink to="/account/classmates">Одногруппники</HeaderLink>
@@ -21,7 +22,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import HeaderLink from "./HeaderLink.vue";
+    import HeaderLink from "./HeaderLink.vue";
 
 const Header = defineComponent({
     components: {
@@ -89,5 +90,12 @@ export default Header;
     /* Add a red background color to navbar links on hover */
     .navbar .dropdown:hover .dropbtn {
         background-color: #cbedff;
+    }
+
+    #navbar-outer {
+        background-color: #333;
+        position: fixed; /* Set the navbar to fixed position */
+        top: 0; /* Position the navbar at the top of the page */
+        width: 100%; /* Full width */
     }
 </style>
