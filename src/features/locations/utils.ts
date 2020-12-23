@@ -5,16 +5,11 @@ export enum Lang {
     EN = "en_EN"
 }
 
-export type LatLng = {
-    latitude: number;
-    longitude: number;
-};
-
 export type MapSettings = {
     apiKey: string;
     lang: Lang;
     load: string;
-    center: LatLng;
+    center: Coords;
     zoom: number;
 };
 
@@ -34,13 +29,13 @@ export const addMapsScript: (settings: MapSettings) => HTMLScriptElement = ({
     return document.head.appendChild(mapsScript);
 };
 
-export const CENTER_OF_MOSCOW: LatLng = {
-    latitude: 55.75396,
-    longitude: 37.620393
+export const CENTER_OF_MOSCOW: Coords = {
+    lat: 55.75396,
+    lng: 37.620393
 };
 
 export const DEFAULT_MAP_SETTINGS: MapSettings = {
-    apiKey: '8239b260-067a-4165-a7a4-e64e5d0c4bd2',
+    apiKey: "8239b260-067a-4165-a7a4-e64e5d0c4bd2",
     lang: Lang.RU,
     load: "package.full",
     center: CENTER_OF_MOSCOW,
@@ -57,4 +52,4 @@ export const mapLoader = (settings: MapSettings) =>
         ymScript.onerror = reject;
     });
 
-export const coordsToArray = (coords: Coords) => [coords.latitude, coords.longitude];
+export const coordsToArray = (coords: Coords) => [coords.lat, coords.lng];

@@ -1,6 +1,11 @@
-import { Locations } from "@/domain/locations/model/Locations";
-import getDummyLocations from "@/data/locations/local/locationsLocalDataSource";
+﻿import Locations from "@/domain/locations/model/Locations";
+import Result from "@/utils/result";
+import LocationsRemoteDataSource from "../remote/locationsRemoteDataSource";
 
-export default function getLocations(): Promise<Locations> {
-    return getDummyLocations()
+export default class LocationsRepository {
+    private remoteDataSource = new LocationsRemoteDataSource();
+
+    getLocations(): Promise<Result<Locations>> {
+        return this.remoteDataSource.getLocations();
+    }
 }

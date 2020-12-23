@@ -6,40 +6,36 @@
 import { defineComponent, onMounted, ref, watch } from "vue";
 import YandexMap from "@/features/locations/components/YandexMap.vue";
 import getLocations from "@/data/locations/repository/locationsRepository";
+import LocationsUseCase from "@/domain/locations/usecase/locationsUseCase";
 import {
+    Addresses,
     Campus,
     Coords,
     Gym,
-    Hostel,
-    Locations
+    Hostel
 } from "@/domain/locations/model/Locations";
+import Locations from "@/domain/locations/model/Locations";
+
+const useCase = new LocationsUseCase();
 
 const Locations = defineComponent({
     components: { YandexMap },
     setup() {
-        const locations = ref<Locations>({});
-        getLocations().then(data => {
-            locations.value = data;
-            console.log("got new locations:", data);
+        const locations = ref<Addresses>({});
+        useCase.getLocations().then(data => {
+            console.log('locations loaded', data.tostring());
+            
+            const addresses = data.getOrNull()?.addresses;
+            if (addresses) {
+                locations.value = addresses;
+            } else {
+                // todo: display an error
+                console.log('there is an error or addresses are null.', 'Error is', data.errorOrNull);
+            }
         });
         return { locations };
     }
 });
-
-// function campusToGeoObject(campus: Campus): ymaps.GeoObject {
-//     return new ymaps.Placemark(coordsToArray(campus.coordinates), {});
-// }
-//
-// function gymToGeoObject(gym: Gym): ymaps.GeoObject {
-//     return new ymaps.Placemark(coordsToArray(gym.coordinates), {});
-// }
-//
-// function hostelToGeoObject(hostel: Hostel): ymaps.GeoObject {
-//     return new ymaps.Placemark(coordsToArray(hostel.coordinates), {});
-// }
-//
-// const coordsToArray = (coords: Coords) => [coords.latitude, coords.longitude];
-
 export default Locations;
 </script>
 
