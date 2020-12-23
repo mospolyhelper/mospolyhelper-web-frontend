@@ -8,6 +8,7 @@
     <searchForm v-on:applyFilter="advancedSearch"
                 v-on:stopSearch="isSearching=false"
                 :isSearch="isSearching" />
+    <br />
     <searchList :searchList="searchRes"
                 :isLoading="isLoading">
     </searchList>
@@ -22,7 +23,6 @@
     import searchForm from "@/features/search/components/SearchForm.vue";
     import SearchUseCase from "@/domain/search/usecase/searchUseCase";
     import SearchEntity from "../../../domain/search/model/SearchEntity";
-    //import BootstrapVue from 'bootstrap-vue'
     import SearchResult from "../../../domain/search/model/SearchResult";
 
     let useCase = new SearchUseCase();
@@ -129,9 +129,7 @@
     }
 
     .example {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
+        text-align: center
     }
 
     /* Style the search field */
@@ -140,12 +138,10 @@
         font-size: 17px;
         border: 1px solid grey;
         min-width: 300px;
-        float: left;
         background: #f1f1f1;
     }
     /* Style the submit button */
     form.example button {
-        float: left;
         padding: 10px;
         background: #2196F3;
         color: white;
@@ -154,6 +150,7 @@
         border-left: none; /* Prevent double borders */
         cursor: pointer;
         min-width: 50px;
+        left: 100%;
     }
 
         form.example button:hover {

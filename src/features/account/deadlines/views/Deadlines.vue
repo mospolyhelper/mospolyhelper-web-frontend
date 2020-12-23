@@ -118,6 +118,10 @@
 </script>
 
 <style scoped>
+    * {
+        
+    }
+
     .container {
         display: block;
         position: relative;

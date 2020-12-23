@@ -1,16 +1,14 @@
 ﻿<template>
-    <form class="example" @submit.prevent="">
-        <input type="text" placeholder="Поиск" v-model.trim="findStr">
-    </form>
-    <br />
     <label class="container">
         Скрыть выполненные
         <input type="checkbox" v-model="hideCompleted">
         <span class="checkmark"></span>
     </label>
-    <button @click="save()" v-if="isChanged">Сохранить</button>
-    <div v-if="list.length==0 && !isLoading && !isSaving">Дедлайнов нет:(</div>
+    <form class="example" @submit.prevent="">
+        <input type="text" placeholder="Поиск" v-model.trim="findStr">
+    </form>
     <div class="deadlineList">
+        <div class="noDeadlines" v-if="list.length==0 && !isLoading && !isSaving">Дедлайнов нет:(</div>
         <deadline v-for="(deadline, index) in list"
                   v-bind:key="deadline.id"
                   v-on:remove="removeFromList(deadline.id)"
@@ -23,8 +21,8 @@
                   :importance="deadline.importance"
                   :completed="deadline.completed"
                   :pinned="deadline.pinned" />
+        <button class="btn" @click="save()" v-if="isChanged">Сохранить</button>
         <loadingAnim :showing="textLoading != ''" />
-
     </div>
 
 </template>
@@ -118,6 +116,14 @@
 </script>
 
 <style scoped>
+    .deadlineList {
+
+    }
+
+    .noDeadlines {
+        margin-top:10px;
+        text-align:center;
+    }
 
     #text {
         display: inline-block;
@@ -125,15 +131,14 @@
     }
 
     .example {
-        text-align: right;
+        text-align: center;
     }
 
     form.example input[type=text] {
         padding: 10px;
         font-size: 17px;
         border: 1px solid grey;
-        min-width: 300px;
-        float: left;
+        width: 500px;
         background: #f1f1f1;
     }
 
@@ -210,4 +215,21 @@
         transform: rotate(45deg);
     }
 
+    .btn {
+        background-color: DodgerBlue; /* Blue background */
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        padding: 12px 16px; /* Some padding */
+        font-size: 16px; /* Set a font size */
+        cursor: pointer; /* Mouse pointer on hover */
+        margin: 5px;
+        display:block;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+        /* Darker background on mouse-over */
+        .btn:hover {
+            background-color: RoyalBlue;
+        }
 </style>

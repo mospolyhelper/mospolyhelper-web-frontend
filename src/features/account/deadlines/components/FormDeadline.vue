@@ -127,8 +127,7 @@
         margin-right: 10px;
         padding: 10px;
         border-radius: 25px;
-        min-width: 200px;
-        max-width: 500px;
+        max-width: 600px;
     }
 
         form.example input[type=text] {

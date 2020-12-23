@@ -1,9 +1,4 @@
 ﻿<template>
-    <p>
-        Оценочки
-        <a href="https://vuejs.org" target="_blank">Vue.js</a> and
-        <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>.
-    </p>
     <markList :courses="searchRes"
                 :isLoading="isLoading">
     </markList>

@@ -8,6 +8,7 @@
         <br />
         <br />
         <br />
+        <loadingAnim :showing="isLoading" />
         <div class="filters">
             Фильтр по дате:<br />
             <label><input type="checkbox" v-model="showEnded" />Закончившиеся</label><br />
@@ -30,10 +31,11 @@
         <arraySelector v-if="auditoriumList?.length" :originalArray="auditoriumList" @arrayChanged="auditoriumListChanged" />
         <arraySelector v-if="titleList?.length" :originalArray="titleList" @arrayChanged="titleListChanged" />
         <arraySelector v-if="typeList?.length" :originalArray="typeList" @arrayChanged="typeListChanged" />
-        <button v-if="groupList?.length || teacherList?.length || auditoriumList?.length || titleList?.length || typeList?.length" 
-                class="searchBtn" @click="advancedSearch"><i class="fa fa-search"></i></button>
+        <button v-if="groupList?.length || teacherList?.length || auditoriumList?.length || titleList?.length || typeList?.length"
+                class="searchBtn" @click="advancedSearch">
+            <i class="fa fa-search"></i>
+        </button>
     </div>
-
 </template>
 
 <script lang="ts">
@@ -49,6 +51,7 @@
     import { getLessons } from "@/domain/schedule/utils/scheduleUtils"
     import * as moment from 'moment';
     import 'moment/locale/ru';
+    import loadingAnim from "@/features/common/components/lodingAnimation.vue";
 
     moment.locale('ru');
 
@@ -76,7 +79,8 @@
                 checkedTeacherList: new Array<string>(),
                 checkedAuditoriumList: new Array<string>(),
                 checkedTitleList: new Array<string>(),
-                checkedTypeList: new Array<string>()
+                checkedTypeList: new Array<string>(),
+                isLoading: false
             }
         },
         watch: {
@@ -95,7 +99,8 @@
         },
         components: {
             weeklySchedule,
-            arraySelector
+            arraySelector,
+            loadingAnim
         },
         methods: {
             getFormattedDate(date: Date) {
@@ -103,23 +108,30 @@
                 return moment(date).format('D MMMM');
             },
             download() {
+                this.isLoading = true;
                 useCase.getScheduleByGroup(this.group).then(value => {
                     this.schedule = value;
+                    this.isLoading = false;
                 });
                 useCase.getGroupList().then(value => {
                     this.groupList = value;
+                    this.isLoading = false;
                 });
                 useCase.getTeacherList().then(value => {
                     this.teacherList = value;
+                    this.isLoading = false;
                 });
                 useCase.getAuditoriumList().then(value => {
                     this.auditoriumList = value;
+                    this.isLoading = false;
                 });
                 useCase.getTitleList().then(value => {
                     this.titleList = value;
+                    this.isLoading = false;
                 });
                 useCase.getTypeList().then(value => {
                     this.typeList = value;
+                    this.isLoading = false;
                 });
             },
             advancedSearch() {
