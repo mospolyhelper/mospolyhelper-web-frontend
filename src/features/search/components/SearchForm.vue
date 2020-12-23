@@ -1,5 +1,6 @@
 ﻿<template>
-    <button  @click="isVisible=!isVisible">Дополнительные параметры поиска</button>
+    <button class="btn" @click="isVisible=!isVisible">Дополнительные параметры поиска</button>
+    <br />
     <form class="searchForm" @submit.prevent="send" v-if="isVisible">
         <input type="text" placeholder="Направление" v-model.trim.lazy="direction" /> <br />
         <input type="text" placeholder="Профиль" v-model.trim.lazy="profile" /><br />
@@ -49,7 +50,14 @@
 </script>
 
 <style scoped>
+    * {
+       
+    }
+    .btn {
+
+    }
     .searchForm {
+        float:left;
         background: #fff;
         box-shadow: 0 0 6px rgba(0,0,0,0.5);
         margin-top: 10px;
@@ -57,8 +65,9 @@
         margin-left: 10px;
         margin-right: 10px;
         padding: 10px;
+        padding-bottom:20px;
         border-radius: 25px;
-        min-width: 200px;
+        min-width: 300px;
         max-width: 500px;
     }
 </style>

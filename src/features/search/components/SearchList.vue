@@ -51,6 +51,10 @@
 </script>
 
 <style scoped>
+    .searchList {
+        
+    }
+
     .btn {
         background-color: DodgerBlue; /* Blue background */
         border: none; /* Remove borders */
@@ -58,6 +62,8 @@
         padding: 12px 16px; /* Some padding */
         font-size: 16px; /* Set a font size */
         cursor: pointer; /* Mouse pointer on hover */
+        display:inline-block;
+        float:right;
     }
 
         /* Darker background on mouse-over */

@@ -78,6 +78,8 @@
         border-radius: 25px;
         min-width: 200px;
         max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .importance {

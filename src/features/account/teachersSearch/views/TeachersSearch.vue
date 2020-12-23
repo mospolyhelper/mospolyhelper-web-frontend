@@ -92,18 +92,20 @@
         box-sizing: border-box;
     }
 
+    .example {
+        text-align: center;
+    }
+
     /* Style the search field */
     form.example input[type=text] {
         padding: 10px;
         font-size: 17px;
         border: 1px solid grey;
         min-width:300px;
-        float: left;
         background: #f1f1f1;
     }
     /* Style the submit button */
     form.example button {
-        float: left;
         padding: 10px;
         background: #2196F3;
         color: white;

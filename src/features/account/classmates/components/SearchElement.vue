@@ -1,5 +1,5 @@
 ﻿<template>
-    <div class="card">
+    <div class="card" v-on:click="dialog(`Dialog key: ${dialogKey}`)">
         <img :src="imageSrc" alt="Avatar"> <br/>
         <div class="container">
             <div class="status" v-bind:class="[status=='Пользователь не на сайте' ? offline : online]"> </div>
@@ -22,6 +22,11 @@
             return {
                 online: 'online',
                 offline: 'offline'
+            }
+        },
+        methods: {
+            dialog(d: string) {
+                alert(d);
             }
         },
         computed: {
