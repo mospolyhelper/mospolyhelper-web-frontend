@@ -3,7 +3,7 @@
         <div class="navbar">
             <HeaderLink to="/" exact>Главная</HeaderLink>
             <HeaderLink to="/schedule">Расписание</HeaderLink>
-            <HeaderLink to="/map">Map</HeaderLink>
+            <HeaderLink to="/locations">Карта</HeaderLink>
             <HeaderLink to="/search">Поиск студентов</HeaderLink>
             <div class="dropdown">
                 <button class="dropbtn">Аккаунт</button>
