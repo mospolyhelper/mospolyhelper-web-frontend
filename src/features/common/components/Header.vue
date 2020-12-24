@@ -93,6 +93,7 @@ export default Header;
     }
 
     #navbar-outer {
+        z-index: 2;
         background-color: #333;
         position: fixed; /* Set the navbar to fixed position */
         top: 0; /* Position the navbar at the top of the page */
