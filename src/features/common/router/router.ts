@@ -31,6 +31,10 @@ const routes: Array<RouteRecordRaw> = [
         component: Auth
     },
     {
+        path: "/locations",
+        component: () => import("@/features/locations/views/Locations.vue")
+    },
+    {
         path: "/account/info",
         component: AccountInfoPage
     },

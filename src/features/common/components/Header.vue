@@ -3,7 +3,7 @@
         <div class="navbar">
             <HeaderLink to="/" exact>Главная</HeaderLink>
             <HeaderLink to="/schedule">Расписание</HeaderLink>
-            <HeaderLink to="/map">Map</HeaderLink>
+            <HeaderLink to="/locations">Карта</HeaderLink>
             <HeaderLink to="/search">Поиск студентов</HeaderLink>
             <div class="dropdown">
                 <button class="dropbtn">Аккаунт</button>
@@ -93,6 +93,7 @@ export default Header;
     }
 
     #navbar-outer {
+        z-index: 2;
         background-color: #333;
         position: fixed; /* Set the navbar to fixed position */
         top: 0; /* Position the navbar at the top of the page */
