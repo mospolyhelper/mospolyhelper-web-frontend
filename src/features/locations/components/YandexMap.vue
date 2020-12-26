@@ -122,12 +122,15 @@ function convertToPlacemarks(
                 addresses[type]?.forEach(gym =>
                     gymsCollection.add(toPlacemark(gym))
                 );
+                break;
             case "hostels":
                 addresses[type]?.forEach(hostel =>
                     hostelsCollection.add(toPlacemark(hostel))
                 );
+                break;
             default:
                 (addresses as any)[type].forEach((pin: BasePin) => defaultCollection.add(toPlacemark(pin)));
+                break;
         }
     }
 
