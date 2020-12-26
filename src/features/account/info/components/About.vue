@@ -10,8 +10,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType, ref } from "vue";
-import TextRow from "@/features/account/info/components/TextRow.vue";
-import { TextRowProps } from "./TextRow.vue";
+import TextRow from "@/features/common/components/TextRow.vue";
+import { TextRowProps } from "@/features/common/components/TextRow.vue";
 
 const About = defineComponent({
     components: {

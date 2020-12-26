@@ -8,6 +8,7 @@ import AccountInfoPage from "@/features/account/info/views/AccountInfoPage.vue";
 import TeachersSearch from "@/features/account/teachersSearch/views/TeachersSearch.vue";
 import Classmates from "@/features/account/classmates/views/Classmates.vue";
 import Marks from "@/features/account/marks/views/Marks.vue";
+import Applications from "@/features/account/applications/views/Applications.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -37,6 +38,10 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/account/info",
         component: AccountInfoPage
+    },
+    {
+        path: "/account/applications",
+        component: Applications
     },
     {
         path: "/account/teachersSearch",
