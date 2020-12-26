@@ -15,10 +15,10 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 import About from "@/features/account/info/components/About.vue";
-import TextRow from "@/features/account/info/components/TextRow.vue";
+import TextRow from "@/features/common/components/TextRow.vue";
 import InfoUseCase from "@/domain/account/info/usecase/infoUseCase";
 import AccountInfo from "@/domain/account/info/model/accountInfo";
-import { TextRowProps } from "../components/TextRow.vue";
+import { TextRowProps } from "@/features/common/components/TextRow.vue";
 
 const useCase = new InfoUseCase();
 
