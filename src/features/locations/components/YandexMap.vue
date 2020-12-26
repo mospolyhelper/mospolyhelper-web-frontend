@@ -83,8 +83,12 @@ const gymsOptions = {
 const hostelsOptions = {
     preset: "islands#blueHomeCircleIcon"
 };
+
+const defaultOptions = {
+    preset: "islands#blueCircleIcon"
+};
+
 /**
- *
  * BE CAREFUL! Invoke only if yandex map's script has already loaded
  */
 function convertToPlacemarks(
@@ -102,16 +106,32 @@ function convertToPlacemarks(
         undefined,
         hostelsOptions
     );
-
-    addresses.campuses?.forEach(campus =>
-        campusesCollection.add(toPlacemark(campus))
-    );
-    addresses.gyms?.forEach(gym => gymsCollection.add(toPlacemark(gym)));
-    addresses.hostels?.forEach(hostel =>
-        hostelsCollection.add(toPlacemark(hostel))
+    const defaultCollection = new ymaps.GeoObjectCollection(
+        undefined,
+        defaultOptions
     );
 
-    return [campusesCollection, gymsCollection, hostelsCollection];
+    for (const type in addresses) {
+        switch (type) {
+            case "campuses":
+                addresses[type]?.forEach(campus =>
+                    campusesCollection.add(toPlacemark(campus))
+                );
+                break;
+            case "gyms":
+                addresses[type]?.forEach(gym =>
+                    gymsCollection.add(toPlacemark(gym))
+                );
+            case "hostels":
+                addresses[type]?.forEach(hostel =>
+                    hostelsCollection.add(toPlacemark(hostel))
+                );
+            default:
+                (addresses as any)[type].forEach((pin: BasePin) => defaultCollection.add(toPlacemark(pin)));
+        }
+    }
+
+    return [campusesCollection, gymsCollection, hostelsCollection, defaultCollection];
 }
 
 function toPlacemark(marker: BasePin): ymaps.Placemark {
