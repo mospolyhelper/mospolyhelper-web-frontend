@@ -7,11 +7,12 @@
         <div class="sender">
             <div>
                 <span id="receiver-name">{{ author }}</span>
+                <span v-if="!dialog.hasRead" id="unread-dot" />
                 <span class="date">{{ dialog.date }}</span>
             </div>
             <div id="identity">
-                <img id="avatar" :src="IMG_BASE_URL + dialog.senderImageUrl" />
-                <span id="name">{{ dialog.senderName }}</span>
+                <img id="avatar" v-if="dialog.senderImageUrl" :src="IMG_BASE_URL + dialog.senderImageUrl" />
+                <span id="name" v-if="dialog.senderName">{{ dialog.senderName }}</span>
             </div>
             <span id="message" v-html="dialog.message" />
         </div>
@@ -95,6 +96,17 @@ export default DialogPreview;
     font-size: 1.05rem;
 }
 
+#unread-dot {
+    height: 7px;
+    width: 7px;
+    background: darksalmon;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-top: -3px;
+    margin-left: 6px;
+    display: inline-block;
+}
+
 .sender #identity {
     display: flex;
     align-items: top;
@@ -118,6 +130,7 @@ export default DialogPreview;
     margin-left: 35px;
     margin-top: 4px;
     margin-right: 14%;
+    font-size: 0.9rem;
 }
 
 .date {
