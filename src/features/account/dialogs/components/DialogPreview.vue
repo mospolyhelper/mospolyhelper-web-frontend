@@ -14,7 +14,10 @@
                 <img id="avatar" v-if="dialog.senderImageUrl" :src="IMG_BASE_URL + dialog.senderImageUrl" />
                 <span id="name" v-if="dialog.senderName">{{ dialog.senderName }}</span>
             </div>
-            <span id="message" v-html="dialog.message" />
+            <div :style="{ marginLeft: messageLeftMargin }">
+                <img id="attachments-icon" v-if="dialog.hasAttachments" src="../attachment-diagonal-interface-symbol-of-paperclip.svg" />
+                <span id="message" v-html="dialog.message" />
+            </div>
         </div>
     </div>
 </template>
@@ -46,8 +49,9 @@ const DialogPreview = defineComponent({
         const { dialog } = props;
 
         const author = computed(() => dialog.authorName + (dialog.authorGroup ? ` – ${dialog.authorGroup}` : ""));
+        const messageLeftMargin = computed(() => (dialog.senderImageUrl && dialog.senderName ? "35px" : "0px"));
 
-        return { ...toRefs(state), author };
+        return { ...toRefs(state), author, messageLeftMargin };
     }
 });
 
@@ -127,10 +131,17 @@ export default DialogPreview;
 }
 
 .sender #message {
-    margin-left: 35px;
     margin-top: 4px;
     margin-right: 14%;
     font-size: 0.9rem;
+}
+
+#attachments-icon {
+    border: none;
+    border-radius: 0;
+    float: right;
+    width: 18px;
+    height: 18px;
 }
 
 .date {
