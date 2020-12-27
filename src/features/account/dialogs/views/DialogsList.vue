@@ -7,9 +7,9 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import DialogsUseCase from "@/domain/account/dialogs/usecase/dialogsUseCase";
+import DialogsUseCase from "@/domain/account/dialogs/preview/usecase/dialogsUseCase";
 import DialogPreview from "@/features/account/dialogs/components/DialogPreview.vue";
-import DialogPreviewModel from "@/domain/account/dialogs/model/dialogs";
+import DialogPreviewModel from "@/domain/account/dialogs/preview/model/dialogs";
 
 type DialogsListState = {
     dialogs: DialogPreviewModel[];

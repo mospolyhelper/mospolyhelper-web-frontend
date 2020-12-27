@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import DialogPreview from "@/domain/account/dialogs/model/dialogs";
+import DialogPreview from "@/domain/account/dialogs/preview/model/dialogs";
 import { computed, defineComponent, PropType, reactive, toRefs } from "vue";
 
 type DialogPreviewState = {};
