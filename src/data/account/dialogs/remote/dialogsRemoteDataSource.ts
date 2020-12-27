@@ -1,11 +1,11 @@
 ﻿import Result from "../../../../utils/result";
-import DialogPreview from "@/domain/account/dialogs/model/dialogs";
+import DialogPreviewModel from "@/domain/account/dialogs/model/dialogs";
 import DialogsApi from "../api/dialogsApi";
 
 export default class DialogsRemoteDataSource {
     private api = new DialogsApi();
 
-    getDialogs(): Promise<Result<DialogPreview[]>> {
+    getDialogs(): Promise<Result<DialogPreviewModel[]>> {
         return this.api.getDialogs();
     }
 }

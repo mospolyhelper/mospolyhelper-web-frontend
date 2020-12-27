@@ -1,4 +1,4 @@
-export default interface DialogPreview {
+export default interface DialogPreviewModel {
     id: number;
     dialogKey?: string;
     authorName?: string;
@@ -6,6 +6,8 @@ export default interface DialogPreview {
     avatarUrl?: string;
     message?: string;
     date?: string;
+    senderImageUrl?: string;
+    senderName?: string;
     hasAttachments: boolean;
     hasRead: boolean;
 }

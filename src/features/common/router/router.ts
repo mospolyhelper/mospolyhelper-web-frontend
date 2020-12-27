@@ -56,6 +56,10 @@ const routes: Array<RouteRecordRaw> = [
         component: Marks
     },
     {
+        path: "/account/dialogs",
+        component: () => import("@/features/account/dialogs/views/DialogsList.vue")
+    },
+    {
         path: "/:pathMatch(.*)*",
         component: () => import("@/features/common/views/NotFound.vue")
     }

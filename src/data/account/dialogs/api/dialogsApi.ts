@@ -1,5 +1,5 @@
 ﻿import restClient from "@/data/client";
-import DialogPreview from "@/domain/account/dialogs/model/dialogs";
+import DialogPreviewModel from "@/domain/account/dialogs/model/dialogs";
 import Result from "@/utils/result";
 import UnauthorizedAccessError from "@/utils/unauthorizedAccessError";
 import AuthLocalDataSource from "../../auth/local/authLocalDataSource";
@@ -9,11 +9,11 @@ export default class DialogsApi {
     private URL_DIALOGS = '/dialogs';
     private session = new AuthLocalDataSource();
 
-    async getDialogs(): Promise<Result<DialogPreview[]>> {
+    async getDialogs(): Promise<Result<DialogPreviewModel[]>> {
         try {
             const path = this.URL_MODULE + this.URL_DIALOGS;
             const options = { additionalHeaders: { sessionId: this.session.getSessionId() } };
-            const response = await restClient.get<DialogPreview[]>(path, options);
+            const response = await restClient.get<DialogPreviewModel[]>(path, options);
             
             console.log("loaded", response.result);
             return Result.success(response.result ?? []);
