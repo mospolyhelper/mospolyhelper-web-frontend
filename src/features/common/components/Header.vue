@@ -15,6 +15,7 @@
                     <HeaderLink to="/account/teachersSearch">Поиск преподавателей</HeaderLink>
                     <HeaderLink to="/account/classmates">Одногруппники</HeaderLink>
                     <HeaderLink to="/account/marks">Оценки</HeaderLink>
+                    <HeaderLink to="/account/dialogs">Сообщения</HeaderLink>
                 </div>
             </div>
         </div>
