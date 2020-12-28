@@ -1,4 +1,4 @@
-import DialogsRepository from "@/data/account/dialogs/repository/dialogsRepository";
+import DialogsRepository from "@/data/account/dialogs/preview/repository/dialogsRepository";
 import Result from "@/utils/result";
 import DialogPreviewModel from "../model/dialogs";
 
