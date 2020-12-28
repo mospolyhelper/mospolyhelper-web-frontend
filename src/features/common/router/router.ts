@@ -1,4 +1,4 @@
-﻿import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+﻿import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import Home from "@/features/home/views/Home.vue";
 import Schedule from "@/features/schedule/views/Schedule.vue";
 import Deadlines from "@/features/account/deadlines/views/Deadlines.vue";
@@ -72,7 +72,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes
 });
 
