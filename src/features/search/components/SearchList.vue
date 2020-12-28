@@ -1,6 +1,4 @@
 ﻿<template>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <button class="btn" @click="toClipboard(numeratedStudentsNames)"><i class="fa fa-clone" aria-hidden="true"></i> Копировать в буфер обмена</button>
     <div class="searchList">
         <searchElement v-for="(element, index) in searchList"
                        v-bind:key="element.id"
@@ -16,7 +14,7 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
+    import { defineComponent, getCurrentInstance } from "vue";
     import { toClipboard } from '@soerenmartius/vue3-clipboard'
     import searchElement from "@/features/search/components/SearchElement.vue";
     import SearchEntity from "../../../domain/search/model/SearchEntity";
@@ -26,13 +24,29 @@
         setup() {
             return { toClipboard }
         },
+        data() {
+            return {
+                emitter: getCurrentInstance()?.appContext.config.globalProperties.emitter
+            }
+        },
         props: {
             searchList: Array,
             isLoading: Boolean
         },
+        emits: ['copy'],
         components: {
             searchElement,
             loadingAnim
+        },
+        mounted() {
+            this.emitter.on("copy", () => {
+                toClipboard(this.numeratedStudentsNames);
+            });
+        },
+        methods: {
+            copy() {
+                this.$emit('copy', this.numeratedStudentsNames)
+            }
         },
         computed: {
             numeratedStudentsNames: function (): string {
@@ -62,8 +76,8 @@
         padding: 12px 16px; /* Some padding */
         font-size: 16px; /* Set a font size */
         cursor: pointer; /* Mouse pointer on hover */
-        display:inline-block;
-        float:right;
+        display:block;
+        float:left;
     }
 
         /* Darker background on mouse-over */

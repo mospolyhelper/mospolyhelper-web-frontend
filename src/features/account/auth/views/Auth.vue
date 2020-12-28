@@ -91,9 +91,6 @@
                     this.isLoading = false;
                     this.emitter.emit("updateHeader");
                 });
-                //const permissions = useCase.getPermissions().then(result => {
-                //    if (result.isSuccess) this.$root?.$options.methods.auth(result.value);
-                //});
             },
             getSaveLogin(): boolean {
                 const saveLogin = useCase.getPreference('SaveLogin', '');

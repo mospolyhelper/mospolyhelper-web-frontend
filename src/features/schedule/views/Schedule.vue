@@ -29,7 +29,7 @@
         <br />
         <br />
         <br />
-        <div v-show="advancedSearch">
+        <div v-show="advancedSearchVisible">
             <p class="advancedSearchTitle">Продвинутый поиск</p>
             <loadingAnim :showing="loadingAdvanced" />
             <arraySelector v-if="groupList?.length" :originalArray="groupList" @arrayChanged="groupListChanged" />
@@ -88,7 +88,7 @@
                 checkedTitleList: new Array<string>(),
                 checkedTypeList: new Array<string>(),
                 isLoading: false,
-                advancedSearch: false
+                advancedSearchVisible: false
             }
         },
         watch: {
@@ -123,7 +123,7 @@
                 });
             },
             advancedInit() {
-                this.$data.advancedSearch = !this.$data.advancedSearch;
+                this.$data.advancedSearchVisible = !this.$data.advancedSearchVisible;
                 if (this.groupList.length == 0) {
                     useCase.getGroupList().then(value => {
                         this.groupList = value;

@@ -1,6 +1,6 @@
 ﻿<template>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <button @click="formVisible=!formVisible">{{buttonText}}</button>
+    <button class="btn" @click="formVisible=!formVisible">{{buttonText}}</button>
     <form class="example" @submit.prevent="send" v-show="formVisible">
         <div class="formContainer">
             <input type="text" placeholder="Какой предмет?" v-model.trim="name" /> <br />
@@ -36,9 +36,7 @@
 <script lang="ts">
     import { defineComponent } from "vue";
     import Deadline from "@/domain/account/deadlines/model/deadline";
-    import DeadlinesUseCase from "@/domain/account/deadlines/usecase/deadlinesUseCase";
 
-    let useCase = new DeadlinesUseCase();
     const FormDeadline = defineComponent({
         props: {
             d: Deadline
@@ -105,6 +103,7 @@
         padding: 12px 16px; /* Some padding */
         font-size: 16px; /* Set a font size */
         cursor: pointer; /* Mouse pointer on hover */
+        margin:10px;
     }
 
         /* Darker background on mouse-over */

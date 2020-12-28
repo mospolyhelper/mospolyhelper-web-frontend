@@ -4,6 +4,9 @@
         <input type="text" name="search" placeholder="Поиск" v-model.trim.lazy="findStr">
         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
+    <button class="btn" @click="emitter.emit('copy')"><i class="fa fa-clone" aria-hidden="true"></i> Копировать в буфер обмена</button>
+    <br />
+    <br />
     <br />
     <searchForm v-on:applyFilter="advancedSearch"
                 v-on:stopSearch="isSearching=false"
@@ -18,7 +21,7 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
+    import { defineComponent, getCurrentInstance } from "vue";
     import searchList from "@/features/search/components/SearchList.vue";
     import searchForm from "@/features/search/components/SearchForm.vue";
     import SearchUseCase from "@/domain/search/usecase/searchUseCase";
@@ -36,7 +39,8 @@
                 page: 1,
                 pageCount: 1,
                 isLoading: false,
-                isSearching: false
+                isSearching: false,
+                emitter: getCurrentInstance()?.appContext.config.globalProperties.emitter
             }
         },
         components: {
@@ -111,9 +115,6 @@
                 }
             }
         },
-        //created() {
-        //    window.addEventListener('scroll', this.handleScroll);
-        //},
         unmounted() {
             window.removeEventListener('scroll', this.handleScroll);
         }
@@ -127,6 +128,21 @@
     * {
         box-sizing: border-box;
     }
+
+    .btn {
+        background-color: DodgerBlue; /* Blue background */
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        padding: 12px 16px; /* Some padding */
+        font-size: 16px; /* Set a font size */
+        cursor: pointer; /* Mouse pointer on hover */
+        float: left;
+    }
+
+        /* Darker background on mouse-over */
+        .btn:hover {
+            background-color: RoyalBlue;
+        }
 
     .example {
         text-align: center
