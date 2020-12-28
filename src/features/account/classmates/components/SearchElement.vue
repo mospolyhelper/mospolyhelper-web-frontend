@@ -1,5 +1,5 @@
 ﻿<template>
-    <div class="card" v-on:click="dialog(`Dialog key: ${dialogKey}`)">
+    <div class="card" v-on:click="dialog(dialogKey)">
         <img :src="imageSrc" alt="Avatar"> <br/>
         <div class="container">
             <div class="status" v-bind:class="[status=='Пользователь не на сайте' ? offline : online]"> </div>
@@ -26,7 +26,7 @@
         },
         methods: {
             dialog(d: string) {
-                alert(d);
+                this.$router.push(`/account/dialogs?dialogKey=${d}`)
             }
         },
         computed: {
