@@ -8,7 +8,6 @@
         <br />
         <br />
         <br />
-        <loadingAnim :showing="isLoading" />
         <div class="filters">
             Фильтр по дате:<br />
             <label><input type="checkbox" v-model="showEnded" />Закончившиеся</label><br />
@@ -25,16 +24,24 @@
 
         <weeklySchedule :dailySchedules="dailySchedules"
                         :dates="dates"></weeklySchedule>
-        <p class="advancedSearchTitle">Продвинутый поиск</p>
-        <arraySelector v-if="groupList?.length" :originalArray="groupList" @arrayChanged="groupListChanged" />
-        <arraySelector v-if="teacherList?.length" :originalArray="teacherList" @arrayChanged="teacherListChanged" />
-        <arraySelector v-if="auditoriumList?.length" :originalArray="auditoriumList" @arrayChanged="auditoriumListChanged" />
-        <arraySelector v-if="titleList?.length" :originalArray="titleList" @arrayChanged="titleListChanged" />
-        <arraySelector v-if="typeList?.length" :originalArray="typeList" @arrayChanged="typeListChanged" />
-        <button v-if="groupList?.length || teacherList?.length || auditoriumList?.length || titleList?.length || typeList?.length"
-                class="searchBtn" @click="advancedSearch">
-            <i class="fa fa-search"></i>
-        </button>
+        <loadingAnim :showing="isLoading" />
+        <button @click="advancedInit" class="searchBtn" style="margin:10px">Продвинутый поиск</button>
+        <br />
+        <br />
+        <br />
+        <div v-show="advancedSearch">
+            <p class="advancedSearchTitle">Продвинутый поиск</p>
+            <loadingAnim :showing="loadingAdvanced" />
+            <arraySelector v-if="groupList?.length" :originalArray="groupList" @arrayChanged="groupListChanged" />
+            <arraySelector v-if="teacherList?.length" :originalArray="teacherList" @arrayChanged="teacherListChanged" />
+            <arraySelector v-if="auditoriumList?.length" :originalArray="auditoriumList" @arrayChanged="auditoriumListChanged" />
+            <arraySelector v-if="titleList?.length" :originalArray="titleList" @arrayChanged="titleListChanged" />
+            <arraySelector v-if="typeList?.length" :originalArray="typeList" @arrayChanged="typeListChanged" />
+            <button v-if="groupList?.length || teacherList?.length || auditoriumList?.length || titleList?.length || typeList?.length"
+                    class="searchBtn" @click="advancedSearch">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
     </div>
 </template>
 
@@ -80,7 +87,8 @@
                 checkedAuditoriumList: new Array<string>(),
                 checkedTitleList: new Array<string>(),
                 checkedTypeList: new Array<string>(),
-                isLoading: false
+                isLoading: false,
+                advancedSearch: false
             }
         },
         watch: {
@@ -113,26 +121,34 @@
                     this.schedule = value;
                     this.isLoading = false;
                 });
-                useCase.getGroupList().then(value => {
-                    this.groupList = value;
-                    this.isLoading = false;
-                });
-                useCase.getTeacherList().then(value => {
-                    this.teacherList = value;
-                    this.isLoading = false;
-                });
-                useCase.getAuditoriumList().then(value => {
-                    this.auditoriumList = value;
-                    this.isLoading = false;
-                });
-                useCase.getTitleList().then(value => {
-                    this.titleList = value;
-                    this.isLoading = false;
-                });
-                useCase.getTypeList().then(value => {
-                    this.typeList = value;
-                    this.isLoading = false;
-                });
+            },
+            advancedInit() {
+                this.$data.advancedSearch = !this.$data.advancedSearch;
+                if (this.groupList.length == 0) {
+                    useCase.getGroupList().then(value => {
+                        this.groupList = value;
+                    });
+                }
+                if (this.teacherList.length == 0) {
+                    useCase.getTeacherList().then(value => {
+                        this.teacherList = value;
+                    });
+                }
+                if (this.auditoriumList.length == 0) {
+                    useCase.getAuditoriumList().then(value => {
+                        this.auditoriumList = value;
+                    });
+                }
+                if (this.titleList.length == 0) {
+                    useCase.getTitleList().then(value => {
+                        this.titleList = value;
+                    });
+                }
+                if (this.typeList.length == 0) {
+                    useCase.getTypeList().then(value => {
+                        this.typeList = value;
+                    });
+                }
             },
             advancedSearch() {
                 useCase.getSchedule(
@@ -204,6 +220,11 @@
         },
         created() {
             this.setCurrentWeek();
+        },
+        computed: {
+            loadingAdvanced: function (): boolean {
+                return this.groupList.length == 0 || this.teacherList.length == 0 || this.auditoriumList.length == 0 || this.titleList.length == 0 || this.typeList.length == 0
+            }
         }
     });
 
