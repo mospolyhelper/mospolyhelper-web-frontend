@@ -2,15 +2,15 @@
     <div class="outer">
         <div class="middle">
             <div class="container">
-                <!-- <form @submit="logIn"> -->
+                <form @submit.prevent="logIn">
                     <input type="text" v-model="login" placeholder="Логин" />
                     <input type="password" v-model="password" placeholder="Пароль" />
                     <input type="checkbox" name="saveLogin" v-model="saveLogin" />
                     <label for="saveLogin">Сохранить логин</label> <br />
                     <input type="checkbox" name="savePassword" v-model="savePassword" />
                     <label for="savePassword">Сохранить пароль (небезопасно)</label>
-                    <input type="submit" @click="logIn" value="Войти" v-if="!isLoading">
-                <!-- </form> -->
+                    <input type="submit" value="Войти" v-if="!isLoading">
+                </form>
                 <div v-if="success && !isLoading">Успешная авторизация</div>
                 <div v-if="success==false && !isLoading">Неправильный логин или пароль</div>
                 <loadingAnim :showing="isLoading" />
