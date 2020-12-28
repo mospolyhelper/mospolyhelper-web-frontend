@@ -29,7 +29,7 @@ const DialogsList = defineComponent({
                 state.dialogs = res.value;
             } else if (res.isFailure) {
                 const err = res.errorOrNull();
-                if (err) alert(err);
+                alert(err ?? "Неизвестная ошибка");
             }
         });
 

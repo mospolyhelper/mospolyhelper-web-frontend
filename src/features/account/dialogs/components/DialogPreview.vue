@@ -15,7 +15,11 @@
                 <span id="name" v-if="dialog.senderName">{{ dialog.senderName }}</span>
             </div>
             <div :style="{ marginLeft: messageLeftMargin }">
-                <img id="attachments-icon" v-if="dialog.hasAttachments" src="../attachment-diagonal-interface-symbol-of-paperclip.svg" />
+                <img
+                    id="attachments-icon"
+                    v-if="dialog.hasAttachments"
+                    src="../attachment-diagonal-interface-symbol-of-paperclip.svg"
+                />
                 <span id="message" v-html="dialog.message" />
             </div>
         </div>
@@ -24,6 +28,8 @@
 
 <script lang="ts">
 import DialogPreview from "@/domain/account/dialogs/preview/model/dialogs";
+import { IMG_BASE_URL } from "@/data/client";
+import { CHAT_PATH } from "@/features/common/router/router";
 import { computed, defineComponent, PropType, reactive, toRefs } from "vue";
 
 type DialogPreviewState = {};
@@ -38,11 +44,14 @@ const DialogPreview = defineComponent({
     },
     data() {
         return {
-            IMG_BASE_URL: "https://e.mospolytech.ru/"
+            IMG_BASE_URL: IMG_BASE_URL
         };
     },
     methods: {
-        openDialogPage() {}
+        openDialogPage() {
+            const route = encodeURIComponent(this.dialog.dialogKey!!);
+            this.$router.push("dialog?dialogKey=" + route);
+        }
     },
     setup(props: DialogPreviewProps) {
         const state = reactive<DialogPreviewState>({});
