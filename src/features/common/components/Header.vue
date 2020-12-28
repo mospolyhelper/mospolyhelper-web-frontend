@@ -14,6 +14,7 @@
                     <HeaderLink v-show="teachers" to="/account/teachersSearch">Поиск преподавателей</HeaderLink>
                     <HeaderLink v-show="classmates" to="/account/classmates">Одногруппники</HeaderLink>
                     <HeaderLink v-show="marks" to="/account/marks">Оценки</HeaderLink>
+                    <HeaderLink to="/account/dialogs">Сообщения</HeaderLink>
                 </div>
             </div>
             <loadingAnim class="loading" :showing="isLoading" />
@@ -150,17 +151,21 @@ export default Header;
         overflow: hidden;
     }
 
-        /* Dropdown button */
-        .dropdown .dropbtn {
-            font-size: 20px;
-            border: none;
-            outline: none;
-            color: #918b8f;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit; /* Important for vertical align on mobile phones */
-            margin: 0; /* Important for vertical align on mobile phones */
-        }
+    .dropdown:hover {
+        cursor: pointer;
+    }
+
+    /* Dropdown button */
+    .dropdown .dropbtn {
+        font-size: 20px;
+        border: none;
+        outline: none;
+        color: #918b8f;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit; /* Important for vertical align on mobile phones */
+        margin: 0; /* Important for vertical align on mobile phones */
+    }
 
     /* Dropdown content (hidden by default) */
     .dropdown-content {
@@ -171,27 +176,28 @@ export default Header;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
     }
-        /* Links inside the dropdown */
-        .dropdown-content div {
-            float: none;
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
+    /* Links inside the dropdown */
+    .dropdown-content div {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
 
-            /* Add a grey background color to dropdown links on hover */
-            .dropdown-content div:hover {
-                background-color: #ddd;
-            }
+    /* Add a grey background color to dropdown links on hover */
+    .dropdown-content div:hover {
+        background-color: #ddd;
+    }
     /* Show the dropdown menu on hover */
     .dropdown:hover .dropdown-content {
         display: block;
     }
-    /* Add a red background color to navbar links on hover */
+    /* Add a background color to navbar links on hover */
     .navbar .dropdown:hover .dropbtn {
         background-color: #cbedff;
+        cursor: pointer;
     }
 
     #navbar-outer {

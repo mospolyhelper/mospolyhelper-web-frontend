@@ -3,27 +3,9 @@
 </template>
 
 <script lang="ts">
-import {
-    defineComponent,
-    onMounted,
-    PropType,
-    ref,
-    watch,
-    watchEffect
-} from "vue";
-import {
-    coordsToArray,
-    DEFAULT_MAP_SETTINGS,
-    Lang,
-    mapLoader,
-    MapSettings
-} from "../utils";
-import {
-    Addresses,
-    BasePin,
-    Campus,
-    Coords
-} from "@/domain/locations/model/Locations";
+import { defineComponent, onMounted, PropType, ref, watch, watchEffect } from "vue";
+import { coordsToArray, DEFAULT_MAP_SETTINGS, Lang, mapLoader, MapSettings } from "../utils";
+import { Addresses, BasePin, Campus, Coords } from "@/domain/locations/model/Locations";
 import { computed } from "@vue/reactivity";
 
 type YandexMapProps = MapSettings & {
@@ -63,9 +45,7 @@ const YandexMap = defineComponent({
                 watchEffect(() => {
                     console.log("markers in props changes observed");
                     map?.geoObjects.removeAll();
-                    convertToPlacemarks(props.markers).forEach(col =>
-                        map?.geoObjects.add(col)
-                    );
+                    convertToPlacemarks(props.markers).forEach(col => map?.geoObjects.add(col));
                 });
             });
         });
@@ -83,35 +63,38 @@ const gymsOptions = {
 const hostelsOptions = {
     preset: "islands#blueHomeCircleIcon"
 };
+
+const defaultOptions = {
+    preset: "islands#blueCircleIcon"
+};
+
 /**
- *
  * BE CAREFUL! Invoke only if yandex map's script has already loaded
  */
-function convertToPlacemarks(
-    addresses: Addresses
-): ymaps.GeoObjectCollection[] {
-    const campusesCollection = new ymaps.GeoObjectCollection(
-        undefined,
-        campusesOptions
-    );
-    const gymsCollection = new ymaps.GeoObjectCollection(
-        undefined,
-        gymsOptions
-    );
-    const hostelsCollection = new ymaps.GeoObjectCollection(
-        undefined,
-        hostelsOptions
-    );
+function convertToPlacemarks(addresses: Addresses): ymaps.GeoObjectCollection[] {
+    const campusesCollection = new ymaps.GeoObjectCollection(undefined, campusesOptions);
+    const gymsCollection = new ymaps.GeoObjectCollection(undefined, gymsOptions);
+    const hostelsCollection = new ymaps.GeoObjectCollection(undefined, hostelsOptions);
+    const defaultCollection = new ymaps.GeoObjectCollection(undefined, defaultOptions);
 
-    addresses.campuses?.forEach(campus =>
-        campusesCollection.add(toPlacemark(campus))
-    );
-    addresses.gyms?.forEach(gym => gymsCollection.add(toPlacemark(gym)));
-    addresses.hostels?.forEach(hostel =>
-        hostelsCollection.add(toPlacemark(hostel))
-    );
+    for (const type in addresses) {
+        switch (type) {
+            case "campuses":
+                addresses[type]?.forEach(campus => campusesCollection.add(toPlacemark(campus)));
+                break;
+            case "gyms":
+                addresses[type]?.forEach(gym => gymsCollection.add(toPlacemark(gym)));
+                break;
+            case "hostels":
+                addresses[type]?.forEach(hostel => hostelsCollection.add(toPlacemark(hostel)));
+                break;
+            default:
+                (addresses as any)[type].forEach((pin: BasePin) => defaultCollection.add(toPlacemark(pin)));
+                break;
+        }
+    }
 
-    return [campusesCollection, gymsCollection, hostelsCollection];
+    return [campusesCollection, gymsCollection, hostelsCollection, defaultCollection];
 }
 
 function toPlacemark(marker: BasePin): ymaps.Placemark {
