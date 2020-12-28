@@ -14,7 +14,7 @@
                     <HeaderLink v-show="teachers" to="/account/teachersSearch">Поиск преподавателей</HeaderLink>
                     <HeaderLink v-show="classmates" to="/account/classmates">Одногруппники</HeaderLink>
                     <HeaderLink v-show="marks" to="/account/marks">Оценки</HeaderLink>
-                    <HeaderLink to="/account/dialogs">Сообщения</HeaderLink>
+                    <HeaderLink v-show="messages" to="/account/dialogs">Сообщения</HeaderLink>
                 </div>
             </div>
             <loadingAnim class="loading" :showing="isLoading" />
@@ -60,6 +60,7 @@
                 applications: false,
                 myportfolio: false,
                 portfolios: false,
+                messages: false,
                 emitter: getCurrentInstance()?.appContext.config.globalProperties.emitter
             }
         },
@@ -76,9 +77,19 @@
         methods: {
             show() {
                 this.isLoading = true;
+                this.dialogs = false;
+                this.info = false;
+                this.marks = false;
+                this.classmates = false;
+                this.teachers = false;
+                this.applications = false;
+                this.myportfolio = false;
+                this.portfolios = false;
+                this.messages = false;
                 let self = this;
                 useCase.getPermissions().then(result => {
                     if (result.isSuccess) {
+                        console.log(result.value);
                         (result.value as Array<string>).forEach(val => {
                             switch (val) {
                                 case "dialogs": self.dialogs = true;
@@ -95,7 +106,10 @@
                                     break;
                                 case "portfolios": self.portfolios = true;
                                     break;
+                                case "messagges": self.messages = true;
+                                    break;
                             }
+                            this.messages = true;
                         });
                     } else if (result.isFailure) {
                         if (result.errorOrNull()?.message == "401") {
