@@ -21,7 +21,7 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
+    import { defineComponent, getCurrentInstance } from "vue";
     import AuthApi from "../../../../data/account/auth/api/authApi";
     import AuthLocalDataSource from "../../../../data/account/auth/local/authLocalDataSource";
     import AuthRemoteDataSource from "../../../../data/account/auth/remote/authRemoteDataSource";
@@ -30,6 +30,7 @@
     import PreferencesRepository from "../../../../data/common/repository/preferencesRepository";
     import AuthUseCase from "../../../../domain/account/auth/usecase/authUseCase";
     import loadingAnim from "@/features/common/components/lodingAnimation.vue";
+    import App from "@/features/App.vue"
 
     const useCase = new AuthUseCase(
         new AuthRepositoryImpl(
@@ -49,7 +50,8 @@
                 success: null as boolean | null,
                 saveLogin: false,
                 savePassword: false,
-                isLoading: false
+                isLoading: false,
+                emitter: getCurrentInstance()?.appContext.config.globalProperties.emitter
             }
         },
         watch: {
@@ -87,8 +89,9 @@
                 }
                 const res = useCase.logIn(this.login, this.password);
                 res.then(it => {
-                    this.success = it
+                    this.success = it;
                     this.isLoading = false;
+                    this.emitter.emit("updateHeader");
                 });
             },
             getSaveLogin(): boolean {

@@ -25,4 +25,8 @@ export default class AuthRepositoryImpl implements AuthRepository {
     setSessionId(sessionId: string) {
         this.localDataSource.setSessionId(sessionId);
     }
+
+    permissionsCheck(): Promise<Result<Array<string>>> {
+        return this.remoteDataSource.checkPermissions(this.localDataSource.getSessionId())
+    }
 }

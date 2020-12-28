@@ -6,14 +6,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import Header from "./common/components/Header.vue";
+    import { defineComponent } from "vue";
+    import Header from "./common/components/Header.vue";
 
-const App = defineComponent({
-    components: {
-        Header
-    }
-});
+    const App = defineComponent({
+        components: {
+            Header
+        }
+    });
 
 export default App;
 </script>

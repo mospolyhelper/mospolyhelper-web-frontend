@@ -1,4 +1,5 @@
 ﻿import PreferencesRepository from "../../../../data/common/repository/preferencesRepository";
+import Result from "../../../../utils/result";
 import AuthRepository from "../repository/authRepository";
 
 const SaveLogin = 'SaveLogin';
@@ -26,5 +27,9 @@ export default class AuthUseCase {
 
     getPreference(key: string, defaultValue: string): string {
         return this.prefRepository.getPreference(key, defaultValue);
+    }
+
+    getPermissions(): Promise<Result<Array<string>>> {
+        return this.repository.permissionsCheck();
     }
 }
