@@ -2,34 +2,39 @@
     <div class="dialogs-list">
         <h2 class="heading">Личные сообщения</h2>
         <DialogPreview v-for="dialog in dialogs" :key="dialog.id" :dialog="dialog" />
+        <loader id="loader" :showing="isLoading" />
     </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import DialogsUseCase from "@/domain/account/dialogs/usecase/dialogsUseCase";
+import DialogsUseCase from "@/domain/account/dialogs/preview/usecase/dialogsUseCase";
 import DialogPreview from "@/features/account/dialogs/components/DialogPreview.vue";
-import DialogPreviewModel from "@/domain/account/dialogs/model/dialogs";
+import DialogPreviewModel from "@/domain/account/dialogs/preview/model/dialogs";
+import loader from "@/features/common/components/lodingAnimation.vue";
 
 type DialogsListState = {
     dialogs: DialogPreviewModel[];
+    isLoading: boolean;
 };
 
 const useCase = new DialogsUseCase();
 
 const DialogsList = defineComponent({
-    components: { DialogPreview },
+    components: { DialogPreview, loader },
     setup() {
         const state = reactive<DialogsListState>({
-            dialogs: []
+            dialogs: [],
+            isLoading: true,
         });
 
         useCase.getDialogs().then(res => {
+            state.isLoading = false;
             if (res.isSuccess) {
                 state.dialogs = res.value;
             } else if (res.isFailure) {
                 const err = res.errorOrNull();
-                if (err) alert(err);
+                alert(err ?? "Неизвестная ошибка");
             }
         });
 
@@ -54,5 +59,10 @@ export default DialogsList;
     color: cornflowerblue;
     font-size: 1.6rem;
     cursor: auto;
+}
+
+#loader {
+    position: relative;
+    margin-top: 30%;
 }
 </style>

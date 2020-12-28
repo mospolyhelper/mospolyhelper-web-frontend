@@ -1,8 +1,11 @@
 <template>
     <div class="application-row">
         <div class="preview" @click="toggleRowVisibility">
-            <p class="inline title">{{ application.name }}</p>
-            <p class="inline title">{{ application.dateTime }}</p>
+            <div>
+                <span class="title">{{ application.name }}</span>
+                <span class="status">{{ statusShortcut }}</span>
+            </div>
+            <div id="creation-date">{{ application.dateTime }}</div>
         </div>
         <transition name="collapse">
             <div class="content" v-if="!collapsed">
@@ -12,33 +15,27 @@
                     :text="application.registrationNumber"
                     delimeter=":"
                 />
-                <TextRow
-                    class="text-row"
-                    title="Статус, дата"
-                    :text="application.status"
-                    delimeter=":"
-                />
+                <TextRow class="text-row" title="Статус, дата" :text="application.status" delimeter=":" />
                 <TextRow
                     class="text-row"
                     title="Структурное подразделение, адрес"
                     :text="application.department"
                     delimeter=":"
                 />
-                <TextRow
-                    class="text-row"
-                    title="Примечание"
-                    :text="application.note"
-                    delimeter=":"
-                />
+                <TextRow class="text-row" title="Примечание" :text="application.note" delimeter=":" />
             </div>
         </transition>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, reactive } from "vue";
+import { computed, defineComponent, PropType, reactive, toRefs } from "vue";
 import Application from "@/domain/account/applications/model/application";
 import TextRow from "@/features/common/components/TextRow.vue";
+
+type ApplicationRowProps = {
+    application: Application;
+};
 
 const ApplicationRow = defineComponent({
     components: { TextRow },
@@ -48,12 +45,13 @@ const ApplicationRow = defineComponent({
         }
     },
     props: {
-        application: Object as PropType<Application>
+        application: { type: Object as PropType<Application>, required: true }
     },
-    setup() {
+    setup(props: ApplicationRowProps) {
         const state = reactive({ collapsed: true });
+        const statusShortcut = computed(() => props.application.status?.replaceAll("<br><br>", " – "));
 
-        return state;
+        return { ...toRefs(state), statusShortcut };
     }
 });
 
@@ -62,7 +60,20 @@ export default ApplicationRow;
 
 <style scoped>
 .title {
+    display: block;
     font-size: 1.15rem;
+}
+
+.status {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.9rem;
+    color: rgba(128, 128, 128, 0.85);
+}
+
+#creation-date {
+    align-self: center;
+    color: rgba(128, 128, 128, 0.7);
 }
 
 .text-row {
@@ -71,8 +82,12 @@ export default ApplicationRow;
     align-items: center;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .application-row {
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -83,7 +98,7 @@ export default ApplicationRow;
     display: flex;
     justify-content: space-between;
     background: #fff;
-    transition: background .4s ease;
+    transition: background 0.4s ease;
 }
 
 .application-row > .preview:hover {
@@ -104,14 +119,15 @@ export default ApplicationRow;
 }
 
 .collapse-enter-active {
-    transition: transform .2s ease;
+    transition: transform 0.2s ease;
 }
 
 .collapse-leave-active {
-    transition: transform .2s ease;
+    transition: transform 0.2s ease;
 }
 
-.collapse-enter-from, .collapse-leave-to {
+.collapse-enter-from,
+.collapse-leave-to {
     transform: scaleY(0);
 }
 </style>

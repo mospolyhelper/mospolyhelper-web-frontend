@@ -1,5 +1,6 @@
 <template>
     <div class="map" id="yandex-map" />
+    <loader id="loader" :showing="isLoading" />
 </template>
 
 <script lang="ts">
@@ -7,6 +8,7 @@ import { defineComponent, onMounted, PropType, ref, watch, watchEffect } from "v
 import { coordsToArray, DEFAULT_MAP_SETTINGS, Lang, mapLoader, MapSettings } from "../utils";
 import { Addresses, BasePin, Campus, Coords } from "@/domain/locations/model/Locations";
 import { computed } from "@vue/reactivity";
+import loader from "@/features/common/components/lodingAnimation.vue";
 
 type YandexMapProps = MapSettings & {
     markers: Addresses;
@@ -15,6 +17,7 @@ type YandexMapProps = MapSettings & {
 let map: ymaps.Map | null = null;
 
 const YandexMap = defineComponent({
+    components: { loader },
     props: {
         apiKey: { type: String, default: DEFAULT_MAP_SETTINGS.apiKey },
         lang: {
@@ -33,8 +36,11 @@ const YandexMap = defineComponent({
         }
     },
     setup(props: YandexMapProps) {
+        const isLoading = ref(true);
+
         onMounted(() => {
             mapLoader(props).then(() => {
+                isLoading.value = false;
                 const { center, zoom } = props;
                 map = new ymaps.Map("yandex-map", {
                     center: [center.lat, center.lng],
@@ -49,6 +55,8 @@ const YandexMap = defineComponent({
                 });
             });
         });
+
+        return { isLoading };
     }
 });
 
@@ -113,5 +121,11 @@ export default YandexMap;
     height: 80vh;
     width: 80vw;
     margin: 5% auto;
+}
+
+#loader {
+    position: absolute;
+    top: 45%;
+    left: 50%;
 }
 </style>

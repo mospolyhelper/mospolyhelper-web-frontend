@@ -2,7 +2,7 @@
     <div class="outer">
         <div class="middle">
             <div class="container">
-                <form @submit="logIn">
+                <form @submit.prevent="logIn">
                     <input type="text" v-model="login" placeholder="Логин" />
                     <input type="password" v-model="password" placeholder="Пароль" />
                     <input type="checkbox" name="saveLogin" v-model="saveLogin" />
@@ -80,6 +80,7 @@
         },
         methods: {
             logIn() {
+                console.log('trying to log in...');
                 this.isLoading = true;
                 if (this.saveLogin) {
                     useCase.setPreference('Login', this.login);
