@@ -26,7 +26,8 @@
         },
         methods: {
             dialog(d: string) {
-                this.$router.push(`/account/dialog?dialogKey=${d}`)
+                const route = encodeURIComponent(d);
+                this.$router.push('dialog?dialogKey=' + route);
             }
         },
         computed: {
