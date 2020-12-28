@@ -9,8 +9,9 @@
                 <button class="dropbtn">Аккаунт</button>
                 <div class="dropdown-content">
                     <HeaderLink to="/account/auth">Авторизация</HeaderLink>
-                    <HeaderLink v-show="info" to="/account/info">Info</HeaderLink>
+                    <HeaderLink v-show="info" to="/account/info">Обо мне</HeaderLink>
                     <HeaderLink to="/account/deadlines">Дедлайны</HeaderLink>
+                    <HeaderLink v-show="applications" to="/account/applications">Справки</HeaderLink>
                     <HeaderLink v-show="teachers" to="/account/teachersSearch">Поиск преподавателей</HeaderLink>
                     <HeaderLink v-show="classmates" to="/account/classmates">Одногруппники</HeaderLink>
                     <HeaderLink v-show="marks" to="/account/marks">Оценки</HeaderLink>
