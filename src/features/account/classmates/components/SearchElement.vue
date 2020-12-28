@@ -26,7 +26,7 @@
         },
         methods: {
             dialog(d: string) {
-                this.$router.push(`/account/dialogs?dialogKey=${d}`)
+                this.$router.push(`/account/dialog?dialogKey=${d}`)
             }
         },
         computed: {
