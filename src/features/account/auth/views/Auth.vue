@@ -87,10 +87,12 @@
                 }
                 const res = useCase.logIn(this.login, this.password);
                 res.then(it => {
-                    this.success = it
+                    this.success = it;
                     this.isLoading = false;
                 });
-                this.$root?.$options.methods.auth()
+                const permissions = useCase.getPermissions().then(result => {
+                    if (result.isSuccess) this.$root?.$options.methods.auth(result.value);
+                });
             },
             getSaveLogin(): boolean {
                 const saveLogin = useCase.getPreference('SaveLogin', '');

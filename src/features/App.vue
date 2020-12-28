@@ -1,22 +1,27 @@
 <template>
     <div id="app">
-        <Header ref="header"/>
-        <div id="main-view"> <router-view v-on:update="auth"/></div>
+        <Header permission="permissions"/>
+        <div id="main-view"> <router-view /></div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import Header from "./common/components/Header.vue";
+    import { defineComponent } from "vue";
+    import Header from "./common/components/Header.vue";
 
     const App = defineComponent({
         components: {
             Header
         },
         methods: {
-            auth() {
-                console.log("need to call header method");
-                
+            auth(permissions: Array<string>) {
+                this.permissions = permissions;
+                console.log(this.permissions);
+            }
+        },
+        data() {
+            return {
+                permissions: Array<string>()
             }
         }
     });

@@ -14,7 +14,7 @@
                     <HeaderLink v-if="teachers" to="/account/teachersSearch">Поиск преподавателей</HeaderLink>
                     <HeaderLink v-if="classmates" to="/account/classmates">Одногруппники</HeaderLink>
                     <HeaderLink v-if="marks" to="/account/marks">Оценки</HeaderLink>
-                    <loadingAnim :showing="false" />
+                    <loadingAnim :showing="isLoading" />
                 </div>
             </div>
         </div>
@@ -45,9 +45,11 @@ import { defineComponent } from "vue";
     );
 
     const Header = defineComponent({
+        props: {
+            permission: Array
+        },
         data() {
             return {
-                permissions: Array<string>(),
                 isLoading: false,
                 dialogs: false,
                 info: false,
@@ -64,37 +66,65 @@ import { defineComponent } from "vue";
             loadingAnim
         },
         mounted() {
-            this.isLoading = true;
-            let self = this;
-            useCase.getPermissions().then(result => {
-                if (result.isSuccess) {
-                    (result.value as Array<string>).forEach(val => {
-                        switch (val) {
-                            case "dialogs": self.dialogs = true;
-                                break;
-                            case "info": self.info = true;
-                                break;
-                            case "marks": self.marks = true;
-                                break;
-                            case "classmates": self.classmates = true;
-                                break;
-                            case "applications": self.applications = true;
-                                break;
-                            case "myportfolio": self.myportfolio = true;
-                                break;
-                            case "portfolios": self.portfolios = true;
-                                break;
-                        }
-                    });
-                } else if (result.isFailure) {
-                    if (result.errorOrNull()?.message == "401") {
-                        alert("Вы будете перенаправлены на страницу авторизации.");
-                        router.push('/account/auth')
-                    }
-                }
-                this.isLoading = false;
-            })
+            //this.isLoading = true;
+            //let self = this;
+            //useCase.getPermissions().then(result => {
+            //    if (result.isSuccess) {
+            //        (result.value as Array<string>).forEach(val => {
+            //            switch (val) {
+            //                case "dialogs": self.dialogs = true;
+            //                    break;
+            //                case "info": self.info = true;
+            //                    break;
+            //                case "marks": self.marks = true;
+            //                    break;
+            //                case "classmates": self.classmates = true;
+            //                    break;
+            //                case "applications": self.applications = true;
+            //                    break;
+            //                case "myportfolio": self.myportfolio = true;
+            //                    break;
+            //                case "portfolios": self.portfolios = true;
+            //                    break;
+            //            }
+            //        });
+            //    } else if (result.isFailure) {
+            //        if (result.errorOrNull()?.message == "401") {
+            //            alert("Вы будете перенаправлены на страницу авторизации.");
+            //            router.push('/account/auth')
+            //        }
+            //    }
+            //    this.isLoading = false;
+            //})
         },
+        methods: {
+
+        },
+        computed: {
+            premissions: function():string {
+                let self = this;
+                this.permission?.forEach(val => {
+                    switch (val) {
+                        case "dialogs": self.dialogs = true;
+                            break;
+                        case "info": self.info = true;
+                            break;
+                        case "marks": self.marks = true;
+                            break;
+                        case "classmates": self.classmates = true;
+                            break;
+                        case "applications": self.applications = true;
+                            break;
+                        case "myportfolio": self.myportfolio = true;
+                            break;
+                        case "portfolios": self.portfolios = true;
+                            break;
+                    }
+                })
+                console.log("123");
+                return "";
+            }
+        }
     });
 
 export default Header;
