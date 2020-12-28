@@ -9,20 +9,20 @@
                 <button class="dropbtn">Аккаунт</button>
                 <div class="dropdown-content">
                     <HeaderLink to="/account/auth">Авторизация</HeaderLink>
-                    <HeaderLink v-if="info" to="/account/info">Info</HeaderLink>
+                    <HeaderLink v-show="info" to="/account/info">Info</HeaderLink>
                     <HeaderLink to="/account/deadlines">Дедлайны</HeaderLink>
-                    <HeaderLink v-if="teachers" to="/account/teachersSearch">Поиск преподавателей</HeaderLink>
-                    <HeaderLink v-if="classmates" to="/account/classmates">Одногруппники</HeaderLink>
-                    <HeaderLink v-if="marks" to="/account/marks">Оценки</HeaderLink>
-                    <loadingAnim :showing="isLoading" />
+                    <HeaderLink v-show="teachers" to="/account/teachersSearch">Поиск преподавателей</HeaderLink>
+                    <HeaderLink v-show="classmates" to="/account/classmates">Одногруппники</HeaderLink>
+                    <HeaderLink v-show="marks" to="/account/marks">Оценки</HeaderLink>
                 </div>
             </div>
+            <loadingAnim class="loading" :showing="isLoading" />
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+    import { defineComponent, getCurrentInstance } from "vue";
     import HeaderLink from "./HeaderLink.vue";
     import AuthApi from "@/data/account/auth/api/authApi";
     import AuthLocalDataSource from "@/data/account/auth/local/authLocalDataSource";
@@ -58,7 +58,8 @@ import { defineComponent } from "vue";
                 teachers: false,
                 applications: false,
                 myportfolio: false,
-                portfolios: false
+                portfolios: false,
+                emitter: getCurrentInstance()?.appContext.config.globalProperties.emitter
             }
         },
         components: {
@@ -66,39 +67,44 @@ import { defineComponent } from "vue";
             loadingAnim
         },
         mounted() {
-            //this.isLoading = true;
-            //let self = this;
-            //useCase.getPermissions().then(result => {
-            //    if (result.isSuccess) {
-            //        (result.value as Array<string>).forEach(val => {
-            //            switch (val) {
-            //                case "dialogs": self.dialogs = true;
-            //                    break;
-            //                case "info": self.info = true;
-            //                    break;
-            //                case "marks": self.marks = true;
-            //                    break;
-            //                case "classmates": self.classmates = true;
-            //                    break;
-            //                case "applications": self.applications = true;
-            //                    break;
-            //                case "myportfolio": self.myportfolio = true;
-            //                    break;
-            //                case "portfolios": self.portfolios = true;
-            //                    break;
-            //            }
-            //        });
-            //    } else if (result.isFailure) {
-            //        if (result.errorOrNull()?.message == "401") {
-            //            alert("Вы будете перенаправлены на страницу авторизации.");
-            //            router.push('/account/auth')
-            //        }
-            //    }
-            //    this.isLoading = false;
-            //})
+            this.show();
+            this.emitter.on("updateHeader", () => {
+                this.show();
+            });
         },
         methods: {
-
+            show() {
+                this.isLoading = true;
+                let self = this;
+                useCase.getPermissions().then(result => {
+                    if (result.isSuccess) {
+                        (result.value as Array<string>).forEach(val => {
+                            switch (val) {
+                                case "dialogs": self.dialogs = true;
+                                    break;
+                                case "info": self.info = true;
+                                    break;
+                                case "marks": self.marks = true;
+                                    break;
+                                case "classmates": self.classmates = true;
+                                    break;
+                                case "applications": self.applications = true;
+                                    break;
+                                case "myportfolio": self.myportfolio = true;
+                                    break;
+                                case "portfolios": self.portfolios = true;
+                                    break;
+                            }
+                        });
+                    } else if (result.isFailure) {
+                        if (result.errorOrNull()?.message == "401") {
+                            alert("Вы будете перенаправлены на страницу авторизации.");
+                            router.push('/account/auth')
+                        }
+                    }
+                    this.isLoading = false;
+                })
+            }
         },
         computed: {
             premissions: function():string {
@@ -120,8 +126,7 @@ import { defineComponent } from "vue";
                         case "portfolios": self.portfolios = true;
                             break;
                     }
-                })
-                console.log("123");
+                });
                 return "";
             }
         }
@@ -195,5 +200,9 @@ export default Header;
         position: fixed; /* Set the navbar to fixed position */
         top: 0; /* Position the navbar at the top of the page */
         width: 100%; /* Full width */
+    }
+
+    .loading {
+        display:inline-block;
     }
 </style>

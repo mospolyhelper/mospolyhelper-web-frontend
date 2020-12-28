@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Header permission="permissions"/>
+        <Header />
         <div id="main-view"> <router-view /></div>
     </div>
 </template>
@@ -12,17 +12,6 @@
     const App = defineComponent({
         components: {
             Header
-        },
-        methods: {
-            auth(permissions: Array<string>) {
-                this.permissions = permissions;
-                console.log(this.permissions);
-            }
-        },
-        data() {
-            return {
-                permissions: Array<string>()
-            }
         }
     });
 

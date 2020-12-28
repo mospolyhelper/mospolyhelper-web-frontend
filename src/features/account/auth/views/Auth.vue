@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
+    import { defineComponent, getCurrentInstance } from "vue";
     import AuthApi from "../../../../data/account/auth/api/authApi";
     import AuthLocalDataSource from "../../../../data/account/auth/local/authLocalDataSource";
     import AuthRemoteDataSource from "../../../../data/account/auth/remote/authRemoteDataSource";
@@ -48,10 +48,10 @@
                 success: null as boolean | null,
                 saveLogin: false,
                 savePassword: false,
-                isLoading: false
+                isLoading: false,
+                emitter: getCurrentInstance()?.appContext.config.globalProperties.emitter
             }
         },
-        emits: ["auth"],
         watch: {
             saveLogin(newValue: boolean, oldValue: boolean) {
                 useCase.setPreference('SaveLogin', String(newValue));
@@ -89,10 +89,11 @@
                 res.then(it => {
                     this.success = it;
                     this.isLoading = false;
+                    this.emitter.emit("updateHeader");
                 });
-                const permissions = useCase.getPermissions().then(result => {
-                    if (result.isSuccess) this.$root?.$options.methods.auth(result.value);
-                });
+                //const permissions = useCase.getPermissions().then(result => {
+                //    if (result.isSuccess) this.$root?.$options.methods.auth(result.value);
+                //});
             },
             getSaveLogin(): boolean {
                 const saveLogin = useCase.getPreference('SaveLogin', '');
