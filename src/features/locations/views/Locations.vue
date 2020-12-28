@@ -3,37 +3,35 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, watch } from "vue";
+import { defineComponent, onMounted, reactive, ref, watch } from "vue";
 import YandexMap from "@/features/locations/components/YandexMap.vue";
 import getLocations from "@/data/locations/repository/locationsRepository";
 import LocationsUseCase from "@/domain/locations/usecase/locationsUseCase";
-import {
-    Addresses,
-    Campus,
-    Coords,
-    Gym,
-    Hostel
-} from "@/domain/locations/model/Locations";
+import { Addresses, Campus, Coords, Gym, Hostel } from "@/domain/locations/model/Locations";
 import Locations from "@/domain/locations/model/Locations";
+
+type LocationsState = {
+    locations: Addresses;
+};
 
 const useCase = new LocationsUseCase();
 
 const Locations = defineComponent({
     components: { YandexMap },
     setup() {
-        const locations = ref<Addresses>({});
+        const state = reactive<LocationsState>({
+            locations: {}
+        });
+
         useCase.getLocations().then(data => {
-            console.log('locations loaded', data.tostring());
-            
-            const addresses = data.getOrNull()?.addresses;
-            if (addresses) {
-                locations.value = addresses;
+            if (data.isSuccess) {
+                state.locations = data.value.addresses;
             } else {
-                // todo: display an error
-                console.log('there is an error or addresses are null.', 'Error is', data.errorOrNull);
+                alert(data.errorOrNull() ?? "Неизвестная ошибка");
             }
         });
-        return { locations };
+
+        return state;
     }
 });
 export default Locations;
