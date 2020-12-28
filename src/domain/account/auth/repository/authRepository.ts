@@ -7,4 +7,6 @@ export default interface AuthRepository {
     updateSessionId(login: string, password: string, sessionId: string): void;
 
     setSessionId(sessionId: string): void;
+
+    permissionsCheck(): Promise<Result<Array<string>>>
 }

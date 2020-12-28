@@ -1,4 +1,4 @@
-import Result from "../../../../utils/result";
+п»їimport Result from "../../../../utils/result";
 import UnauthorizedAccessError from "../../../../utils/unauthorizedAccessError";
 import AuthApi from "../api/authApi";
 
@@ -13,7 +13,7 @@ export default class AuthRemoteDataSource {
         } catch (e) {
             console.log(e);
             if (e['statusCode'] == 401) {
-                return Result.failure(new UnauthorizedAccessError("Авторизируйтесь!"));
+                return Result.failure(new UnauthorizedAccessError("РђРІС‚РѕСЂРёР·РёСЂСѓР№С‚РµСЃСЊ!"));
             } else return Result.failure(e);
         }
     }
@@ -24,7 +24,18 @@ export default class AuthRemoteDataSource {
         } catch (e) {
             console.log(e);
             if (e['statusCode'] == 401) {
-                return Result.failure(new UnauthorizedAccessError("Авторизируйтесь!"));
+                return Result.failure(new UnauthorizedAccessError("РђРІС‚РѕСЂРёР·РёСЂСѓР№С‚РµСЃСЊ!"));
+            } else return Result.failure(e);
+        }
+    }
+
+    async checkPermissions(sessionId: string): Promise<Result<Array<string>>> {
+        try {
+            return Result.success(await this.api.permissionsCheck(sessionId));
+        } catch (e) {
+            console.log(e);
+            if (e['statusCode'] == 401) {
+                return Result.failure(new UnauthorizedAccessError("401"));
             } else return Result.failure(e);
         }
     }

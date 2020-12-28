@@ -1,7 +1,7 @@
 <template>
     <div id="app">
-        <Header />
-        <div id="main-view"> <router-view /></div>
+        <Header ref="header"/>
+        <div id="main-view"> <router-view v-on:update="auth"/></div>
     </div>
 </template>
 
@@ -9,11 +9,17 @@
 import { defineComponent } from "vue";
 import Header from "./common/components/Header.vue";
 
-const App = defineComponent({
-    components: {
-        Header
-    }
-});
+    const App = defineComponent({
+        components: {
+            Header
+        },
+        methods: {
+            auth() {
+                console.log("need to call header method");
+                
+            }
+        }
+    });
 
 export default App;
 </script>

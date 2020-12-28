@@ -28,6 +28,7 @@
     import PreferencesRepository from "../../../../data/common/repository/preferencesRepository";
     import AuthUseCase from "../../../../domain/account/auth/usecase/authUseCase";
     import loadingAnim from "@/features/common/components/lodingAnimation.vue";
+    import App from "@/features/App.vue"
 
     const useCase = new AuthUseCase(
         new AuthRepositoryImpl(
@@ -50,6 +51,7 @@
                 isLoading: false
             }
         },
+        emits: ["auth"],
         watch: {
             saveLogin(newValue: boolean, oldValue: boolean) {
                 useCase.setPreference('SaveLogin', String(newValue));
@@ -88,6 +90,7 @@
                     this.success = it
                     this.isLoading = false;
                 });
+                this.$root?.$options.methods.auth()
             },
             getSaveLogin(): boolean {
                 const saveLogin = useCase.getPreference('SaveLogin', '');
