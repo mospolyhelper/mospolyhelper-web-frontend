@@ -107,6 +107,8 @@
                                     break;
                                 case "portfolios": self.portfolios = true;
                                     break;
+                                case "teachers": self.teachers = true;
+                                    break;
                                 case "messagges": self.messages = true;
                                     break;
                             }
