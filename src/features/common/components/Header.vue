@@ -12,7 +12,7 @@
                     <HeaderLink v-show="info" to="/account/info">Обо мне</HeaderLink>
                     <HeaderLink v-show="myportfolio" to="/account/deadlines">Дедлайны</HeaderLink>
                     <HeaderLink v-show="applications" to="/account/applications">Справки</HeaderLink>
-                    <HeaderLink  to="/account/teachersSearch">Поиск преподавателей</HeaderLink>
+                    <HeaderLink v-show="teachers" to="/account/teachersSearch">Поиск преподавателей</HeaderLink>
                     <HeaderLink v-show="classmates" to="/account/classmates">Одногруппники</HeaderLink>
                     <HeaderLink v-show="marks" to="/account/marks">Оценки</HeaderLink>
                     <HeaderLink v-show="messages" to="/account/dialogs">Сообщения</HeaderLink>
