@@ -1,4 +1,4 @@
-﻿import InfoRepository from "@/data/account/info/repository/searchRepository";
+﻿import InfoRepository from "@/data/account/info/repository/infoRepository";
 import Result from "@/utils/result";
 import AccountInfo from "../model/accountInfo";
 

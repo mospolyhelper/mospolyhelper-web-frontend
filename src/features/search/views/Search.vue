@@ -4,10 +4,14 @@
         <input type="text" name="search" placeholder="Поиск" v-model.trim.lazy="findStr">
         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
+    <button class="btn" @click="emitter.emit('copy')"><i class="fa fa-clone" aria-hidden="true"></i> Копировать в буфер обмена</button>
+    <br />
+    <br />
     <br />
     <searchForm v-on:applyFilter="advancedSearch"
                 v-on:stopSearch="isSearching=false"
                 :isSearch="isSearching" />
+    <br />
     <searchList :searchList="searchRes"
                 :isLoading="isLoading">
     </searchList>
@@ -17,12 +21,11 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
+    import { defineComponent, getCurrentInstance } from "vue";
     import searchList from "@/features/search/components/SearchList.vue";
     import searchForm from "@/features/search/components/SearchForm.vue";
     import SearchUseCase from "@/domain/search/usecase/searchUseCase";
     import SearchEntity from "../../../domain/search/model/SearchEntity";
-    //import BootstrapVue from 'bootstrap-vue'
     import SearchResult from "../../../domain/search/model/SearchResult";
 
     let useCase = new SearchUseCase();
@@ -36,7 +39,8 @@
                 page: 1,
                 pageCount: 1,
                 isLoading: false,
-                isSearching: false
+                isSearching: false,
+                emitter: getCurrentInstance()?.appContext.config.globalProperties.emitter
             }
         },
         components: {
@@ -111,9 +115,6 @@
                 }
             }
         },
-        //created() {
-        //    window.addEventListener('scroll', this.handleScroll);
-        //},
         unmounted() {
             window.removeEventListener('scroll', this.handleScroll);
         }
@@ -128,10 +129,23 @@
         box-sizing: border-box;
     }
 
+    .btn {
+        background-color: DodgerBlue; /* Blue background */
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        padding: 12px 16px; /* Some padding */
+        font-size: 16px; /* Set a font size */
+        cursor: pointer; /* Mouse pointer on hover */
+        float: left;
+    }
+
+        /* Darker background on mouse-over */
+        .btn:hover {
+            background-color: RoyalBlue;
+        }
+
     .example {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
+        text-align: center
     }
 
     /* Style the search field */
@@ -140,12 +154,10 @@
         font-size: 17px;
         border: 1px solid grey;
         min-width: 300px;
-        float: left;
         background: #f1f1f1;
     }
     /* Style the submit button */
     form.example button {
-        float: left;
         padding: 10px;
         background: #2196F3;
         color: white;
@@ -154,6 +166,7 @@
         border-left: none; /* Prevent double borders */
         cursor: pointer;
         min-width: 50px;
+        left: 100%;
     }
 
         form.example button:hover {

@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-link-div">
+    <div class="nav-link-div" @click="propogate">
         <div class="nav-link-center">
             <router-link :to="to"
                          class="nav-link">
@@ -54,7 +54,8 @@
         height: 50px;
         float: left;
     }
-        .nav-link-div:hover {
-            background-color: #cbedff;
-        }
+    .nav-link-div:hover {
+        background-color: #cbedff;
+        cursor: pointer;
+    }
 </style>

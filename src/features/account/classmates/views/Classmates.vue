@@ -1,9 +1,4 @@
 ﻿<template>
-    <p>
-        Одноклассники
-        <a href="https://vuejs.org" target="_blank">Vue.js</a> and
-        <a href="http://www.typescriptlang.org/" target="_blank">TypeScript</a>.
-    </p>
     <searchList :searchList="searchRes"
                 :isLoading="isLoading">
     </searchList>

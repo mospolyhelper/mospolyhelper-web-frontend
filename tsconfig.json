@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowUmdGlobalAccess": true,
     "noEmit": true,
     "target": "esnext",
     "module": "esnext",
@@ -13,7 +14,8 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "yandex-maps"
     ],
     "paths": {
       "@/*": [

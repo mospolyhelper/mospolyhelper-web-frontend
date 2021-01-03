@@ -1,11 +1,9 @@
 <template>
     <div v-if="title || text">
-        <p v-if="title" class="text-row-title">{{ title + delimeter }}</p>
-        <p class="text-row-text">
-            <strong>{{ text }}</strong>
-        </p>
+        <p v-if="title" class="inline title" v-html="title + delimeter" />
+        <p class="inline text" v-html="text" />
+        <br /><br />
     </div>
-    <br />
 </template>
 
 <script lang="ts">
@@ -29,13 +27,12 @@ export default TextRow;
 </script>
 
 <style scoped>
-.text-row-title {
-    display: inline;
-    margin-right: 8px;
+.title {
+    margin-right: 12px;
+    font-size: 1.1rem;
 }
 
-.text-row-text {
-    display: inline;
+.text {
     font-weight: bold;
 }
 </style>

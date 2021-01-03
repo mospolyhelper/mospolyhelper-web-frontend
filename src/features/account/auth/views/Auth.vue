@@ -2,15 +2,18 @@
     <div class="outer">
         <div class="middle">
             <div class="container">
-                <input type="text" v-model="login" placeholder="Логин" />
-                <input type="password" v-model="password" placeholder="Пароль" />
-                <input type="checkbox" name="saveLogin" v-model="saveLogin" />
-                <label for="saveLogin">Сохранить логин</label> <br />
-                <input type="checkbox" name="savePassword" v-model="savePassword" />
-                <label for="savePassword">Сохранить пароль (небезопасно)</label>
-                <input @click="logIn" type="submit" value="Войти">
-                <div v-if="success">Успешная авторизация</div>
-                <div v-if="success==false">Неправильный логин или пароль</div>
+                <form @submit.prevent="logIn">
+                    <input type="text" v-model="login" placeholder="Логин" />
+                    <input type="password" v-model="password" placeholder="Пароль" />
+                    <input type="checkbox" name="saveLogin" v-model="saveLogin" />
+                    <label for="saveLogin">Сохранить логин</label> <br />
+                    <input type="checkbox" name="savePassword" v-model="savePassword" />
+                    <label for="savePassword">Сохранить пароль (небезопасно)</label>
+                    <input type="submit" value="Войти" v-if="!isLoading">
+                </form>
+                <div v-if="success && !isLoading">Успешная авторизация</div>
+                <div v-if="success==false && !isLoading">Неправильный логин или пароль</div>
+                <loadingAnim :showing="isLoading" />
             </div>
         </div>
         </div>
@@ -18,14 +21,16 @@
 </template>
 
 <script lang="ts">
-    import { defineComponent } from "vue";
-import AuthApi from "../../../../data/account/auth/api/authApi";
-import AuthLocalDataSource from "../../../../data/account/auth/local/authLocalDataSource";
-import AuthRemoteDataSource from "../../../../data/account/auth/remote/authRemoteDataSource";
-import AuthRepositoryImpl from "../../../../data/account/auth/repository/authRepository";
-import { StorageLocalDataSource } from "../../../../data/common/local/storageLocalDataSource";
-import PreferencesRepository from "../../../../data/common/repository/preferencesRepository";
+    import { defineComponent, getCurrentInstance } from "vue";
+    import AuthApi from "../../../../data/account/auth/api/authApi";
+    import AuthLocalDataSource from "../../../../data/account/auth/local/authLocalDataSource";
+    import AuthRemoteDataSource from "../../../../data/account/auth/remote/authRemoteDataSource";
+    import AuthRepositoryImpl from "../../../../data/account/auth/repository/authRepository";
+    import { StorageLocalDataSource } from "../../../../data/common/local/storageLocalDataSource";
+    import PreferencesRepository from "../../../../data/common/repository/preferencesRepository";
     import AuthUseCase from "../../../../domain/account/auth/usecase/authUseCase";
+    import loadingAnim from "@/features/common/components/lodingAnimation.vue";
+    import App from "@/features/App.vue"
 
     const useCase = new AuthUseCase(
         new AuthRepositoryImpl(
@@ -44,7 +49,9 @@ import PreferencesRepository from "../../../../data/common/repository/preference
                 password: '',
                 success: null as boolean | null,
                 saveLogin: false,
-                savePassword: false
+                savePassword: false,
+                isLoading: false,
+                emitter: getCurrentInstance()?.appContext.config.globalProperties.emitter
             }
         },
         watch: {
@@ -73,6 +80,8 @@ import PreferencesRepository from "../../../../data/common/repository/preference
         },
         methods: {
             logIn() {
+                console.log('trying to log in...');
+                this.isLoading = true;
                 if (this.saveLogin) {
                     useCase.setPreference('Login', this.login);
                 }
@@ -80,7 +89,11 @@ import PreferencesRepository from "../../../../data/common/repository/preference
                     useCase.setPreference('Password', this.password);
                 }
                 const res = useCase.logIn(this.login, this.password);
-                res.then(it => this.success = it);
+                res.then(it => {
+                    this.success = it;
+                    this.isLoading = false;
+                    this.emitter.emit("updateHeader");
+                });
             },
             getSaveLogin(): boolean {
                 const saveLogin = useCase.getPreference('SaveLogin', '');
@@ -98,6 +111,9 @@ import PreferencesRepository from "../../../../data/common/repository/preference
                     return false;
                 }
             }
+        },
+        components: {
+            loadingAnim
         }
     });
 

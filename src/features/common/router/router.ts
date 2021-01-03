@@ -8,6 +8,9 @@ import AccountInfoPage from "@/features/account/info/views/AccountInfoPage.vue";
 import TeachersSearch from "@/features/account/teachersSearch/views/TeachersSearch.vue";
 import Classmates from "@/features/account/classmates/views/Classmates.vue";
 import Marks from "@/features/account/marks/views/Marks.vue";
+import Applications from "@/features/account/applications/views/Applications.vue";
+
+export const CHAT_PATH = "/account/dialog";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -31,8 +34,16 @@ const routes: Array<RouteRecordRaw> = [
         component: Auth
     },
     {
+        path: "/locations",
+        component: () => /* webpackChunkName: "locations" */ import("@/features/locations/views/Locations.vue")
+    },
+    {
         path: "/account/info",
         component: AccountInfoPage
+    },
+    {
+        path: "/account/applications",
+        component: Applications
     },
     {
         path: "/account/teachersSearch",
@@ -47,8 +58,16 @@ const routes: Array<RouteRecordRaw> = [
         component: Marks
     },
     {
+        path: "/account/dialogs",
+        component: () => /* webpackChunkName: "dialogs-list" */ import("@/features/account/dialogs/views/DialogsList.vue")
+    },
+    {
+        path: CHAT_PATH,
+        component: () => /* webpackChunkName: "chat" */ import("@/features/account/dialogs/views/Chat.vue")
+    },
+    {
         path: "/:pathMatch(.*)*",
-        component: () => import("@/features/common/views/NotFound.vue")
+        component: () => /* webpackChunkName: "not-found" */ import("@/features/common/views/NotFound.vue")
     }
 ];
 
