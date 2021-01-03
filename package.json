@@ -15,6 +15,7 @@
     "@soerenmartius/vue3-clipboard": "^0.1.0",
     "axios": "^0.21.0",
     "inversify": "^5.0.1",
+    "mitt": "^2.1.0",
     "moment": "^2.29.1",
     "typed-rest-client": "^1.8.0",
     "vue": "^3.0.4",
