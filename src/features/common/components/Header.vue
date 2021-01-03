@@ -116,8 +116,9 @@
                         });
                     } else if (result.isFailure) {
                         if (result.errorOrNull()?.message == "401") {
-                            alert("Вы будете перенаправлены на страницу авторизации.");
-                            router.push('/account/auth')
+                            //alert('Вы не авторизованы')
+                            //alert("Вы будете перенаправлены на страницу авторизации.");
+                            //router.push('/account/auth')
                         }
                     }
                     this.isLoading = false;

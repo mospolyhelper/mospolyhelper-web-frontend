@@ -7,6 +7,7 @@
                 :title="lesson.title"
                 :type="lesson.type"
                 :teacher="getTeachers(lesson)"
+                :groups="getGroups(lesson)"
                 :auditorium="getAuditoriums(lesson)"
                 :dateFrom="lesson.dateFrom"
                 :dateTo="lesson.dateTo"></lesson>
@@ -29,6 +30,9 @@ import Lesson from '../../../domain/schedule/model/lesson';
         methods: {
             getTeachers(lesson: Lesson): string {
                 return lesson.teachers.map(it => it.names.join(' ')).join(', ')
+            },
+            getGroups(lesson: Lesson): string {
+                return lesson.groups.map(it => it.title).join(', ')
             },
             getAuditoriums(lesson: Lesson): string {
                 return lesson.auditoriums.map(it => it.title).join(', ')
