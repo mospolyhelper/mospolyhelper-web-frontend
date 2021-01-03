@@ -1,7 +1,8 @@
 <template>
     <div class="time" v-if="!previousEqual">{{getTime()}}</div>
     <div class="lesson">
-        <div class="type">{{type}}</div>
+        <div class="type"
+             v-bind:class="[isImportant(type) ? 'important' : 'not-important']">{{type}}</div>
         <div class="title">{{title}}</div>
         <div>{{teacher}}</div>
         <div v-html="auditorium"></div>
@@ -12,6 +13,7 @@
 <script lang="ts">
     import { defineComponent } from "vue";
     import LessonTimes from '@/domain/schedule/utils/lessonTimes'
+    import { isImportant } from '@/domain/schedule/utils/lessonUtils'
 
     const lesson = defineComponent({
         props: {
@@ -32,6 +34,12 @@
             getFormattedDate(date: Date) {
                 const moment = require('moment');
                 return moment(date).format('D MMMM');
+            },
+            isImportant(type: string): boolean {
+                console.log(type.toLowerCase());
+                console.log('Зачет'.toLowerCase());
+                console.log('Зачет'.toLowerCase().includes(type.toLowerCase()));
+                return isImportant(type);
             }
         }
     });
@@ -58,14 +66,22 @@
     }
 
     .type {
-        background: #d1eafd;
-        color: #4985a3;
         margin-top: 4px;
         margin-bottom: 4px;
         margin-right: 2px;
         padding: 6px;
         border-radius: 10px;
         display: inline-block;
+    }
+
+    .not-important {
+        background: #d1eafd;
+        color: #4985a3;
+    }
+
+    .important {
+        background: #ff9999;
+        color: #990000;
     }
 
     .title {
