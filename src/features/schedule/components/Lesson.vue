@@ -5,8 +5,9 @@
              v-bind:class="[isImportant(type) ? 'important' : 'not-important']">{{type}}</div>
         <div class="title">{{title}}</div>
         <div>{{teacher}}</div>
+        <div v-if="groups">{{groups}}</div>
         <div v-html="auditorium"></div>
-        <div>{{getFormattedDate(dateFrom)}} - {{getFormattedDate(dateTo)}}</div>
+        <div class="date">{{getFormattedDate(dateFrom, dateTo)}}</div>
     </div>
 </template>
 
@@ -22,6 +23,7 @@
             title: String,
             type: String,
             teacher: String,
+            groups: String,
             auditorium: String,
             dateFrom: Date,
             dateTo: Date
@@ -31,14 +33,15 @@
                 const times = LessonTimes.getTime(this.order!, false);
                 return this.order! + 1 + ') ' + times[0] + ' - ' + times[1];
             },
-            getFormattedDate(date: Date) {
+            getFormattedDate(date1: Date, date2: Date) {
                 const moment = require('moment');
-                return moment(date).format('D MMMM');
+                if (date1.getTime() == date2.getTime()) {
+                    return moment(date1).format('D MMMM');
+                } else {
+                    return moment(date1).format('D MMMM') + ' - ' + moment(date2).format('D MMMM');
+                }
             },
             isImportant(type: string): boolean {
-                console.log(type.toLowerCase());
-                console.log('Зачет'.toLowerCase());
-                console.log('Зачет'.toLowerCase().includes(type.toLowerCase()));
                 return isImportant(type);
             }
         }
@@ -86,6 +89,11 @@
 
     .title {
         font-weight: bold;
+    }
+    .date {
+        font-size: 14px;
+        margin-top: 5px;
+        color: #888888;
     }
   
 </style>
