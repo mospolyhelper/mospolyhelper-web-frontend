@@ -1,7 +1,7 @@
 import Lesson from './lesson';
 
 export default interface Schedule {
-    readonly dailySchedules: Array<Array<Lesson>>;
-    readonly dateFrom: Date;
-    readonly dateTo: Date;
+    dailySchedules: Array<Array<Lesson>>;
+    dateFrom: Date;
+    dateTo: Date;
 }

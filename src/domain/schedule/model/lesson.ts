@@ -9,6 +9,6 @@ export default interface Lesson {
     readonly teachers: Array<Teacher>;
     readonly auditoriums: Array<Auditorium>;
     readonly groups: Array<Group>;
-    readonly dateFrom: Date;
-    readonly dateTo: Date;
+    dateFrom: Date;
+    dateTo: Date;
 }

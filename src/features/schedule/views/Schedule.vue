@@ -5,6 +5,7 @@
             <input v-model="group" type="text" placeholder="Номер группы" />
             <button class="searchBtn" @click="download"><i class="fa fa-search"></i></button>
         </div>
+        <input type="file" @change="openScheduleFromFile"/>
         <br />
         <br />
         <br />
@@ -58,6 +59,7 @@
     import { getLessons } from "@/domain/schedule/utils/scheduleUtils"
     import * as moment from 'moment';
     import 'moment/locale/ru';
+    import fs from 'fs';
     import loadingAnim from "@/features/common/components/lodingAnimation.vue";
 
     moment.locale('ru');
@@ -111,6 +113,27 @@
             loadingAnim
         },
         methods: {
+            openScheduleFromFile(event: any) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    var target: any = e.target;
+                    var data = target.result;
+                    var schedule = JSON.parse(data) as Schedule;
+                    schedule.dateFrom = new Date(Date.parse(schedule.dateFrom as any));
+                    schedule.dateTo = new Date(Date.parse(schedule.dateTo as any));
+                    schedule.dailySchedules.forEach(dailySchedule => {
+                        dailySchedule.forEach(lesson => {
+                            lesson.dateFrom = new Date(Date.parse(lesson.dateFrom as any));
+                            lesson.dateTo = new Date(Date.parse(lesson.dateTo as any));
+                        });
+                    });
+
+                    console.log(schedule);
+                    this.schedule = schedule;
+                };
+                reader.readAsText(file);
+            },
             getFormattedDate(date: Date) {
                 const moment = require('moment');
                 return moment(date).format('D MMMM');
