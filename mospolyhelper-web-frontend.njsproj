@@ -325,6 +325,9 @@
     <TypeScriptCompile Include="src\domain\schedule\utils\lessonTimes.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="src\domain\schedule\utils\lessonUtils.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="src\domain\schedule\utils\scheduleUtils.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
