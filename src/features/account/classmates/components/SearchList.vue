@@ -7,6 +7,7 @@
                        :status="element.status"
                        :dialogKey="element.dialogKey"/>
         <loadingAnim :showing="isLoading" />
+        67
     </div>
 
 </template>
@@ -34,5 +35,4 @@
 </script>
 
 <style scoped>
-    
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-link-div" @click="propogate">
+    <div class="nav-link-div" click="propogate">
         <div class="nav-link-center">
             <router-link :to="to"
                          class="nav-link">
@@ -37,25 +37,33 @@
 
 <style scoped>
     .nav-link-center {
-        margin: 0;
-        position: relative;
-        top: 50%;
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-        margin: auto 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
+    @media screen and (max-width: 950px) {
+    .navbar-links {
+        justify-content: center;
+        gap: 0;
+    }
+}
     .nav-link {      
-        font-size: 20px;
+        font-size: 16px;
         text-decoration: none;
-        color: #918b8f;
+        color: #000;
+    }
+    
+    .nav-link:hover {
+        color: #2E4054; 
     }
     .nav-link-div {
+        padding: 12px;
         text-align: center;
-        height: 50px;
-        float: left;
+        border-radius: 12px;
     }
     .nav-link-div:hover {
-        background-color: #cbedff;
+        background-color: rgba(46, 64, 84, 0.05);
         cursor: pointer;
     }
+    
 </style>

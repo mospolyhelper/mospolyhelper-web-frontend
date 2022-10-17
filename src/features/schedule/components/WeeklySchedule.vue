@@ -34,6 +34,10 @@
 
 <style scoped>
     .weeklySchedule {
+        overflow-x: scroll;
         display: flex;
+        gap: 6px;
+        padding: 0 6px 2em;
+        margin-top: 24px;
     }
 </style>
