@@ -49,11 +49,14 @@ import Lesson from '../../../domain/schedule/model/lesson';
         flex-grow: 1;
         flex-shrink: 1;
         flex-basis: 0%;
+        border: 1px solid #b8c1cc9e;
+        border-radius: 8px;
+        padding-top: 12px;
     }
     .dayOfWeek {
         text-align: center;
         font-size: 18px;
-        font-weight: bold;
+        font-weight: 500;
         margin-bottom: 10px;
     }
 </style>
